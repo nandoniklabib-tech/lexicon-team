@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.2
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Aug 14, 2025 at 04:51 AM
--- Server version: 10.11.10-MariaDB-log
--- PHP Version: 7.2.34
+-- Host: 127.0.0.1
+-- Generation Time: Aug 19, 2025 at 09:44 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `u868502852_lexiconeltc`
+-- Database: `lexicon`
 --
 
 -- --------------------------------------------------------
@@ -1070,7 +1070,15 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (41, '2025_04_21_064716_create_sliders_table', 35),
 (43, '2025_04_30_054320_create_exam_date_tests_table', 37),
 (44, '2025_05_04_081741_create_exam_date_times_table', 38),
-(45, '2025_05_06_081154_create_mocktest_students_table', 39);
+(45, '2025_05_06_081154_create_mocktest_students_table', 39),
+(50, '2025_08_14_065317_create_mock_tests_table', 40),
+(51, '2025_08_14_071731_create_sections_table', 40),
+(52, '2025_08_14_081024_create_test_users_table', 40),
+(53, '2025_08_14_110259_create_question_groups_table', 40),
+(54, '2025_08_14_110300_create_questions_table', 41),
+(55, '2025_08_14_110300_create_question_options_table', 42),
+(56, '2025_08_14_110301_create_question_answers_table', 42),
+(57, '2025_08_16_073900_add_question_no_to_questions_table', 43);
 
 -- --------------------------------------------------------
 
@@ -1123,7 +1131,29 @@ INSERT INTO `mocktest_students` (`id`, `type`, `name`, `phone`, `email`, `create
 (131, NULL, 'Tazim Ahmed', '01917670027', 'tazim670027@gmail.com', '2025-08-07 04:02:26', '2025-08-07 04:02:26'),
 (132, NULL, 'Deepan Paul Diptya', '01609003519', 'dpdstudy2026@gmail.com', '2025-08-07 04:03:10', '2025-08-07 04:03:10'),
 (133, NULL, 'Sheikh Abidul Haque Abid', '01760136079', 'prankbd1971@gamil.com', '2025-08-07 04:03:25', '2025-08-07 04:03:25'),
-(134, NULL, 'Rachel Potter', '+1 (903) 187-1777', 'qezydocyza@mailinator.com', '2025-08-07 04:46:00', '2025-08-07 04:46:00');
+(134, NULL, 'Rachel Potter', '+1 (903) 187-1777', 'qezydocyza@mailinator.com', '2025-08-07 04:46:00', '2025-08-07 04:46:00'),
+(135, NULL, 'Amir Moreno', '+1 (657) 948-9815', 'xepygari@mailinator.com', '2025-08-14 00:10:14', '2025-08-14 00:10:14');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mock_tests`
+--
+
+CREATE TABLE `mock_tests` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `mock_tests`
+--
+
+INSERT INTO `mock_tests` (`id`, `title`, `description`, `created_at`, `updated_at`) VALUES
+(1, 'MockTest 1', 'This is test 1', '0000-00-00 00:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -1286,6 +1316,238 @@ INSERT INTO `placements` (`id`, `course_id`, `first_name`, `last_name`, `dob`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `questions`
+--
+
+CREATE TABLE `questions` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `question_group_id` bigint(20) UNSIGNED NOT NULL,
+  `text` text NOT NULL,
+  `type` enum('mcq','fill_blank','multi_select','checkbox','table','true_false','select','static','others') NOT NULL,
+  `order_no` int(11) NOT NULL DEFAULT 1,
+  `question_no` int(11) DEFAULT NULL,
+  `meta_data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`meta_data`)),
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `questions`
+--
+
+INSERT INTO `questions` (`id`, `question_group_id`, `text`, `type`, `order_no`, `question_no`, `meta_data`, `created_at`, `updated_at`) VALUES
+(1, 1, '<b>Southern</b> <span style=\"color:red;\">Rental Car</span> - booking extra', 'static', 1, NULL, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
+(2, 1, 'Name: William <input>', 'fill_blank', 2, 1, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
+(3, 1, 'Address: 10 <input>', 'fill_blank', 3, 2, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
+(4, 1, 'Contact number: 07 <input>', 'fill_blank', 4, 3, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
+(5, 1, 'Payment by <input> card type', 'fill_blank', 5, 4, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
+(6, 1, 'Card No. 4550 1392 8309 3221', 'static', 6, NULL, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
+(7, 1, 'Card expiry date: July 20XX', 'static', 7, NULL, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
+(8, 1, 'Rental period: <input>', 'fill_blank', 8, 5, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
+(9, 1, 'How much is the car per day? <input>', 'fill_blank', 9, 6, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
+(10, 1, 'What does the price include? <input>', 'fill_blank', 10, 7, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
+(11, 1, 'Who will he be visiting? <input>', 'fill_blank', 11, 8, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
+(12, 1, 'What kind of car does the agent recommend? <input>', 'fill_blank', 12, 9, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
+(13, 1, 'What does he need to collect the car? <input>', 'fill_blank', 13, 10, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
+(14, 2, 'Overlander', 'others', 1, NULL, '{\"row\":1,\"col\":1}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
+(15, 2, '', 'others', 2, NULL, '{\"row\":1,\"col\":2}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
+(16, 2, 'Distance/km', 'others', 3, NULL, '{\"row\":2,\"col\":1}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
+(17, 2, '', 'fill_blank', 4, 11, '{\"row\":2,\"col\":2}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
+(18, 2, 'Highlight', 'others', 5, NULL, '{\"row\":3,\"col\":1}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
+(19, 2, '3 volcanoes', 'others', 6, NULL, '{\"row\":3,\"col\":2}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
+(20, 2, 'Time/hours', 'others', 7, NULL, '{\"row\":4,\"col\":1}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
+(21, 2, '11', 'others', 8, NULL, '{\"row\":4,\"col\":2}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
+(22, 2, 'Transalpine', 'others', 9, NULL, '{\"row\":5,\"col\":1}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
+(23, 2, '', 'others', 10, NULL, '{\"row\":5,\"col\":2}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
+(24, 2, 'Distance/km', 'others', 11, NULL, '{\"row\":6,\"col\":1}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
+(25, 2, '223', 'others', 12, NULL, '{\"row\":6,\"col\":2}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
+(26, 2, 'Highlight', 'others', 13, NULL, '{\"row\":7,\"col\":1}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
+(27, 2, '', 'fill_blank', 14, 12, '{\"row\":7,\"col\":2}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
+(28, 2, 'Time/hours', 'others', 15, NULL, '{\"row\":8,\"col\":1}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
+(29, 2, '', 'fill_blank', 16, 13, '{\"row\":8,\"col\":2}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
+(30, 2, 'Transcoastal', 'others', 17, NULL, '{\"row\":9,\"col\":1}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
+(31, 2, '', 'others', 18, NULL, '{\"row\":9,\"col\":2}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
+(32, 2, 'Distance/km', 'others', 19, NULL, '{\"row\":10,\"col\":1}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
+(33, 2, '', 'fill_blank', 20, 14, '{\"row\":10,\"col\":2}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
+(34, 2, 'Highlight', 'others', 21, NULL, '{\"row\":11,\"col\":1}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
+(35, 2, '', 'fill_blank', 22, 15, '{\"row\":11,\"col\":2}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
+(36, 2, 'Time/hours', 'others', 23, NULL, '{\"row\":12,\"col\":1}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
+(37, 2, '5', 'others', 24, NULL, '{\"row\":12,\"col\":2}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
+(38, 2, 'Taking three days to complete, the <input> is one of the world’s longest train journeys.', 'fill_blank', 25, 16, '{\"position\":\"summary\"}', '2025-08-16 09:02:08', '2025-08-16 09:02:08'),
+(39, 2, 'The Ghan is shorter, passing through towns built by the <input>', 'fill_blank', 26, 17, '{\"position\":\"summary\"}', '2025-08-16 09:02:08', '2025-08-16 09:02:08'),
+(40, 2, 'There is also a sculpture designed to mark the laying of the <input> concrete sleeper.', 'fill_blank', 27, 18, '{\"position\":\"summary\"}', '2025-08-16 09:02:08', '2025-08-16 09:02:08'),
+(41, 2, 'The Overland was the first train to travel between the capital cities in two <input>', 'fill_blank', 28, 19, '{\"position\":\"summary\"}', '2025-08-16 09:02:08', '2025-08-16 09:02:08'),
+(42, 2, ' and it is also the oldest journey of its kind on <input>', 'fill_blank', 29, 20, '{\"position\":\"summary\"}', '2025-08-16 09:02:08', '2025-08-16 09:02:08'),
+(43, 3, 'Lyn is having difficulty completing her project because', 'mcq', 1, 21, NULL, '2025-08-16 10:00:32', '2025-08-16 10:00:32'),
+(44, 3, 'Her presentation is going to focus on', 'mcq', 2, 22, NULL, '2025-08-16 10:00:32', '2025-08-16 10:00:32'),
+(45, 3, 'Why does Lyn think we should be looking for alternative sources of energy?', 'mcq', 3, 23, NULL, '2025-08-16 10:00:32', '2025-08-16 10:00:32'),
+(46, 3, 'Solar power is a good form of alternative energy because', 'mcq', 4, 24, NULL, '2025-08-16 10:00:32', '2025-08-16 10:00:32'),
+(47, 3, 'Which graph best indicates what Lyn is describing?', 'mcq', 5, 25, '{\"image\":\"https://ieltsonlinetests.com/sites/default/files/listening-test-1-section-3-Q25.png\"}', '2025-08-16 10:00:32', '2025-08-16 10:00:32'),
+(48, 3, 'Label the following diagram USING NO MORE THAN TWO WORDS AND / OR A NUMBER', 'static', 6, NULL, '{\"image\":\"https://ieltsonlinetests.com/sites/default/files/2018-11/listening-test-13-section-3-Q27.png\"}', '2025-08-16 10:14:15', '2025-08-16 10:14:15'),
+(49, 3, '<input>', 'fill_blank', 7, 26, NULL, '2025-08-16 10:14:15', '2025-08-16 10:14:15'),
+(50, 3, '<input>', 'fill_blank', 8, 27, NULL, '2025-08-16 10:14:15', '2025-08-16 10:14:15'),
+(51, 3, '<input>', 'fill_blank', 9, 28, NULL, '2025-08-16 10:14:15', '2025-08-16 10:14:15'),
+(52, 3, '<input>', 'fill_blank', 10, 29, NULL, '2025-08-16 10:14:15', '2025-08-16 10:14:15'),
+(53, 3, '<input>', 'fill_blank', 11, 30, NULL, '2025-08-16 10:14:15', '2025-08-16 10:14:15'),
+(54, 4, 'Lecture on <input>', 'fill_blank', 1, 31, NULL, '2025-08-16 10:41:18', '2025-08-16 10:41:18'),
+(55, 4, 'Examples: tourism and <input>', 'fill_blank', 2, 32, NULL, '2025-08-16 10:41:18', '2025-08-16 10:41:18'),
+(56, 4, 'Common misconception is that marketing points to <input> in what is being provided.', 'fill_blank', 3, 33, NULL, '2025-08-16 10:41:18', '2025-08-16 10:41:18'),
+(57, 4, 'Marketing is actually essential in maintaining <input>', 'fill_blank', 4, 34, NULL, '2025-08-16 10:41:18', '2025-08-16 10:41:18'),
+(58, 4, 'Selling a product is easier because it is <input> and customers do not have such different ___', 'fill_blank', 5, 35, NULL, '2025-08-16 10:41:18', '2025-08-16 10:41:18'),
+(59, 4, 'Aim: offer service beyond hopes of <input>', 'fill_blank', 6, 37, NULL, '2025-08-16 10:41:18', '2025-08-16 10:41:18'),
+(60, 4, 'Important to: (a) keep informed & (b) <input>', 'fill_blank', 7, 38, NULL, '2025-08-16 10:41:18', '2025-08-16 10:41:18'),
+(61, 4, 'One way to achieve this: <input>', 'fill_blank', 8, 39, NULL, '2025-08-16 10:41:18', '2025-08-16 10:41:18'),
+(62, 4, '<input> must always be available for any queries or problems.', 'fill_blank', 9, 40, NULL, '2025-08-16 10:41:18', '2025-08-16 10:41:18'),
+(63, 5, 'The text has 5 paragraphs (A - E).', 'static', 1, NULL, NULL, '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
+(64, 5, '<b>Which paragraph contains each of the following pieces of information?</b>', 'static', 2, NULL, NULL, '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
+(65, 5, 'The fact that a woman runs one of Thailand’s biggest banks', 'select', 3, 1, '{\"options\":[\"A\",\"B\",\"C\",\"D\",\"E\"]}', '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
+(66, 5, 'The number of countries included in the survey', 'select', 4, 2, '{\"options\":[\"A\",\"B\",\"C\",\"D\",\"E\"]}', '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
+(67, 5, 'The fact that Japan’s birth rate is falling quickly', 'select', 5, 3, '{\"options\":[\"A\",\"B\",\"C\",\"D\",\"E\"]}', '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
+(68, 5, 'The criteria used to get a score for each country', 'select', 6, 4, '{\"options\":[\"A\",\"B\",\"C\",\"D\",\"E\"]}', '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
+(69, 5, '<b>Complete the following sentences using NO MORE THAN THREE WORDS from the text for each gap.</b>', 'static', 7, NULL, NULL, '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
+(70, 5, 'Higher consumption in the <input> sector of the market is one reason that Asia’s economies are doing well.', 'fill_blank', 8, 5, NULL, '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
+(71, 5, 'The scores were decided through a combination of interviews and <input>.', 'fill_blank', 9, 6, NULL, '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
+(72, 5, 'Higher <input> has created an economic problem for Korea.', 'fill_blank', 10, 7, NULL, '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
+(73, 5, 'Japanese politicians have not yet decided how to get money for the <input> .', 'fill_blank', 11, 8, NULL, '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
+(74, 5, '<b>Do the following statements agree with the information given in Reading Passage 1?</b>', 'static', 12, NULL, NULL, '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
+(75, 5, 'In boxes 9 - 13 on your answer sheet, write <b>TRUE</b> if the statement agrees with the information, <b> FALSE </b> if it contradicts the information, and <b> NOT GIVEN </b> if there is no information.', 'static', 13, NULL, NULL, '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
+(76, 5, 'Other countries are looking at the example of Thailand to see if its policies can help their economies.', 'true_false', 14, 9, '{\"options\":[\"TRUE\",\"FALSE\",\"NOT GIVEN\"]}', '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
+(77, 5, 'Higher female participation in an economy always leads to greater economic growth.', 'true_false', 15, 10, '{\"options\":[\"TRUE\",\"FALSE\",\"NOT GIVEN\"]}', '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
+(78, 5, 'Female participation in the economy is lower in Japan than in most other developed economies.', 'true_false', 16, 11, '{\"options\":[\"TRUE\",\"FALSE\",\"NOT GIVEN\"]}', '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
+(79, 5, 'Most of the Bank of Thailand’s assistant governors are female.', 'true_false', 17, 12, '{\"options\":[\"TRUE\",\"FALSE\",\"NOT GIVEN\"]}', '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
+(80, 5, 'The writer considers fairness to be a bad reason for giving women top jobs.', 'true_false', 18, 13, '{\"options\":[\"TRUE\",\"FALSE\",\"NOT GIVEN\"]}', '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
+(81, 6, 'The text has 8 paragraphs (A - H).', 'static', 1, NULL, NULL, '2025-08-16 11:41:24', '2025-08-16 11:41:24'),
+(82, 6, 'Which paragraph does each of the following headings best fit?', 'static', 2, NULL, NULL, '2025-08-16 11:41:24', '2025-08-16 11:41:24'),
+(83, 6, 'Most popular employers for different students', 'select', 3, 14, '{\"options\":[\"A\",\"B\",\"C\",\"D\",\"E\",\"F\",\"G\",\"H\"]}', '2025-08-16 11:41:24', '2025-08-16 11:41:24'),
+(84, 6, 'Students’ expectations', 'select', 4, 15, '{\"options\":[\"A\",\"B\",\"C\",\"D\",\"E\",\"F\",\"G\",\"H\"]}', '2025-08-16 11:41:24', '2025-08-16 11:41:24'),
+(85, 6, 'Give and develop with the NHS', 'select', 5, 16, '{\"options\":[\"A\",\"B\",\"C\",\"D\",\"E\",\"F\",\"G\",\"H\"]}', '2025-08-16 11:41:24', '2025-08-16 11:41:24'),
+(86, 6, 'Reason for the NHS to be happy', 'select', 6, 17, '{\"options\":[\"A\",\"B\",\"C\",\"D\",\"E\",\"F\",\"G\",\"H\"]}', '2025-08-16 11:41:24', '2025-08-16 11:41:24'),
+(87, 6, 'According to the information given in the text, choose the correct answer or answers from the choices given.', 'static', 7, NULL, NULL, '2025-08-16 11:47:28', '2025-08-16 11:47:28'),
+(88, 6, 'The survey covered students', 'mcq', 8, 23, NULL, '2025-08-16 11:47:28', '2025-08-16 11:47:28'),
+(89, 6, 'The BBC', 'mcq', 9, 24, NULL, '2025-08-16 11:47:28', '2025-08-16 11:47:28'),
+(90, 7, 'For each question, only ONE of the choices is correct. Write the corresponding letter in the appropriate box on your answer sheet.', 'static', 1, NULL, NULL, '2025-08-16 11:54:20', '2025-08-16 11:54:20'),
+(91, 7, 'The Celestron SkyScout can', 'mcq', 2, 27, NULL, '2025-08-16 11:54:20', '2025-08-16 11:54:20'),
+(92, 7, 'The Seiko Spectrum e-paper watch', 'mcq', 3, 28, NULL, '2025-08-16 11:54:20', '2025-08-16 11:54:20'),
+(93, 7, 'The Electrolux Trilobite 2.0 robot vacuum cleaner', 'mcq', 4, 29, NULL, '2025-08-16 11:54:20', '2025-08-16 11:54:20'),
+(94, 7, 'The Honda Asimo robot', 'mcq', 5, 30, NULL, '2025-08-16 11:54:20', '2025-08-16 11:54:20'),
+(95, 7, '<b>Complete the following sentences using NO MORE THAN THREE WORDS from the text for each gap.</b>', 'static', 6, NULL, NULL, NULL, NULL),
+(96, 7, 'The SkyScout uses GPS and <input> to help you find a star.', 'fill_blank', 7, 31, NULL, '2025-08-18 10:40:41', '2025-08-18 10:40:41'),
+(97, 7, 'The Seiko Spectrum does not need batteries to power the <input>.', 'fill_blank', 8, 32, NULL, '2025-08-18 10:40:41', '2025-08-18 10:40:41'),
+(98, 7, 'HDTV uses more <input> than conventional TV.', 'fill_blank', 9, 33, NULL, '2025-08-18 10:40:41', '2025-08-18 10:40:41'),
+(99, 7, 'The Trilobite 2.0 could be used to <input> guests.', 'fill_blank', 10, 34, NULL, '2025-08-18 10:40:41', '2025-08-18 10:40:41'),
+(100, 7, 'Asimo first appeared <input>.', 'fill_blank', 11, 35, NULL, '2025-08-18 10:40:41', '2025-08-18 10:40:41'),
+(101, 7, 'Do the following statements agree with the information given in Reading Passage 3? In boxes 36 - 40 on your answer sheet, write TRUE if the statement agrees with the information, FALSE if the statement contradicts the information, NOT GIVEN if there is no information on this.', 'static', 12, NULL, NULL, '2025-08-18 10:43:02', '2025-08-18 10:43:02'),
+(102, 7, 'The Nokia N91 is strong.', 'true_false', 13, 36, '{\"options\":[\"TRUE\",\"FALSE\",\"NOT GIVEN\"]}', '2025-08-18 10:44:41', '2025-08-18 10:44:41'),
+(103, 7, 'E-paper can be torn easily.', 'true_false', 14, 37, '{\"options\":[\"TRUE\",\"FALSE\",\"NOT GIVEN\"]}', '2025-08-18 10:44:41', '2025-08-18 10:44:41'),
+(104, 7, 'HDTV is filmed differently to conventional TV.', 'true_false', 15, 38, '{\"options\":[\"TRUE\",\"FALSE\",\"NOT GIVEN\"]}', '2025-08-18 10:44:41', '2025-08-18 10:44:41'),
+(105, 7, 'The Trilobite 2.0 looks just like the original design.', 'true_false', 16, 39, '{\"options\":[\"TRUE\",\"FALSE\",\"NOT GIVEN\"]}', '2025-08-18 10:44:41', '2025-08-18 10:44:41'),
+(106, 7, 'Asimo is available for export.', 'true_false', 17, 40, '{\"options\":[\"TRUE\",\"FALSE\",\"NOT GIVEN\"]}', '2025-08-18 10:44:41', '2025-08-18 10:44:41');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `question_answers`
+--
+
+CREATE TABLE `question_answers` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `question_id` bigint(20) UNSIGNED NOT NULL,
+  `answer_text` varchar(255) DEFAULT NULL,
+  `option_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `question_groups`
+--
+
+CREATE TABLE `question_groups` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `section_id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL,
+  `media_file` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `question_groups`
+--
+
+INSERT INTO `question_groups` (`id`, `section_id`, `title`, `description`, `media_file`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Part 1', 'Part 1', NULL, '2025-08-16 06:22:37', '2025-08-16 06:22:37'),
+(2, 1, 'Part 2', 'Part 2', NULL, '2025-08-16 06:22:37', '2025-08-16 06:22:37'),
+(3, 1, 'Part 3', 'Part 3', NULL, '2025-08-16 06:22:37', '2025-08-16 06:22:37'),
+(4, 1, 'Part 4', 'Part 3', NULL, '2025-08-16 06:22:37', '2025-08-16 06:22:37'),
+(5, 2, 'Part 1', '<p>You should spend about 20 minutes on Questions 1 -13, which are based on Reading Passage 1 below.</p><img style=\"width:100%;height:300px;\"src=\"{{ asset(\'adminMock/2/T2S1_0.jpg\') }}\"alt=\"image\"><h5>Secret of Thailand\'s Success?</h5><p>A. It is a question officials here in Asia are being posed more and more:Why are your economies so vibrant? Answers include young and swelling populations, decreased debt, growing cities, emerging middle-class consumer sectors, evolving markets and, of course, ( China’s rise. Add this to that list: Women and their increasing role in Asia’s economies. The idea is that the more opportunities women have, the more vibrant economies are and,consequently, the less need there is to amass a huge public debt to boost growth. It is an idea bolstered by a new survey by MasterCard International Inc., which compares the socio-economic level of women with men in Asia-Pacific nations. The gauge uses four key indicators: participation in the labour force, college education, managerial positions, and above-median income.<br>B. Which Asian nation is doing host when it comes to women’s advancement? Thailand. It scored 92.3 of a possible 100, and according to MasterCard’s index, 100 equals gender equality. The survey was based on interviews with 300 to 350 women in thirteen nations and national statistics. Malaysia came in second with a score of 86.2, while China came in third with 68.4. The average score in Asia was 67.7. At the bottom of the list is South Korea (45.5), followed by Indonesia (52.5), and Japan (54.5). Perhaps it is a bizarre coincidence, yet MasterCard’s findings fit quite neatly with two important issues in Asia: economic leadership and debt. Thailand, Malaysia, and China are three economies widely seen as the future of Asia. Thailand’s economic boom in recent years has prompted many leaders in the region to look at its growth strategy. Malaysia, which has a female central bank governor, is one of Asia’s rising economic powers. China, of course, is the world’s hottest economy, and one that is shaking up trade patterns and business decisions everywhere.<br>C. Something all three economies have in common is an above-average level of female participation. What the three worst ranked economies share are severe long-term economic challenges of high levels of debt and a female workforce that is being neglected. Research in economic history is very conclusive on the role of women in economic growth and development, says Yuwa Hedrick-Wong, an economic adviser to MasterCard. The more extensive women’s participation at all areas of economic activities, the higher the probability for stronger economic growth. That, Hedrick-Wong says, means societies and economies that consistently fail to fully incorporate women’s ability and talent in businesses, and the workplace will suffer the consequences. Take Korea, which has been walking in place economically in recent years. Immediately following the 1997— 1998 Asian financial crisis, Korea became a regional role model as growth boomed and unemployment fell. Yet a massive increase in household debt left consumers overexposed and growth slowed.<br>D. Maybe it is a just coincidence that Korea also ranks low on measures of gender equality published by the United Nations. As of 2003, for example, it ranked below Honduras, Paraguay, Mauritius, and Ukraine in terms of women’s economic and political empowerment. Utilising more of its female workforce would deepen Korea’s labour pool and increase potential growth rates in the economy. The same goes for Japan. The reluctance of Asia’s biggest economy to increase female participation and let more women into the executive suite exacerbates its biggest long-term challenge: a declining birth rate. In 2003, the number of children per Japanese woman fell to a record low of 1.29 versus about. 2 in the early 1970s. Preliminary government statistics suggest the rate declined further in 2004. The trend is nothing short of a crisis for a highly indebted nation of 126 million that has yet to figure out how to fund the national pension system down the road. Yet Japan has been slow to realise that for many women, the decision to delay childbirth is a form of rebellion against societal expectations to have children and become housewives,<br>E. It may be 2005, yet having children is a career-ending decision for millions of bright, ambit ions, and well-educated Japanese, Until corrected, Japan’s birth rate will drop and economic growth will lag, UN Secretary General Kofi Annan was absolutely right earlier this month when he said no other policy is as likely to raise economic productivity than the empowerment of women. Here, in Thailand, the government is getting some decent marks in this regard, and the economy’s 6 per cent-plus growth rate may be a direct result. Thailand still has a long way to go. Yet the Bank of Thailand’s deputy governor, Tarisa Watanagase, is a woman, as are seven of nine assistant governors. Then there’s Jada Wattanasiritham, who runs Siam Commercial Bank Plc, Thailand’s fourth-biggest lender. How many female chief executives can you name in Japan or Korea? Looked at broadly in Asia, MasterCard’s survey is on to something. It is that giving women more opportunities to contribute to an economy is not just about fairness, but dollars and sense, too.\n</p>\n', NULL, '2025-08-16 06:22:37', '2025-08-16 06:22:37'),
+(6, 2, 'Part 2', '<p> You should spend about 20 minutes on Questions 14 - 26, which are based on Reading Passage 2 below.</p><img style=\"width: 100%; height: 300px\" src=\"{{asset(\'adminMock/2/T2S2_0.jpg\')}}\" alt=\"image\"/><h5>Patients Are a Virtue</h <p> A. Despite conference jeers, job cuts, and a financial crisis, health secretary Patricia Hewitt may find a reason to smile this week, as the NHS (British National Health Service) was named one of the top places to work by students. Among engineering, science, and IT students, the health service was ranked second in this year’s Univer-sum UK graduate survey of ideal employers, a leap of 54 places from last year. The annual survey, conducted in the UK since 1997, canvassed the opinions of more than 7,700 final and penultimate-year students studying for degrees in business, engineering, science, IT, and the humanities, at 39 universities, between January and March this year.<br>B. Each student was presented with a list of 130 employers, nominated by students through a separate process, from which they selected the five they considered to be ideal employers. The Universum list is based on the frequency of an organisation being selected as an ideal employer, following a weighting process. This year, government departments and public sector organisations dominated the top spots, with the BBC ranked first among humanities, engineering, science, and IT students, retaining its place from last year, and coming third for those studying business. Among humanities students, the BBC was followed closely by the Foreign and Commonwealth Office and the Civil Service fast stream. The Cabinet Office and the Ministry of Defence were not far behind, ranked fifth and sixth respectively. As well as the NHS, engineering, science, and IT students favoured the Environment Agency, which leapt 83 places, from 86 in 2005 to number three this year. Meanwhile, business students voted accountancy giants PricewaterhouseCoopers (PwC) as their favoured employer, followed by HSBC.< >C. At a London awards ceremony sponsored by the Guardian, Foluke Ajayi, head of NHS careers at NHS employers, said its success this year reflected the reality of the health service, which is the third largest employer in the world and the largest in Europe. “We employ people in other clinical areas, such as health care. We employ IT managers, engineers, architects,” she said, adding that the health service is no longer seen as a “second choice” career. “People recognise that they can give something back to the community, but still develop a worthwhile career.”<br>D. Sarah Churchman, director of student recruitment and diversity at PwC, said her company’s success is down to a good campus presence, its commitment to invest in its employees and, with offices around the world, the chance to travel, something which just under half of the students polled said was an important factor when it came to looking for work. One of the big four accountancy firms, PwC is not into gimmicks, and it does not offer freebies but, said Churchman, it does offer “a solid foundation” for anyone wanting a career in business. “We sell our people skills, so we are interested in building skills. We’re not selling something, we invest in our people,” she added.<br> E. Further down the rankings, but still with reason to celebrate, was John Lewis, which matched bumper sales this year with a leap from 111th place in 2005 to 26th among this year’s humanities students. Sky found itself in 12th place, up from 104th last year, and the Environment Agency also proved popular among this student group, rising from 138th in 2005 to 7th this year. Among the business fraternity, shell saw a reversal of fortunes, rising to 30th place after last year’s 76thposition. There were a few dramatic drops in the rankings. The Bank of England fell from 14th in 2005 to 27th this year among humanities students, although it retained its mid-table position among those studying business. British Airways also saw a slight dip, as did McKinsey & Co, which dropped from 11th to 22ndamong business undergraduates.<br>F. Perhaps more surprisingly, this year was the first appearance in the rankings of Teach First, a small charity launched three years ago that aims to create the “leaders of the future” by encouraging top graduates who would not normally consider a career in teaching to commit to work in “challenging” secondary schools for at least two years. The organisation came straight in at number eight among humanities students and was voted 22nd by those studying engineering, science, and IT. James Darley, director of graduate recruitment at Teach First, said he was “bowled over” by the news. “We were not expecting this. We’re a registered charity, only able to physically go to 15 universities.”<br>G. The scheme, based on one run in the US, has the backing of more than 80 businesses, including Deloitte and HSBC. During their two years, candidates undertake leadership training and emerge from the programme with a range of skills and experiences. “We hope in the long term they will be our ambassadors, as we call them, in politics, industry, charities, who will have done it and continue to support the educationally disadvantaged,” adds Darley. This year, 260 graduates are expected to take up the Teach First challenge in schools in London and Manchester, More are expected over the coming years, as the scheme expands to Birmingham and three other cities by 2008. Of the first set of recruits to complete the programme, half have gone on to work for “some amazing companies”, while the other half have chosen to stay on in their schools for a further year - 20% in leadership roles.<br>H. While more than half of students were concerned about achieving a good work life balance, a third said they wanted a job that would challenge them. Although male Students tended to focus more on the practical aspects of work, such as “building a sound financial base”, women, particularly those studying for humanities degrees, had a more idealistic outlook, saying making a contribution to society was a key career goal. Almost half of all students said that paid overtime was a key part of any company compensation package, However, business students said that the most important compensation, apart from salary, was performance-related bonuses, while important considerations for humanities students were retirement plans. Working overseas also scored highly among those surveyed this year, with 45% of business students, and 44% of humanities students, listing it as a priority. Ethical considerations and corporate social responsibilities were also mentioned, with a large percentage of humanities and engineering, science and IT students saying it was a key consideration when it came to choosing an employer.</p>\n', NULL, '2025-08-16 06:22:37', '2025-08-16 06:22:37'),
+(7, 2, 'Part 3', '<p>\n    You should spend about 20 minutes on Questions 27 - 40, which are based on\n    Reading Passage 3 below.\n</p>\n<img\n    style=\"width: 100%; height: 300px\"\n    src=\"{{asset(\'adminMock/2/T2S3_0.jpg\')}}\"\n    alt=\"image\"\n/>\n\n<h5>Rise of the Robots</h5>\n<p>\n    If you are into technology, you are living in wonderful times. Things are\n    developing in leaps and bounds, especially gadgets. Let us look at the\n    technology that is set to break through.\n</p>\n\n<h6>CELESTRON SKYSCOUT</h6>\n<p>\n    Backyard stargazing goes seriously hi-tech with the Celestron SkyScout,\n    which was judged to be the Best of Innovations at the New York Consumer\n    Electronics Show press preview event in November. It is not difficult to see\n    why. The SkyScout is a hand-held viewing device that is capable of finding\n    and identifying more than 6,000 celestial objects visible to the naked eye,\n    thus transforming the night sky into your own personal planetarium. Using\n    GPS technology and a substantial celestial database, the camcorder-sized\n    SkyScout enables stargazers to point the device at any visible object in the\n    sky, press a button, and then listen to a commentary. For the truly\n    celestially challenged, if you want to view a star or planet but do not have\n    a clue which bit of the heavens to look in, do not despair; the SkyScout’s\n    \"locate” feature will guide you to it using illuminated arrows in the\n    viewfinder.\n</p>\n\n<h6>NOKIA N91</h6>\n<p>\n    This amazing mobile jukebox is due out early in 2006. Nokia’s N91 looks set\n    to be in a class of its own as a multimedia mobile phone. It will play\n    music, take photos, surf the web and download videos, store contact details,\n    and generally organise your life. The robust little phone, resplendent in\n    its stainless steel case, is the first Nokia to be equipped with a hard\n    drive (4Gb), which means that it can store up to 3,000 songs. The N91, which\n    has a hi-fi quality headset and remote control, supports a wide range of\n    digital music formats, including MP3, Real, WAV, and WMA. It uses wireless\n    technology to allow users to find and buy music from the operator’s music\n    store. You can also drag and drop music from your PC to the N91 and manage\n    and share playlists. If you can find the time, you can get on the blower,\n    too.\n</p>\n\n<h6>SEIKO SPECTRUM E-PAPER WATCH</h6>\n<p>\n    The Seiko Spectrum is no ordinary wristwatch. At first glance, it is an\n    attractive and futuristic bracelet-style watch. Look closer, however, and\n    you will notice that its display is unlike any you have seen before. Rather\n    than the usual LCD screen, the display is made of “e-paper” - from the\n    electronic paper pioneers E Ink Corp - and shows a constantly changing\n    mosaic pattern along with the time. Because e-paper is so flexible and thin,\n    it allows the display to curve round the wrist along with the watch band -\n    something conventional liquid-crystal displays cannot do, as they have to be\n    flat. Seiko says the e-paper display not only produces far better contrast\n    than an LCD screen, but requires no power to retain an image, so the\n    batteries last longer. Seiko is releasing only 500 of the watches next\n    month, priced at about £1,250 - so you\'d better lose no time.\n</p>\n\n<h6>HIGH-DEFINITION TV</h6>\n<p>\n    HDTV, already available in the United States, Japan, and Australia, will hit\n    the UK in 2006. When you watch a programme filmed in the HD format, you will\n    see a much sharper, clearer and more vibrant image. This is due partly to\n    the way a programme is filmed, but also to the high-definition TV set\n    itself, which uses either 720 or 1,080 visible rows of pixels (depending on\n    which format the individual HDTV uses) to display images, compared to the\n    576 rows of pixels used in current sets.\n</p>\n\n<h6>ELECTROLUX TRILOBITE 2.0 ROBOT VACUUM CLEANER</h6>\n<p>\n    Next time you are expecting visitors, do not bother to vacuum first - wait\n    until they arrive, and then entertain them with this little gadget. The\n    Electrolux Trilobite 2.0 is a robotic vacuum cleaner that navigates its way\n    around your floors using ultrasound, just like a bat. It pings out\n    ultrasound vibrations at surfaces to create a map of the room, which it\n    remembers for future cleaning assignments. The Trilobite has no problem\n    avoiding collision with things placed on the floor. Special magnetic strips\n    are placed in doorways, near stairs and other openings. These act as a wall,\n    keeping the Trilobite in the room. You can also programme it to glide round\n    when you’re at work or after you\'ve gone to bed. When Electrolux introduced\n    the original Trilobite in 2001, it was voted among the 100 most innovative\n    designs (though whether the judges were dedicated couch potatoes, and thus\n    biased, we were not aide to discover). The name comes from the hard-shelled\n    sea creature from the Paleozoic era (between 250 million and 560 million\n    years ago) that roamed the ocean floor feeding on particles and small\n    animals.\n</p>\n\n<h6>HONDA ASIMO ROBOT</h6>\n<p>\n    Need an extra pair of hands around the office? Look no further; this mouth,\n    the Honda Motor Company showcased its second-generation humanoid robot,\n    Asimo. The machine has come a long way since its first incarnation five\n    years ago. The 1.3 metre-tall droid is now capable of performing a variety\n    of office tasks, including reception duties, serving drinks and acting as an\n    information guide, as well as making deliveries. Using multiple sensors,\n    Asimo has the ability to recognise the surrounding environment and interact\n    with people using integrated circuit tags. It can walk and run at a fair\n    pace, and push a cart. Honda plans to start using Asimo’s receptionist\n    functions at its Wako Building in Japan early in 2006, and it is hoped it\n    will become available for leasing afterwards. It could soon be pushing a\n    cart at an office near you.\n</p>\n', NULL, '2025-08-16 06:22:37', '2025-08-16 06:22:37'),
+(8, 3, 'Part 1', 'Part 1', NULL, '2025-08-16 06:22:37', '2025-08-16 06:22:37'),
+(9, 3, 'Part 2', 'Part 2', NULL, '2025-08-16 06:22:37', '2025-08-16 06:22:37');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `question_options`
+--
+
+CREATE TABLE `question_options` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `question_id` bigint(20) UNSIGNED NOT NULL,
+  `text` varchar(255) DEFAULT NULL,
+  `row_index` int(11) DEFAULT NULL,
+  `col_index` int(11) DEFAULT NULL,
+  `is_correct` tinyint(1) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `question_options`
+--
+
+INSERT INTO `question_options` (`id`, `question_id`, `text`, `row_index`, `col_index`, `is_correct`, `created_at`, `updated_at`) VALUES
+(1, 43, 'she doesn’t have enough information', NULL, NULL, 0, '2025-08-16 10:06:02', '2025-08-16 10:06:02'),
+(2, 43, 'she can’t organise her presentation', NULL, NULL, 0, '2025-08-16 10:06:02', '2025-08-16 10:06:02'),
+(3, 43, 'she doesn’t have enough time', NULL, NULL, 1, '2025-08-16 10:06:02', '2025-08-16 10:06:02'),
+(4, 44, 'solar power in America', NULL, NULL, 0, '2025-08-16 10:06:02', '2025-08-16 10:06:02'),
+(5, 44, 'solar-powered water heaters', NULL, NULL, 1, '2025-08-16 10:06:02', '2025-08-16 10:06:02'),
+(6, 44, 'alternative energy technology', NULL, NULL, 0, '2025-08-16 10:06:02', '2025-08-16 10:06:02'),
+(7, 45, 'Fossil fuels are expensive', NULL, NULL, 0, '2025-08-16 10:06:02', '2025-08-16 10:06:02'),
+(8, 45, 'Fossil fuels have an impact on the environment', NULL, NULL, 0, '2025-08-16 10:06:02', '2025-08-16 10:06:02'),
+(9, 45, 'Fossil fuels are limited', NULL, NULL, 1, '2025-08-16 10:06:02', '2025-08-16 10:06:02'),
+(10, 46, 'it can be harnessed with simple technology', NULL, NULL, 1, '2025-08-16 10:06:02', '2025-08-16 10:06:02'),
+(11, 46, 'it is infinite', NULL, NULL, 0, '2025-08-16 10:06:02', '2025-08-16 10:06:02'),
+(12, 46, 'it can be applied equally well in any country', NULL, NULL, 0, '2025-08-16 10:06:02', '2025-08-16 10:06:02'),
+(13, 47, 'A', NULL, NULL, 0, '2025-08-16 10:06:02', '2025-08-16 10:06:02'),
+(14, 47, 'B', NULL, NULL, 1, '2025-08-16 10:06:02', '2025-08-16 10:06:02'),
+(15, 47, 'C', NULL, NULL, 0, '2025-08-16 10:06:02', '2025-08-16 10:06:02'),
+(16, 88, 'from all British universities', NULL, NULL, 0, '2025-08-16 11:49:56', '2025-08-16 11:49:56'),
+(17, 88, 'studying a variety of subjects', NULL, NULL, 0, '2025-08-16 11:49:56', '2025-08-16 11:49:56'),
+(18, 88, 'who were in their last year of studies only', NULL, NULL, 0, '2025-08-16 11:49:56', '2025-08-16 11:49:56'),
+(19, 89, 'was first choice in most categories', NULL, NULL, 0, '2025-08-16 11:49:56', '2025-08-16 11:49:56'),
+(20, 89, 'was unpopular with business students', NULL, NULL, 0, '2025-08-16 11:49:56', '2025-08-16 11:49:56'),
+(21, 89, 'employs more graduates than most other organisations and companies', NULL, NULL, 0, '2025-08-16 11:49:56', '2025-08-16 11:49:56'),
+(22, 91, 'tell you information about the stars', NULL, NULL, 0, '2025-08-16 11:59:01', '2025-08-16 11:59:01'),
+(23, 91, 'tell you where in the world you are', NULL, NULL, 0, '2025-08-16 11:59:01', '2025-08-16 11:59:01'),
+(24, 91, 'find objects in the sky that are not normally visible', NULL, NULL, 0, '2025-08-16 11:59:01', '2025-08-16 11:59:01'),
+(25, 92, 'cannot be bent', NULL, NULL, 0, '2025-08-16 11:59:01', '2025-08-16 11:59:01'),
+(26, 92, 'can be used for surfing the Internet', NULL, NULL, 0, '2025-08-16 11:59:01', '2025-08-16 11:59:01'),
+(27, 92, 'is being produced as a limited edition', NULL, NULL, 0, '2025-08-16 11:59:01', '2025-08-16 11:59:01'),
+(28, 93, 'asks permission before moving from room to room', NULL, NULL, 0, '2025-08-16 11:59:01', '2025-08-16 11:59:01'),
+(29, 93, 'uses lasers to help it avoid objects', NULL, NULL, 0, '2025-08-16 11:59:01', '2025-08-16 11:59:01'),
+(30, 93, 'is programmable', NULL, NULL, 0, '2025-08-16 11:59:01', '2025-08-16 11:59:01'),
+(31, 94, 'has two pairs of hands', NULL, NULL, 0, '2025-08-16 11:59:01', '2025-08-16 11:59:01'),
+(32, 94, 'uses lasers to help it recognise its surroundings', NULL, NULL, 0, '2025-08-16 11:59:01', '2025-08-16 11:59:01'),
+(33, 94, 'can run', NULL, NULL, 0, '2025-08-16 11:59:01', '2025-08-16 11:59:01');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `scorers`
 --
 
@@ -1315,6 +1577,31 @@ INSERT INTO `scorers` (`id`, `name`, `image`, `speaking`, `listening`, `reading`
 (3, 'Randall Nicholson', 'image1742109530.png', '6.5', '6.5', '8.5', '9', 0, 0, 0, 1, '8', '2025-03-03 12:32:27', '2025-04-12 13:52:30'),
 (4, 'Lane Vargas', 'image1742109677.png', '5', '6', '7', '8', 0, 0, 0, 1, '6', '2025-03-03 12:32:36', '2025-03-25 11:07:32'),
 (5, 'Colin Cardenas', 'image1742033168.png', '8.5', '7', '8.5', '7', 1, 0, 1, 0, '7.5', '2025-03-03 12:32:44', '2025-03-25 11:17:15');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sections`
+--
+
+CREATE TABLE `sections` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `mock_test_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `order_no` int(11) NOT NULL,
+  `duration` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `sections`
+--
+
+INSERT INTO `sections` (`id`, `mock_test_id`, `name`, `order_no`, `duration`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Listening', 1, 30, '2025-08-16 06:12:44', '2025-08-16 06:12:44'),
+(2, 1, 'Reading', 2, 60, '2025-08-16 06:12:44', '2025-08-16 06:12:44'),
+(3, 1, 'Writing', 3, 60, '2025-08-16 06:12:44', '2025-08-16 06:12:44');
 
 -- --------------------------------------------------------
 
@@ -1540,6 +1827,13 @@ CREATE TABLE `test_listenings` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `test_listenings`
+--
+
+INSERT INTO `test_listenings` (`id`, `exam`, `user_id`, `name`, `email`, `status`, `test_id`, `answer1`, `mark1`, `answer2`, `mark2`, `answer3`, `mark3`, `answer4`, `mark4`, `answer5`, `mark5`, `answer6`, `mark6`, `answer7`, `mark7`, `answer8`, `mark8`, `answer9`, `mark9`, `answer10`, `mark10`, `answer11`, `mark11`, `answer12`, `mark12`, `answer13`, `mark13`, `answer14`, `mark14`, `answer15`, `mark15`, `answer16`, `mark16`, `answer17`, `mark17`, `answer18`, `mark18`, `answer19`, `mark19`, `answer20`, `mark20`, `answer21`, `mark21`, `answer22`, `mark22`, `answer23`, `mark23`, `answer24`, `mark24`, `answer25`, `mark25`, `answer26`, `mark26`, `answer27`, `mark27`, `answer28`, `mark28`, `answer29`, `mark29`, `answer30`, `mark30`, `answer31`, `mark31`, `answer32`, `mark32`, `answer33`, `mark33`, `answer34`, `mark34`, `answer35`, `mark35`, `answer36`, `mark36`, `answer37`, `mark37`, `answer38`, `mark38`, `answer39`, `mark39`, `answer40`, `mark40`, `score`, `correct`, `created_at`, `updated_at`) VALUES
+(88, 'Admin2', NULL, 'Nicole Baldwin', 'sizip@mailinator.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'F', '0', '2025-08-14 04:49:05', '2025-08-14 04:49:05');
+
 -- --------------------------------------------------------
 
 --
@@ -1640,6 +1934,39 @@ CREATE TABLE `test_readings` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `test_readings`
+--
+
+INSERT INTO `test_readings` (`id`, `exam`, `user_id`, `name`, `email`, `status`, `test_id`, `answer1`, `mark1`, `answer2`, `mark2`, `answer3`, `mark3`, `answer4`, `mark4`, `answer5`, `mark5`, `answer6`, `mark6`, `answer7`, `mark7`, `answer8`, `mark8`, `answer9`, `mark9`, `answer10`, `mark10`, `answer11`, `mark11`, `answer12`, `mark12`, `answer13`, `mark13`, `answer14`, `mark14`, `answer15`, `mark15`, `answer16`, `mark16`, `answer17`, `mark17`, `answer18`, `mark18`, `answer19`, `mark19`, `answer20`, `mark20`, `answer21`, `mark21`, `answer22`, `mark22`, `answer23`, `mark23`, `answer24`, `mark24`, `answer25`, `mark25`, `answer26`, `mark26`, `answer27`, `mark27`, `answer28`, `mark28`, `answer29`, `mark29`, `answer30`, `mark30`, `answer31`, `mark31`, `answer32`, `mark32`, `answer33`, `mark33`, `answer34`, `mark34`, `answer35`, `mark35`, `answer36`, `mark36`, `answer37`, `mark37`, `answer38`, `mark38`, `answer39`, `mark39`, `answer40`, `mark40`, `score`, `correct`, `created_at`, `updated_at`) VALUES
+(52, 'Admin2', NULL, 'Nicole Baldwin', 'sizip@mailinator.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'F', '0', '2025-08-14 04:49:22', '2025-08-14 04:49:22');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `test_users`
+--
+
+CREATE TABLE `test_users` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `mock_test_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `test_users`
+--
+
+INSERT INTO `test_users` (`id`, `mock_test_id`, `name`, `phone`, `email`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Sybil Aguilar', '+1 (681) 683-4694', 'misuvi@mailinator.com', '2025-08-16 00:07:41', '2025-08-16 00:07:41'),
+(2, 1, 'Danielle Fitzgerald', '+1 (813) 636-2194', 'vuzovodoha@mailinator.com', '2025-08-16 04:56:03', '2025-08-16 04:56:03'),
+(3, 1, 'Lysandra Gardner', '+1 (154) 213-7276', 'liwetyxuf@mailinator.com', '2025-08-16 04:59:29', '2025-08-16 04:59:29'),
+(4, 1, 'Camilla Bender', '+1 (545) 121-5556', 'pore@mailinator.com', '2025-08-17 22:06:51', '2025-08-17 22:06:51');
+
 -- --------------------------------------------------------
 
 --
@@ -1661,6 +1988,13 @@ CREATE TABLE `test_writings` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `test_writings`
+--
+
+INSERT INTO `test_writings` (`id`, `exam`, `user_id`, `name`, `email`, `status`, `test_id`, `answer1`, `mark1`, `answer2`, `mark2`, `created_at`, `updated_at`) VALUES
+(66, 'Admin2', NULL, 'Nicole Baldwin', 'sizip@mailinator.com', NULL, NULL, NULL, NULL, NULL, NULL, '2025-08-14 04:49:37', '2025-08-14 04:49:37');
 
 -- --------------------------------------------------------
 
@@ -1932,6 +2266,12 @@ ALTER TABLE `mocktest_students`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `mock_tests`
+--
+ALTER TABLE `mock_tests`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `notices`
 --
 ALTER TABLE `notices`
@@ -1970,10 +2310,46 @@ ALTER TABLE `placements`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `questions`
+--
+ALTER TABLE `questions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `questions_question_group_id_foreign` (`question_group_id`);
+
+--
+-- Indexes for table `question_answers`
+--
+ALTER TABLE `question_answers`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `question_answers_option_id_foreign` (`option_id`),
+  ADD KEY `question_answers_question_id_foreign` (`question_id`);
+
+--
+-- Indexes for table `question_groups`
+--
+ALTER TABLE `question_groups`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `question_groups_section_id_foreign` (`section_id`);
+
+--
+-- Indexes for table `question_options`
+--
+ALTER TABLE `question_options`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `question_options_question_id_foreign` (`question_id`);
+
+--
 -- Indexes for table `scorers`
 --
 ALTER TABLE `scorers`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sections`
+--
+ALTER TABLE `sections`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `sections_mock_test_id_foreign` (`mock_test_id`);
 
 --
 -- Indexes for table `settings`
@@ -2010,6 +2386,13 @@ ALTER TABLE `test_listenings`
 --
 ALTER TABLE `test_readings`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `test_users`
+--
+ALTER TABLE `test_users`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `test_users_mock_test_id_foreign` (`mock_test_id`);
 
 --
 -- Indexes for table `test_writings`
@@ -2182,13 +2565,19 @@ ALTER TABLE `mcq_students`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT for table `mocktest_students`
 --
 ALTER TABLE `mocktest_students`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=135;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=136;
+
+--
+-- AUTO_INCREMENT for table `mock_tests`
+--
+ALTER TABLE `mock_tests`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `notices`
@@ -2215,10 +2604,40 @@ ALTER TABLE `placements`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT for table `questions`
+--
+ALTER TABLE `questions`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
+
+--
+-- AUTO_INCREMENT for table `question_answers`
+--
+ALTER TABLE `question_answers`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `question_groups`
+--
+ALTER TABLE `question_groups`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `question_options`
+--
+ALTER TABLE `question_options`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+
+--
 -- AUTO_INCREMENT for table `scorers`
 --
 ALTER TABLE `scorers`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `sections`
+--
+ALTER TABLE `sections`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `settings`
@@ -2248,19 +2667,25 @@ ALTER TABLE `tests`
 -- AUTO_INCREMENT for table `test_listenings`
 --
 ALTER TABLE `test_listenings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT for table `test_readings`
 --
 ALTER TABLE `test_readings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+
+--
+-- AUTO_INCREMENT for table `test_users`
+--
+ALTER TABLE `test_users`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `test_writings`
 --
 ALTER TABLE `test_writings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT for table `trainers`
@@ -2285,6 +2710,47 @@ ALTER TABLE `websites`
 --
 ALTER TABLE `writes`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `questions`
+--
+ALTER TABLE `questions`
+  ADD CONSTRAINT `questions_question_group_id_foreign` FOREIGN KEY (`question_group_id`) REFERENCES `question_groups` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `question_answers`
+--
+ALTER TABLE `question_answers`
+  ADD CONSTRAINT `question_answers_option_id_foreign` FOREIGN KEY (`option_id`) REFERENCES `question_options` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `question_answers_question_id_foreign` FOREIGN KEY (`question_id`) REFERENCES `questions` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `question_groups`
+--
+ALTER TABLE `question_groups`
+  ADD CONSTRAINT `question_groups_section_id_foreign` FOREIGN KEY (`section_id`) REFERENCES `sections` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `question_options`
+--
+ALTER TABLE `question_options`
+  ADD CONSTRAINT `question_options_question_id_foreign` FOREIGN KEY (`question_id`) REFERENCES `questions` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `sections`
+--
+ALTER TABLE `sections`
+  ADD CONSTRAINT `sections_mock_test_id_foreign` FOREIGN KEY (`mock_test_id`) REFERENCES `mock_tests` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `test_users`
+--
+ALTER TABLE `test_users`
+  ADD CONSTRAINT `test_users_mock_test_id_foreign` FOREIGN KEY (`mock_test_id`) REFERENCES `mock_tests` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
