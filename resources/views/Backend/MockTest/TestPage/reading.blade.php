@@ -81,7 +81,7 @@
         </a>
     </div>
 
-    <form class="afterSubmitForm" action="{{ url('admin-mocktest-reading-exam-store') }}" method="post"> @csrf
+    <form class="" action="{{ route('admin.reading.store', $mockTest->id) }}" method="post"> @csrf
 
         <!-- top bar -->
         <section class=""
@@ -205,14 +205,14 @@
                                                                                                                 <input
                                                                                                                     type="text"
                                                                                                                     class="form-control"
-                                                                                                                    name="question_{{ $question->id }}"
-                                                                                                                    placeholder="Answer">
+                                                                                                                    name="answers[{{ $question->id }}]"
+                                                                                                                    placeholder="Q{{ $question->question_no }}">
                                                                                                             @elseif($question->type === 'mcq')
                                                                                                                 @foreach ($question->options as $option)
                                                                                                                     <div>
                                                                                                                         <input
                                                                                                                             type="radio"
-                                                                                                                            name="question_{{ $question->id }}"
+                                                                                                                            name="answers[{{ $question->id }}]"
                                                                                                                             value="{{ $option->id }}">
                                                                                                                         {{ $option->text }}
                                                                                                                     </div>
@@ -250,28 +250,27 @@
                                                                                                 <div>
                                                                                                     <input
                                                                                                         type="radio"
-                                                                                                        name="question_{{ $question->id }}"
+                                                                                                        name="answers[{{ $question->id }}]"
                                                                                                         value="{{ $option->id }}">
                                                                                                     {{ $option->text }}
                                                                                                 </div>
                                                                                             @endforeach
 
                                                                                             {{-- Fill in The Blanks --}}
-                                                                                        @elseif($question->type === 'fill_blank' && empty($question->meta_data['row']))
+                                                                                            @elseif($question->type === 'fill_blank' && empty($question->meta_data['row']))
                                                                                             <p class="">
                                                                                                 Q{{ $question->question_no }}
                                                                                                 :
-                                                                                                {!! $question->text !!}
+                                                                                                {!! str_replace('___','<input type="text" name="answers[' .
+                                                                                                        $question->id .']" class="form-control d-inline mx-1" style="width:150px;"placeholder="Q ' . $question->question_no . ' ">',
+                                                                                                    $question->text,
+                                                                                                ) !!}
                                                                                             </p>
-                                                                                            <input type="hidden"
-                                                                                                class="form-control w-50"
-                                                                                                name="question_{{ $question->id }}"
-                                                                                                placeholder="Answer here">
 
                                                                                             {{-- Multi Select --}}
                                                                                         @elseif($question->type === 'multi_select')
                                                                                             <select
-                                                                                                name="question_{{ $question->id }}[]"
+                                                                                                name="answers[{{ $question->id }}][]"
                                                                                                 class="form-select w-50"
                                                                                                 multiple>
                                                                                                 @foreach ($question->options as $option)
@@ -287,7 +286,7 @@
                                                                                             Q{{ $question->question_no }}
                                                                                             :
                                                                                             <select
-                                                                                                name="question_{{ $question->id }}"
+                                                                                                name="answers[{{ $question->id }}]"
                                                                                                 class="form-select"
                                                                                                 style="width: 60px; height:50px; display: inline">
                                                                                                 <option value="">
@@ -308,7 +307,7 @@
                                                                                                 <div>
                                                                                                     <input
                                                                                                         type="checkbox"
-                                                                                                        name="question_{{ $question->id }}[]"
+                                                                                                        name="answers[{{ $question->id }}][]"
                                                                                                         value="{{ $option->id }}">
                                                                                                     {{ $option->text }}
                                                                                                 </div>

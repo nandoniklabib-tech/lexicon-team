@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\TestWriting;
 use App\Models\MockTest;
 use App\Models\TestUser;
+use App\Models\Question;
+use App\Models\UserAnswer;
+
 
 
 
@@ -39,6 +42,7 @@ class AdminMocktestController extends Controller
             'phone' => $validated['phone'],
             'email' => $validated['email'],
         ]);
+        session(['test_user_id' => $testUser->id]);
 
         return redirect()->route('admin.listening.show', $mockTest->id);
     }
@@ -54,6 +58,54 @@ class AdminMocktestController extends Controller
         return view('Backend.MockTest.TestPage.listening', compact('mockTest'));
     }
 
+    public function storeListeningQuestion(Request $request, MockTest $mockTest)
+    {
+        $testUserId = session('test_user_id');
+
+        if (!$testUserId) {
+            return redirect()->route('admin/mocktests')
+                ->withErrors('Session expired. Please start the test again.');
+        }
+
+        $answers = $request->input('answers', []);
+
+        foreach ($answers as $questionId => $answer) {
+            $question = Question::find($questionId);
+
+            if (!$question) {
+                continue;
+            }
+
+            // If it's an array (checkbox / multi_select), save multiple rows
+            if (is_array($answer)) {
+                foreach ($answer as $optionId) {
+                    UserAnswer::create([
+                        'test_user_id' => $testUserId,
+                        'mock_test_id' => $mockTest->id,
+                        'section_id'   => $question->group->section_id,
+                        'question_id'  => $question->id,
+                        'option_id'    => is_numeric($optionId) ? $optionId : null,
+                        'question_no'  => $question->question_no,
+                        'answer_text'  => !is_numeric($optionId) ? $optionId : null,
+                    ]);
+                }
+            } else {
+                UserAnswer::create([
+                    'test_user_id' => $testUserId,
+                    'mock_test_id' => $mockTest->id,
+                    'section_id'   => $question->group->section_id,
+                    'question_id'  => $question->id,
+                    'option_id'    => is_numeric($answer) ? $answer : null,
+                    'question_no'  => $question->question_no,
+                    'answer_text'  => !is_numeric($answer) ? $answer : null,
+                ]);
+            }
+        }
+
+        return redirect()->route('admin.reading.show', $mockTest->id)
+            ->with('success', 'Answers saved successfully.');
+    }
+
     //Show Reading Question
     public function showReadingQuestion($mockTestId)
     {
@@ -63,6 +115,53 @@ class AdminMocktestController extends Controller
         ])->findOrFail($mockTestId);
 
         return view('Backend.MockTest.TestPage.reading', compact('mockTest'));
+    }
+    public function storeReadingQuestion(Request $request, MockTest $mockTest)
+    {
+        $testUserId = session('test_user_id');
+
+        if (!$testUserId) {
+            return redirect()->route('admin/mocktests')
+                ->withErrors('Session expired. Please start the test again.');
+        }
+
+        $answers = $request->input('answers', []);
+
+        foreach ($answers as $questionId => $answer) {
+            $question = Question::find($questionId);
+
+            if (!$question) {
+                continue;
+            }
+
+            // If it's an array (checkbox / multi_select), save multiple rows
+            if (is_array($answer)) {
+                foreach ($answer as $optionId) {
+                    UserAnswer::create([
+                        'test_user_id' => $testUserId,
+                        'mock_test_id' => $mockTest->id,
+                        'section_id'   => $question->group->section_id,
+                        'question_id'  => $question->id,
+                        'option_id'    => is_numeric($optionId) ? $optionId : null,
+                        'question_no'  => $question->question_no,
+                        'answer_text'  => !is_numeric($optionId) ? $optionId : null,
+                    ]);
+                }
+            } else {
+                UserAnswer::create([
+                    'test_user_id' => $testUserId,
+                    'mock_test_id' => $mockTest->id,
+                    'section_id'   => $question->group->section_id,
+                    'question_id'  => $question->id,
+                    'option_id'    => is_numeric($answer) ? $answer : null,
+                    'question_no'  => $question->question_no,
+                    'answer_text'  => !is_numeric($answer) ? $answer : null,
+                ]);
+            }
+        }
+
+        return redirect()->route('admin.listening.show', $mockTest->id)
+            ->with('success', 'Answers saved successfully.');
     }
 
 

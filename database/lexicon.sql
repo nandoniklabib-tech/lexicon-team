@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 19, 2025 at 09:44 AM
+-- Generation Time: Aug 20, 2025 at 01:37 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -1078,7 +1078,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (54, '2025_08_14_110300_create_questions_table', 41),
 (55, '2025_08_14_110300_create_question_options_table', 42),
 (56, '2025_08_14_110301_create_question_answers_table', 42),
-(57, '2025_08_16_073900_add_question_no_to_questions_table', 43);
+(57, '2025_08_16_073900_add_question_no_to_questions_table', 43),
+(58, '2025_08_19_113310_create_user_answers_table', 44);
 
 -- --------------------------------------------------------
 
@@ -1337,18 +1338,18 @@ CREATE TABLE `questions` (
 
 INSERT INTO `questions` (`id`, `question_group_id`, `text`, `type`, `order_no`, `question_no`, `meta_data`, `created_at`, `updated_at`) VALUES
 (1, 1, '<b>Southern</b> <span style=\"color:red;\">Rental Car</span> - booking extra', 'static', 1, NULL, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
-(2, 1, 'Name: William <input>', 'fill_blank', 2, 1, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
-(3, 1, 'Address: 10 <input>', 'fill_blank', 3, 2, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
-(4, 1, 'Contact number: 07 <input>', 'fill_blank', 4, 3, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
-(5, 1, 'Payment by <input> card type', 'fill_blank', 5, 4, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
+(2, 1, 'Name: William ___', 'fill_blank', 2, 1, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
+(3, 1, 'Address: 10 ___', 'fill_blank', 3, 2, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
+(4, 1, 'Contact number: 07 ___', 'fill_blank', 4, 3, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
+(5, 1, 'Payment by ___ card type', 'fill_blank', 5, 4, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
 (6, 1, 'Card No. 4550 1392 8309 3221', 'static', 6, NULL, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
 (7, 1, 'Card expiry date: July 20XX', 'static', 7, NULL, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
-(8, 1, 'Rental period: <input>', 'fill_blank', 8, 5, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
-(9, 1, 'How much is the car per day? <input>', 'fill_blank', 9, 6, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
-(10, 1, 'What does the price include? <input>', 'fill_blank', 10, 7, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
-(11, 1, 'Who will he be visiting? <input>', 'fill_blank', 11, 8, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
-(12, 1, 'What kind of car does the agent recommend? <input>', 'fill_blank', 12, 9, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
-(13, 1, 'What does he need to collect the car? <input>', 'fill_blank', 13, 10, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
+(8, 1, 'Rental period: ___', 'fill_blank', 8, 5, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
+(9, 1, 'How much is the car per day? ___', 'fill_blank', 9, 6, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
+(10, 1, 'What does the price include? ___', 'fill_blank', 10, 7, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
+(11, 1, 'Who will he be visiting? ___', 'fill_blank', 11, 8, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
+(12, 1, 'What kind of car does the agent recommend? ___', 'fill_blank', 12, 9, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
+(13, 1, 'What does he need to collect the car? ___', 'fill_blank', 13, 10, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
 (14, 2, 'Overlander', 'others', 1, NULL, '{\"row\":1,\"col\":1}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
 (15, 2, '', 'others', 2, NULL, '{\"row\":1,\"col\":2}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
 (16, 2, 'Distance/km', 'others', 3, NULL, '{\"row\":2,\"col\":1}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
@@ -1373,31 +1374,31 @@ INSERT INTO `questions` (`id`, `question_group_id`, `text`, `type`, `order_no`, 
 (35, 2, '', 'fill_blank', 22, 15, '{\"row\":11,\"col\":2}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
 (36, 2, 'Time/hours', 'others', 23, NULL, '{\"row\":12,\"col\":1}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
 (37, 2, '5', 'others', 24, NULL, '{\"row\":12,\"col\":2}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
-(38, 2, 'Taking three days to complete, the <input> is one of the world’s longest train journeys.', 'fill_blank', 25, 16, '{\"position\":\"summary\"}', '2025-08-16 09:02:08', '2025-08-16 09:02:08'),
-(39, 2, 'The Ghan is shorter, passing through towns built by the <input>', 'fill_blank', 26, 17, '{\"position\":\"summary\"}', '2025-08-16 09:02:08', '2025-08-16 09:02:08'),
-(40, 2, 'There is also a sculpture designed to mark the laying of the <input> concrete sleeper.', 'fill_blank', 27, 18, '{\"position\":\"summary\"}', '2025-08-16 09:02:08', '2025-08-16 09:02:08'),
-(41, 2, 'The Overland was the first train to travel between the capital cities in two <input>', 'fill_blank', 28, 19, '{\"position\":\"summary\"}', '2025-08-16 09:02:08', '2025-08-16 09:02:08'),
-(42, 2, ' and it is also the oldest journey of its kind on <input>', 'fill_blank', 29, 20, '{\"position\":\"summary\"}', '2025-08-16 09:02:08', '2025-08-16 09:02:08'),
+(38, 2, 'Taking three days to complete, the ___ is one of the world’s longest train journeys.', 'fill_blank', 25, 16, '{\"position\":\"summary\"}', '2025-08-16 09:02:08', '2025-08-16 09:02:08'),
+(39, 2, 'The Ghan is shorter, passing through towns built by the ___', 'fill_blank', 26, 17, '{\"position\":\"summary\"}', '2025-08-16 09:02:08', '2025-08-16 09:02:08'),
+(40, 2, 'There is also a sculpture designed to mark the laying of the ___ concrete sleeper.', 'fill_blank', 27, 18, '{\"position\":\"summary\"}', '2025-08-16 09:02:08', '2025-08-16 09:02:08'),
+(41, 2, 'The Overland was the first train to travel between the capital cities in two ___', 'fill_blank', 28, 19, '{\"position\":\"summary\"}', '2025-08-16 09:02:08', '2025-08-16 09:02:08'),
+(42, 2, ' and it is also the oldest journey of its kind on ___', 'fill_blank', 29, 20, '{\"position\":\"summary\"}', '2025-08-16 09:02:08', '2025-08-16 09:02:08'),
 (43, 3, 'Lyn is having difficulty completing her project because', 'mcq', 1, 21, NULL, '2025-08-16 10:00:32', '2025-08-16 10:00:32'),
 (44, 3, 'Her presentation is going to focus on', 'mcq', 2, 22, NULL, '2025-08-16 10:00:32', '2025-08-16 10:00:32'),
 (45, 3, 'Why does Lyn think we should be looking for alternative sources of energy?', 'mcq', 3, 23, NULL, '2025-08-16 10:00:32', '2025-08-16 10:00:32'),
 (46, 3, 'Solar power is a good form of alternative energy because', 'mcq', 4, 24, NULL, '2025-08-16 10:00:32', '2025-08-16 10:00:32'),
 (47, 3, 'Which graph best indicates what Lyn is describing?', 'mcq', 5, 25, '{\"image\":\"https://ieltsonlinetests.com/sites/default/files/listening-test-1-section-3-Q25.png\"}', '2025-08-16 10:00:32', '2025-08-16 10:00:32'),
 (48, 3, 'Label the following diagram USING NO MORE THAN TWO WORDS AND / OR A NUMBER', 'static', 6, NULL, '{\"image\":\"https://ieltsonlinetests.com/sites/default/files/2018-11/listening-test-13-section-3-Q27.png\"}', '2025-08-16 10:14:15', '2025-08-16 10:14:15'),
-(49, 3, '<input>', 'fill_blank', 7, 26, NULL, '2025-08-16 10:14:15', '2025-08-16 10:14:15'),
-(50, 3, '<input>', 'fill_blank', 8, 27, NULL, '2025-08-16 10:14:15', '2025-08-16 10:14:15'),
-(51, 3, '<input>', 'fill_blank', 9, 28, NULL, '2025-08-16 10:14:15', '2025-08-16 10:14:15'),
-(52, 3, '<input>', 'fill_blank', 10, 29, NULL, '2025-08-16 10:14:15', '2025-08-16 10:14:15'),
-(53, 3, '<input>', 'fill_blank', 11, 30, NULL, '2025-08-16 10:14:15', '2025-08-16 10:14:15'),
-(54, 4, 'Lecture on <input>', 'fill_blank', 1, 31, NULL, '2025-08-16 10:41:18', '2025-08-16 10:41:18'),
-(55, 4, 'Examples: tourism and <input>', 'fill_blank', 2, 32, NULL, '2025-08-16 10:41:18', '2025-08-16 10:41:18'),
-(56, 4, 'Common misconception is that marketing points to <input> in what is being provided.', 'fill_blank', 3, 33, NULL, '2025-08-16 10:41:18', '2025-08-16 10:41:18'),
-(57, 4, 'Marketing is actually essential in maintaining <input>', 'fill_blank', 4, 34, NULL, '2025-08-16 10:41:18', '2025-08-16 10:41:18'),
-(58, 4, 'Selling a product is easier because it is <input> and customers do not have such different ___', 'fill_blank', 5, 35, NULL, '2025-08-16 10:41:18', '2025-08-16 10:41:18'),
-(59, 4, 'Aim: offer service beyond hopes of <input>', 'fill_blank', 6, 37, NULL, '2025-08-16 10:41:18', '2025-08-16 10:41:18'),
-(60, 4, 'Important to: (a) keep informed & (b) <input>', 'fill_blank', 7, 38, NULL, '2025-08-16 10:41:18', '2025-08-16 10:41:18'),
-(61, 4, 'One way to achieve this: <input>', 'fill_blank', 8, 39, NULL, '2025-08-16 10:41:18', '2025-08-16 10:41:18'),
-(62, 4, '<input> must always be available for any queries or problems.', 'fill_blank', 9, 40, NULL, '2025-08-16 10:41:18', '2025-08-16 10:41:18'),
+(49, 3, '___', 'fill_blank', 7, 26, NULL, '2025-08-16 10:14:15', '2025-08-16 10:14:15'),
+(50, 3, '___', 'fill_blank', 8, 27, NULL, '2025-08-16 10:14:15', '2025-08-16 10:14:15'),
+(51, 3, '___', 'fill_blank', 9, 28, NULL, '2025-08-16 10:14:15', '2025-08-16 10:14:15'),
+(52, 3, '___', 'fill_blank', 10, 29, NULL, '2025-08-16 10:14:15', '2025-08-16 10:14:15'),
+(53, 3, '___', 'fill_blank', 11, 30, NULL, '2025-08-16 10:14:15', '2025-08-16 10:14:15'),
+(54, 4, 'Lecture on ___', 'fill_blank', 1, 31, NULL, '2025-08-16 10:41:18', '2025-08-16 10:41:18'),
+(55, 4, 'Examples: tourism and ___', 'fill_blank', 2, 32, NULL, '2025-08-16 10:41:18', '2025-08-16 10:41:18'),
+(56, 4, 'Common misconception is that marketing points to ___ in what is being provided.', 'fill_blank', 3, 33, NULL, '2025-08-16 10:41:18', '2025-08-16 10:41:18'),
+(57, 4, 'Marketing is actually essential in maintaining ___', 'fill_blank', 4, 34, NULL, '2025-08-16 10:41:18', '2025-08-16 10:41:18'),
+(58, 4, 'Selling a product is easier because it is ___ and customers do not have such different ___', 'fill_blank', 5, 35, NULL, '2025-08-16 10:41:18', '2025-08-16 10:41:18'),
+(59, 4, 'Aim: offer service beyond hopes of ___', 'fill_blank', 6, 37, NULL, '2025-08-16 10:41:18', '2025-08-16 10:41:18'),
+(60, 4, 'Important to: (a) keep informed & (b) ___', 'fill_blank', 7, 38, NULL, '2025-08-16 10:41:18', '2025-08-16 10:41:18'),
+(61, 4, 'One way to achieve this: ___', 'fill_blank', 8, 39, NULL, '2025-08-16 10:41:18', '2025-08-16 10:41:18'),
+(62, 4, '___ must always be available for any queries or problems.', 'fill_blank', 9, 40, NULL, '2025-08-16 10:41:18', '2025-08-16 10:41:18'),
 (63, 5, 'The text has 5 paragraphs (A - E).', 'static', 1, NULL, NULL, '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
 (64, 5, '<b>Which paragraph contains each of the following pieces of information?</b>', 'static', 2, NULL, NULL, '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
 (65, 5, 'The fact that a woman runs one of Thailand’s biggest banks', 'select', 3, 1, '{\"options\":[\"A\",\"B\",\"C\",\"D\",\"E\"]}', '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
@@ -1405,10 +1406,10 @@ INSERT INTO `questions` (`id`, `question_group_id`, `text`, `type`, `order_no`, 
 (67, 5, 'The fact that Japan’s birth rate is falling quickly', 'select', 5, 3, '{\"options\":[\"A\",\"B\",\"C\",\"D\",\"E\"]}', '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
 (68, 5, 'The criteria used to get a score for each country', 'select', 6, 4, '{\"options\":[\"A\",\"B\",\"C\",\"D\",\"E\"]}', '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
 (69, 5, '<b>Complete the following sentences using NO MORE THAN THREE WORDS from the text for each gap.</b>', 'static', 7, NULL, NULL, '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
-(70, 5, 'Higher consumption in the <input> sector of the market is one reason that Asia’s economies are doing well.', 'fill_blank', 8, 5, NULL, '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
-(71, 5, 'The scores were decided through a combination of interviews and <input>.', 'fill_blank', 9, 6, NULL, '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
-(72, 5, 'Higher <input> has created an economic problem for Korea.', 'fill_blank', 10, 7, NULL, '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
-(73, 5, 'Japanese politicians have not yet decided how to get money for the <input> .', 'fill_blank', 11, 8, NULL, '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
+(70, 5, 'Higher consumption in the ___ sector of the market is one reason that Asia’s economies are doing well.', 'fill_blank', 8, 5, NULL, '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
+(71, 5, 'The scores were decided through a combination of interviews and ___.', 'fill_blank', 9, 6, NULL, '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
+(72, 5, 'Higher ___ has created an economic problem for Korea.', 'fill_blank', 10, 7, NULL, '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
+(73, 5, 'Japanese politicians have not yet decided how to get money for the ___ .', 'fill_blank', 11, 8, NULL, '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
 (74, 5, '<b>Do the following statements agree with the information given in Reading Passage 1?</b>', 'static', 12, NULL, NULL, '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
 (75, 5, 'In boxes 9 - 13 on your answer sheet, write <b>TRUE</b> if the statement agrees with the information, <b> FALSE </b> if it contradicts the information, and <b> NOT GIVEN </b> if there is no information.', 'static', 13, NULL, NULL, '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
 (76, 5, 'Other countries are looking at the example of Thailand to see if its policies can help their economies.', 'true_false', 14, 9, '{\"options\":[\"TRUE\",\"FALSE\",\"NOT GIVEN\"]}', '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
@@ -1431,11 +1432,11 @@ INSERT INTO `questions` (`id`, `question_group_id`, `text`, `type`, `order_no`, 
 (93, 7, 'The Electrolux Trilobite 2.0 robot vacuum cleaner', 'mcq', 4, 29, NULL, '2025-08-16 11:54:20', '2025-08-16 11:54:20'),
 (94, 7, 'The Honda Asimo robot', 'mcq', 5, 30, NULL, '2025-08-16 11:54:20', '2025-08-16 11:54:20'),
 (95, 7, '<b>Complete the following sentences using NO MORE THAN THREE WORDS from the text for each gap.</b>', 'static', 6, NULL, NULL, NULL, NULL),
-(96, 7, 'The SkyScout uses GPS and <input> to help you find a star.', 'fill_blank', 7, 31, NULL, '2025-08-18 10:40:41', '2025-08-18 10:40:41'),
-(97, 7, 'The Seiko Spectrum does not need batteries to power the <input>.', 'fill_blank', 8, 32, NULL, '2025-08-18 10:40:41', '2025-08-18 10:40:41'),
-(98, 7, 'HDTV uses more <input> than conventional TV.', 'fill_blank', 9, 33, NULL, '2025-08-18 10:40:41', '2025-08-18 10:40:41'),
-(99, 7, 'The Trilobite 2.0 could be used to <input> guests.', 'fill_blank', 10, 34, NULL, '2025-08-18 10:40:41', '2025-08-18 10:40:41'),
-(100, 7, 'Asimo first appeared <input>.', 'fill_blank', 11, 35, NULL, '2025-08-18 10:40:41', '2025-08-18 10:40:41'),
+(96, 7, 'The SkyScout uses GPS and ___ to help you find a star.', 'fill_blank', 7, 31, NULL, '2025-08-18 10:40:41', '2025-08-18 10:40:41'),
+(97, 7, 'The Seiko Spectrum does not need batteries to power the ___', 'fill_blank', 8, 32, NULL, '2025-08-18 10:40:41', '2025-08-18 10:40:41'),
+(98, 7, 'HDTV uses more ___ than conventional TV.', 'fill_blank', 9, 33, NULL, '2025-08-18 10:40:41', '2025-08-18 10:40:41'),
+(99, 7, 'The Trilobite 2.0 could be used to ___ guests.', 'fill_blank', 10, 34, NULL, '2025-08-18 10:40:41', '2025-08-18 10:40:41'),
+(100, 7, 'Asimo first appeared ___', 'fill_blank', 11, 35, NULL, '2025-08-18 10:40:41', '2025-08-18 10:40:41'),
 (101, 7, 'Do the following statements agree with the information given in Reading Passage 3? In boxes 36 - 40 on your answer sheet, write TRUE if the statement agrees with the information, FALSE if the statement contradicts the information, NOT GIVEN if there is no information on this.', 'static', 12, NULL, NULL, '2025-08-18 10:43:02', '2025-08-18 10:43:02'),
 (102, 7, 'The Nokia N91 is strong.', 'true_false', 13, 36, '{\"options\":[\"TRUE\",\"FALSE\",\"NOT GIVEN\"]}', '2025-08-18 10:44:41', '2025-08-18 10:44:41'),
 (103, 7, 'E-paper can be torn easily.', 'true_false', 14, 37, '{\"options\":[\"TRUE\",\"FALSE\",\"NOT GIVEN\"]}', '2025-08-18 10:44:41', '2025-08-18 10:44:41'),
@@ -1965,7 +1966,12 @@ INSERT INTO `test_users` (`id`, `mock_test_id`, `name`, `phone`, `email`, `creat
 (1, 1, 'Sybil Aguilar', '+1 (681) 683-4694', 'misuvi@mailinator.com', '2025-08-16 00:07:41', '2025-08-16 00:07:41'),
 (2, 1, 'Danielle Fitzgerald', '+1 (813) 636-2194', 'vuzovodoha@mailinator.com', '2025-08-16 04:56:03', '2025-08-16 04:56:03'),
 (3, 1, 'Lysandra Gardner', '+1 (154) 213-7276', 'liwetyxuf@mailinator.com', '2025-08-16 04:59:29', '2025-08-16 04:59:29'),
-(4, 1, 'Camilla Bender', '+1 (545) 121-5556', 'pore@mailinator.com', '2025-08-17 22:06:51', '2025-08-17 22:06:51');
+(4, 1, 'Camilla Bender', '+1 (545) 121-5556', 'pore@mailinator.com', '2025-08-17 22:06:51', '2025-08-17 22:06:51'),
+(5, 1, 'Amity Hardin', '+1 (302) 414-2304', 'hysomudoma@mailinator.com', '2025-08-19 03:52:12', '2025-08-19 03:52:12'),
+(6, 1, 'Bruce Chaney', '+1 (222) 389-4438', 'wara@mailinator.com', '2025-08-20 01:10:32', '2025-08-20 01:10:32'),
+(7, 1, 'Alexa Michael', '+1 (163) 913-7869', 'hupixa@mailinator.com', '2025-08-20 04:09:37', '2025-08-20 04:09:37'),
+(8, 1, 'Mark Bowman', '+1 (827) 455-6948', 'cynekol@mailinator.com', '2025-08-20 05:13:30', '2025-08-20 05:13:30'),
+(9, 1, 'Mark Bowman', '+1 (827) 455-6948', 'cynekol@mailinator.com', '2025-08-20 05:17:22', '2025-08-20 05:17:22');
 
 -- --------------------------------------------------------
 
@@ -2059,6 +2065,88 @@ INSERT INTO `users` (`id`, `name`, `mobile`, `education`, `institution`, `email`
 (10, 'Rakib', NULL, NULL, NULL, 'islamrakib635@gmail.com', 'Admin', NULL, '$2y$12$7D62BsJfT9oCI5SdU96tc.jpDAOWTTHOITf8Trrx62edKBed2zKS6', NULL, '2025-04-26 08:44:39', '2025-04-26 08:45:32'),
 (11, 'Shakib hossain Shovon', NULL, NULL, NULL, 'skbshvn@gmail.com', 'Admin', NULL, '$2y$12$KIQ2patIfQETZXHHrkRRCuXMoM9V8.YmRGQCcRAcPGaCLFjzASP8G', NULL, '2025-07-19 05:31:00', '2025-07-19 05:31:11'),
 (12, 'Lexicon Admin', NULL, NULL, NULL, 'lexiconeltc@gmail.com', 'Admin', NULL, '$2y$12$YlL2ia2n.K.DIViM555YPuY8NkObkDEX34455N8UPKO2lxGsSfxWm', NULL, '2025-07-19 06:35:29', '2025-07-19 06:35:58');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_answers`
+--
+
+CREATE TABLE `user_answers` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `test_user_id` bigint(20) UNSIGNED NOT NULL,
+  `mock_test_id` bigint(20) UNSIGNED NOT NULL,
+  `section_id` bigint(20) UNSIGNED NOT NULL,
+  `question_id` bigint(20) UNSIGNED NOT NULL,
+  `option_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `question_no` int(11) DEFAULT NULL,
+  `answer_text` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `user_answers`
+--
+
+INSERT INTO `user_answers` (`id`, `test_user_id`, `mock_test_id`, `section_id`, `question_id`, `option_id`, `question_no`, `answer_text`, `created_at`, `updated_at`) VALUES
+(137, 9, 1, 1, 2, NULL, 1, 'Quia architecto labo', '2025-08-20 05:18:29', '2025-08-20 05:18:29'),
+(138, 9, 1, 1, 3, NULL, 2, 'Ullamco odio eos qu', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
+(139, 9, 1, 1, 4, NULL, 3, 'Ea pariatur Asperna', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
+(140, 9, 1, 1, 5, NULL, 4, 'Ut exercitation quam', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
+(141, 9, 1, 1, 8, NULL, 5, 'Quo fugit omnis non', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
+(142, 9, 1, 1, 9, NULL, 6, 'Ratione necessitatib', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
+(143, 9, 1, 1, 10, NULL, 7, 'Eiusmod nesciunt de', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
+(144, 9, 1, 1, 11, NULL, 8, 'Veniam pariatur Cu', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
+(145, 9, 1, 1, 12, NULL, 9, 'Eum fugiat eveniet', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
+(146, 9, 1, 1, 13, NULL, 10, 'Laborum dignissimos', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
+(147, 9, 1, 1, 38, NULL, 16, 'Voluptatem consequa', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
+(148, 9, 1, 1, 39, NULL, 17, 'Consequat Laboris q', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
+(149, 9, 1, 1, 40, NULL, 18, 'Et voluptatem porro', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
+(150, 9, 1, 1, 41, NULL, 19, 'Consequat Autem ten', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
+(151, 9, 1, 1, 42, NULL, 20, 'Debitis itaque facil', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
+(152, 9, 1, 1, 43, 2, 21, NULL, '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
+(153, 9, 1, 1, 44, 5, 22, NULL, '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
+(154, 9, 1, 1, 45, 9, 23, NULL, '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
+(155, 9, 1, 1, 46, 10, 24, NULL, '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
+(156, 9, 1, 1, 47, 14, 25, NULL, '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
+(157, 9, 1, 1, 49, NULL, 26, 'Vel laborum ut quo q', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
+(158, 9, 1, 1, 50, NULL, 27, 'Blanditiis deserunt', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
+(159, 9, 1, 1, 51, NULL, 28, 'Voluptates voluptate', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
+(160, 9, 1, 1, 52, NULL, 29, 'Laborum Perferendis', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
+(161, 9, 1, 1, 53, NULL, 30, 'Et aut earum labore', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
+(162, 9, 1, 1, 54, NULL, 31, 'Consequatur eaque su', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
+(163, 9, 1, 1, 55, NULL, 32, 'Rerum et eos exercit', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
+(164, 9, 1, 1, 56, NULL, 33, 'Iste minus libero qu', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
+(165, 9, 1, 1, 57, NULL, 34, 'Alias reprehenderit', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
+(166, 9, 1, 1, 58, NULL, 35, 'Quasi dignissimos Na', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
+(167, 9, 1, 1, 59, NULL, 37, 'Consequat Eius dolo', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
+(168, 9, 1, 1, 60, NULL, 38, 'Voluptate ea dolorem', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
+(169, 9, 1, 1, 61, NULL, 39, 'Praesentium maiores', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
+(170, 9, 1, 1, 62, NULL, 40, 'Dolorum magnam optio', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
+(171, 9, 1, 2, 65, NULL, 1, 'E', '2025-08-20 05:33:47', '2025-08-20 05:33:47'),
+(172, 9, 1, 2, 66, NULL, 2, 'D', '2025-08-20 05:33:48', '2025-08-20 05:33:48'),
+(173, 9, 1, 2, 67, NULL, 3, 'A', '2025-08-20 05:33:48', '2025-08-20 05:33:48'),
+(174, 9, 1, 2, 68, NULL, 4, 'E', '2025-08-20 05:33:48', '2025-08-20 05:33:48'),
+(175, 9, 1, 2, 70, NULL, 5, 'Quis excepteur ut bl', '2025-08-20 05:33:48', '2025-08-20 05:33:48'),
+(176, 9, 1, 2, 71, NULL, 6, 'Optio qui distincti', '2025-08-20 05:33:48', '2025-08-20 05:33:48'),
+(177, 9, 1, 2, 72, NULL, 7, 'Nihil non consequatu', '2025-08-20 05:33:48', '2025-08-20 05:33:48'),
+(178, 9, 1, 2, 73, NULL, 8, 'Consequat Quia faci', '2025-08-20 05:33:48', '2025-08-20 05:33:48'),
+(179, 9, 1, 2, 83, NULL, 14, 'A', '2025-08-20 05:33:48', '2025-08-20 05:33:48'),
+(180, 9, 1, 2, 84, NULL, 15, 'G', '2025-08-20 05:33:48', '2025-08-20 05:33:48'),
+(181, 9, 1, 2, 85, NULL, 16, 'G', '2025-08-20 05:33:48', '2025-08-20 05:33:48'),
+(182, 9, 1, 2, 86, NULL, 17, 'B', '2025-08-20 05:33:48', '2025-08-20 05:33:48'),
+(183, 9, 1, 2, 88, 17, 23, NULL, '2025-08-20 05:33:48', '2025-08-20 05:33:48'),
+(184, 9, 1, 2, 89, 19, 24, NULL, '2025-08-20 05:33:48', '2025-08-20 05:33:48'),
+(185, 9, 1, 2, 91, 22, 27, NULL, '2025-08-20 05:33:48', '2025-08-20 05:33:48'),
+(186, 9, 1, 2, 92, 27, 28, NULL, '2025-08-20 05:33:48', '2025-08-20 05:33:48'),
+(187, 9, 1, 2, 93, 28, 29, NULL, '2025-08-20 05:33:48', '2025-08-20 05:33:48'),
+(188, 9, 1, 2, 94, 31, 30, NULL, '2025-08-20 05:33:48', '2025-08-20 05:33:48'),
+(189, 9, 1, 2, 96, NULL, 31, 'Hic suscipit officii', '2025-08-20 05:33:48', '2025-08-20 05:33:48'),
+(190, 9, 1, 2, 97, NULL, 32, 'Id et temporibus vol', '2025-08-20 05:33:48', '2025-08-20 05:33:48'),
+(191, 9, 1, 2, 98, NULL, 33, 'In ut voluptas vero', '2025-08-20 05:33:48', '2025-08-20 05:33:48'),
+(192, 9, 1, 2, 99, NULL, 34, 'Magni laborum blandi', '2025-08-20 05:33:48', '2025-08-20 05:33:48'),
+(193, 9, 1, 2, 100, NULL, 35, 'Eum quia consequatur', '2025-08-20 05:33:48', '2025-08-20 05:33:48');
 
 -- --------------------------------------------------------
 
@@ -2414,6 +2502,17 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
+-- Indexes for table `user_answers`
+--
+ALTER TABLE `user_answers`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_answers_test_user_id_foreign` (`test_user_id`),
+  ADD KEY `user_answers_mock_test_id_foreign` (`mock_test_id`),
+  ADD KEY `user_answers_section_id_foreign` (`section_id`),
+  ADD KEY `user_answers_question_id_foreign` (`question_id`),
+  ADD KEY `user_answers_option_id_foreign` (`option_id`);
+
+--
 -- Indexes for table `websites`
 --
 ALTER TABLE `websites`
@@ -2565,7 +2664,7 @@ ALTER TABLE `mcq_students`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `mocktest_students`
@@ -2679,7 +2778,7 @@ ALTER TABLE `test_readings`
 -- AUTO_INCREMENT for table `test_users`
 --
 ALTER TABLE `test_users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `test_writings`
@@ -2698,6 +2797,12 @@ ALTER TABLE `trainers`
 --
 ALTER TABLE `users`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `user_answers`
+--
+ALTER TABLE `user_answers`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=194;
 
 --
 -- AUTO_INCREMENT for table `websites`
@@ -2751,6 +2856,16 @@ ALTER TABLE `sections`
 --
 ALTER TABLE `test_users`
   ADD CONSTRAINT `test_users_mock_test_id_foreign` FOREIGN KEY (`mock_test_id`) REFERENCES `mock_tests` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `user_answers`
+--
+ALTER TABLE `user_answers`
+  ADD CONSTRAINT `user_answers_mock_test_id_foreign` FOREIGN KEY (`mock_test_id`) REFERENCES `mock_tests` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `user_answers_option_id_foreign` FOREIGN KEY (`option_id`) REFERENCES `question_options` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `user_answers_question_id_foreign` FOREIGN KEY (`question_id`) REFERENCES `questions` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `user_answers_section_id_foreign` FOREIGN KEY (`section_id`) REFERENCES `sections` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `user_answers_test_user_id_foreign` FOREIGN KEY (`test_user_id`) REFERENCES `test_users` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

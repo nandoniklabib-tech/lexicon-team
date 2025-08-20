@@ -97,8 +97,12 @@ Route::middleware(['auth','user-access:Admin'])->group(function(){
   Route::get('admin/mocktests', [AdminMocktestController::class, 'mocktests']);
   Route::get('admin/mocktests/{mockTest}/user-info', [AdminMocktestController::class, 'userInfoShow'])->name('userInfoShow');
   Route::post('admin/mocktests/{mockTest}/user-info', [AdminMocktestController::class, 'userInfoSave'])->name('userInfoSave');
+
   Route::get('admin/listening/{mockTest}',[AdminMocktestController::class, 'showListeningQuestion'])->name('admin.listening.show');
+  Route::post('admin/listening/{mockTest}',[AdminMocktestController::class, 'storeListeningQuestion'])->name('admin.listening.store');
+
   Route::get('admin/reading/{mockTest}',[AdminMocktestController::class, 'showReadingQuestion'])->name('admin.reading.show');
+  Route::post('admin/reading/{mockTest}',[AdminMocktestController::class, 'storeReadingQuestion'])->name('admin.reading.store');
 
    });
 
