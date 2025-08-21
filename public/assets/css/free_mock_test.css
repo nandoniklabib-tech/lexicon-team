@@ -19,6 +19,42 @@
             border-radius: 100%;
             margin-bottom: 5px;
         }
+
+        /* start code by Labib*/
+        .question-inline {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Space between circle and input */
+        }
+
+        .question-circle {
+            display: inline-flex;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #1f8b5a; /* Circle color */
+            color: white;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+        .question-input {
+            width: 250px;           
+            padding: 6px 10px;     
+            border: 1px solid #d3d31f; 
+            border-radius: 6px;     
+            font-size: 14px;       
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .question-input:focus {
+            border-color: #007bff;  
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            outline: none;
+        }
+
+        /*End codeby labib*/
+
         .btn-sidebtn {
             --bs-btn-color: #000;
             --bs-btn-bg: #ffa0a0;

@@ -240,22 +240,3 @@ Route::get('free-mock-test-view-3', [WelcomeController::class,'freeMockTestView3
 Route::get('free-mock-test-view-1-complete', [WelcomeController::class,'freeMockTestView1Complete']);
 Route::get('free-mock-test-view-2-complete', [WelcomeController::class,'freeMockTestView2Complete']);
 Route::get('free-mock-test-view-3-complete', [WelcomeController::class,'freeMockTestView3Complete']);
-
-
-Route::get('/clear-all', function() { Artisan::call('optimize:clear'); return redirect()->to('/'); });
-Route::get('/migrate-fresh', function() { Artisan::call('migrate:fresh'); return redirect()->to('/'); });
-Route::get('/migrate-fresh-seed', function() { Artisan::call('migrate:fresh --seed'); return redirect()->to('/'); });
-
-
-
-
-
-
-
-Route::middleware(['auth','user-access:Admin'])->group(function(){
-  
-  
-  Route::post('admin-mocktest-listening-exam-store', [TestListeningController::class, 'listeningExamStore']);
-  Route::post('admin-mocktest-reading-exam-store', [TestReadingController::class, 'readingExamStore']);
-  Route::post('admin-mocktest-writing-exam-store', [TestWritingController::class, 'writingExamStore']);
-});
