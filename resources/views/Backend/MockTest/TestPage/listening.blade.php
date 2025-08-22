@@ -122,8 +122,8 @@
                 @foreach ($mockTest->sections as $section)
                     @if ($section->name === 'Listening')
                         @foreach ($section->questionGroups as $index => $group)
-                            <div class="tab-pane fade {{ $firstGroup ? 'show active' : '' }}"
-                                id="part{{ $index + 1 }}" role="tabpanel">
+                            <div class="tab-pane fade {{ $firstGroup ? 'show active' : '' }}" id="part{{ $index + 1 }}"
+                                role="tabpanel">
                                 <h3 class="mb-4">Part {{ $index + 1 }}</h3>
 
                                 <div class="card mb-4">
@@ -154,7 +154,8 @@
                                                         <p class="fw-bold">{{ $question->question_no }}: {{ $question->text }}</p>
                                                         @if (!empty($question->meta_data['image']))
                                                             <div class="text-left mb-3">
-                                                                <img src="{{ $question->meta_data['image'] }}" alt="Question Image" class="img-fluid" style="max-height: 300px;">
+                                                                <img src="{{ $question->meta_data['image'] }}" alt="Question Image"
+                                                                    class="img-fluid" style="max-height: 300px;">
                                                             </div>
                                                         @endif
                                                         @foreach ($question->options as $option)
@@ -164,16 +165,15 @@
                                                             </div>
                                                         @endforeach
                                                     @elseif ($question->type === 'fill_blank')
-                                                        <p class="question-inline">
+                                                                <p class="question-inline">
 
-                                                            {!! str_replace(
-                                                                '___',
-                                                                '<span class="question-circle">'.$question->question_no.'</span>
-                                                                <input type="text" name="answers['.$question->id.']" class="form-control d-inline mx-1 question-input">',
-                                                                $question->text
-                                                            ) !!}
+                                                                    {!! str_replace(
+                                                            '___',
+                                                            '<input type="text" class="form-control d-inline mx-1 question-input" name="answers[' . $q->id . ']" placeholder="' . $question->question_no . '">',
+                                                            $question->text
+                                                        ) !!}
 
-                                                        </p>
+                                                                </p>
                                                     @elseif ($question->type === 'multi_select')
                                                         <select name="answers[{{ $question->id }}][]" class="form-select w-50" multiple>
                                                             @foreach ($question->options as $option)
@@ -191,7 +191,8 @@
                                                     @elseif ($question->type === 'checkbox')
                                                         @foreach ($question->options as $option)
                                                             <div>
-                                                                <input type="checkbox" name="answers[{{ $question->id }}][]" value="{{ $option->id }}">
+                                                                <input type="checkbox" name="answers[{{ $question->id }}][]"
+                                                                    value="{{ $option->id }}">
                                                                 {{ $option->text }}
                                                             </div>
                                                         @endforeach
@@ -208,7 +209,8 @@
                                                         {!! $question->text !!}
                                                         @if (!empty($question->meta_data['image']))
                                                             <div class="text-left my-3">
-                                                                <img src="{{ $question->meta_data['image'] }}" alt="Diagram" class="img-fluid" style="max-height: 300px;">
+                                                                <img src="{{ $question->meta_data['image'] }}" alt="Diagram" class="img-fluid"
+                                                                    style="max-height: 300px;">
                                                             </div>
                                                         @endif
                                                     @endif
@@ -220,36 +222,40 @@
                                                     if (isset($tables[$tableNo])) {
                                                         $rows = $tables[$tableNo];
                                                         unset($tables[$tableNo]); // avoid rendering twice
-                                                    @endphp
-                                                        <table class="table table-bordered text-left align-middle mb-4">
-                                                            @foreach ($rows as $row)
-                                                                <tr>
-                                                                    @for ($col = 1; $col <= max(array_keys($row)); $col++)
-                                                                        <td>
-                                                                            @if (isset($row[$col]))
-                                                                                @php $q = $row[$col]; @endphp
-                                                                                @if ($q->type === 'static' && !empty($question->meta_data['table_no']) || $q->type === 'others' && !empty($question->meta_data['table_no']))
-                                                                                    {!! $q->text !!}
-                                                                                @elseif ($q->type === 'fill_blank' && !empty($question->meta_data['table_no']))
-                                                                                    <div class="question-inline">
-                                                                                        <span class="question-circle">{{ $q->question_no }}</span>
-                                                                                        <input type="text" class="form-control question-input" name="answers[{{ $q->id }}]">
-                                                                                    </div>
-                                                                                @elseif ($q->type === 'mcq' && !empty($question->meta_data['table_no']))
-                                                                                    @foreach ($q->options as $option)
-                                                                                        <div>
-                                                                                            <input type="radio" name="answers[{{ $q->id }}]" value="{{ $option->id }}">
-                                                                                            {{ $option->text }}
-                                                                                        </div>
-                                                                                    @endforeach
-                                                                                @endif
-                                                                            @endif
-                                                                        </td>
-                                                                    @endfor
-                                                                </tr>
-                                                            @endforeach
-                                                        </table>
-                                                    @php } @endphp
+                                                @endphp
+                                                <table class="table table-bordered text-left align-middle mb-4">
+                                                    @foreach ($rows as $row)
+                                                        <tr>
+                                                            @for ($col = 1; $col <= max(array_keys($row)); $col++)
+                                                                <td>
+                                                                    @if (isset($row[$col]))
+                                                                        @php $q = $row[$col]; @endphp
+                                                                        @if ($q->type === 'static' && !empty($question->meta_data['table_no']) || $q->type === 'others' && !empty($question->meta_data['table_no']))
+                                                                            {!! $q->text !!}
+                                                                        @elseif ($q->type === 'fill_blank' && !empty($q->meta_data['table_no']))
+                                                                            <p class="question-inline">
+                                                                                {!! str_replace(
+                                                                                '___',
+                                                                                '<input type="text" class="form-control d-inline mx-1 question-input" name="answers[' . $q->id . ']" placeholder="' . $q->question_no . '">',
+                                                                                $q->text
+                                                                            ) !!}
+                                                                            </p>
+
+                                                                        @elseif ($q->type === 'mcq' && !empty($question->meta_data['table_no']))
+                                                                            @foreach ($q->options as $option)
+                                                                                <div>
+                                                                                    <input type="radio" name="answers[{{ $q->id }}]" value="{{ $option->id }}">
+                                                                                    {{ $option->text }}
+                                                                                </div>
+                                                                            @endforeach
+                                                                        @endif
+                                                                    @endif
+                                                                </td>
+                                                            @endfor
+                                                        </tr>
+                                                    @endforeach
+                                                </table>
+                                                @php } @endphp
                                             @endif
                                         @endforeach
 
@@ -316,7 +322,7 @@
         }
 
         // To start the time counter
-        startBtn.addEventListener('click', function(e) {
+        startBtn.addEventListener('click', function (e) {
             e.preventDefault();
 
             if (!timerStarted) {
@@ -325,12 +331,13 @@
                 timer = setInterval(updateCountdown, 1000);
             }
         });
+
     </script>
 
     <!-- bootstrap js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="{{ asset('assets/js/fullscreen.js') }}?version={{ time() }}"></script>
     <script src="{{ asset('assets/js/start_modal.js') }}?version={{ time() }}"></script>
     <script src="{{ asset('assets/js/highlight.js') }}?version={{ time() }}"></script>
