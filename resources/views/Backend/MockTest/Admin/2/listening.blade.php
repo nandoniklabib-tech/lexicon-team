@@ -602,20 +602,8 @@
                     <div class="col-12">
                         <!-- BOTTOM BUTTON -->
                         <ul class="nav nav-pills d-flex justify-content-around" id="pills-tab" role="tablist">
-                            @php $firstTab = true; @endphp
-                @foreach ($mockTest->sections as $section)
-                    @if ($section->name === 'Listening')
-                        @foreach ($section->questionGroups as $index => $group)
-                            <li class="nav-item">
-                                <button type="button" class="nav-link {{ $firstTab ? 'active' : '' }}"
-                                    data-bs-toggle="pill" data-bs-target="#part{{ $index + 1 }}">
-                                    Part {{ $index + 1 }}
-                                </button>
-                            </li>
-                            @php $firstTab = false; @endphp
-                        @endforeach
-                    @endif
-                @endforeach
+                            
+                        
                         </ul>
 
                     </div>

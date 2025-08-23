@@ -99,6 +99,7 @@ Route::middleware(['auth','user-access:Admin'])->group(function(){
   Route::post('admin/mocktests/{mockTest}/user-info', [AdminMocktestController::class, 'userInfoSave'])->name('userInfoSave');
   Route::get('admin/listening/{mockTest}',[AdminMocktestController::class, 'showListeningQuestion'])->name('admin.listening.show');
   Route::get('admin/reading/{mockTest}',[AdminMocktestController::class, 'showReadingQuestion'])->name('admin.reading.show');
+    Route::get('admin-mocktest-listening-2-exam', function () { return view('Backend.MockTest.Admin.2.listening'); });
 
    });
 
