@@ -1,5 +1,3 @@
-ALTER TABLE question_options DROP COLUMN row_index, DROP COLUMN col_index, DROP COLUMN is_correct;
-
 INSERT INTO questions (question_group_id, text, type, order_no, question_no, meta_data, created_at, updated_at)
 VALUES
 (1, '<b>Questions 1-2</b><br>Choose the correct letter A–C.<br>Example: <br>The customer went to South Africa <br>A. last month <br> B. last week <br> C. last year.', 'static', 1, NULL, NULL, NOW(), NOW());

@@ -189,6 +189,7 @@
                                                             @endforeach
                                                         </select>
                                                     @elseif ($question->type === 'checkbox')
+                                                        Q{{ $question->question_no }}: {!! $question->text !!}
                                                         @foreach ($question->options as $option)
                                                             <div>
                                                                 <input type="checkbox" name="answers[{{ $question->id }}][]"
@@ -209,8 +210,7 @@
                                                         {!! $question->text !!}
                                                         @if (!empty($question->meta_data['image']))
                                                             <div class="text-left my-3">
-                                                                <img src="{{ $question->meta_data['image'] }}" alt="Diagram" class="img-fluid"
-                                                                    style="max-height: 300px;">
+                                                                <img src="{{ asset($question->meta_data['image']) }}" alt="Diagram" class="img-fluid" style="max-height: 300px;">
                                                             </div>
                                                         @endif
                                                     @endif
