@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 23, 2025 at 09:02 AM
+-- Generation Time: Aug 23, 2025 at 02:13 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -1428,6 +1428,53 @@ CREATE TABLE `question_answers` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `question_answers`
+--
+
+INSERT INTO `question_answers` (`id`, `question_id`, `answer_text`, `option_id`, `created_at`, `updated_at`) VALUES
+(1, 7, 'keiko', NULL, '2025-08-23 07:27:49', '2025-08-23 07:27:49'),
+(2, 15, 'jo6337', NULL, '2025-08-23 07:27:49', '2025-08-23 07:27:49'),
+(3, 19, 'advanced english studies', NULL, '2025-08-23 07:27:49', '2025-08-23 07:27:49'),
+(4, 21, '5 months', NULL, '2025-08-23 07:27:49', '2025-08-23 07:27:49'),
+(5, 23, 'about 4 months', NULL, '2025-08-23 07:27:49', '2025-08-23 07:27:49'),
+(6, 26, NULL, 35, '2025-08-23 07:27:49', '2025-08-23 07:27:49'),
+(7, 26, NULL, 37, '2025-08-23 07:27:49', '2025-08-23 07:27:49'),
+(8, 29, 'seafood', NULL, '2025-08-23 07:27:49', '2025-08-23 07:27:49'),
+(9, 30, 'tennis', NULL, '2025-08-23 07:27:49', '2025-08-23 07:27:49'),
+(10, 31, 'take the train', NULL, '2025-08-23 07:27:49', '2025-08-23 07:27:49'),
+(11, 32, 'this afternoon', NULL, '2025-08-23 07:27:49', '2025-08-23 07:27:49'),
+(12, 34, '90 days', NULL, '2025-08-23 07:27:49', '2025-08-23 07:27:49'),
+(13, 35, '30 pounds', NULL, '2025-08-23 07:27:49', '2025-08-23 07:27:49'),
+(14, 36, 'confirm your nationality', NULL, '2025-08-23 07:27:49', '2025-08-23 07:27:49'),
+(15, 37, 'page 13', NULL, '2025-08-23 07:27:49', '2025-08-23 07:27:49'),
+(16, 38, 'currency form', NULL, '2025-08-23 07:27:49', '2025-08-23 07:27:49'),
+(17, 39, 'tourist export form', NULL, '2025-08-23 07:27:49', '2025-08-23 07:27:49'),
+(18, 40, 'bm276', NULL, '2025-08-23 07:27:49', '2025-08-23 07:27:49'),
+(19, 41, 'international student card', NULL, '2025-08-23 07:27:49', '2025-08-23 07:27:49'),
+(20, 42, '12', NULL, '2025-08-23 07:27:49', '2025-08-23 07:27:49'),
+(21, 43, 'australian dollar', NULL, '2025-08-23 07:27:49', '2025-08-23 07:27:49'),
+(22, 45, 'cashier', NULL, '2025-08-23 07:27:49', '2025-08-23 07:27:49'),
+(23, 46, '£50', NULL, '2025-08-23 07:27:49', '2025-08-23 07:27:49'),
+(24, 47, 'big department stores', NULL, '2025-08-23 07:27:49', '2025-08-23 07:27:49'),
+(25, 48, 'jeans', NULL, '2025-08-23 07:27:49', '2025-08-23 07:27:49'),
+(26, 53, '45 pounds', NULL, '2025-08-23 07:27:49', '2025-08-23 07:27:49'),
+(27, 55, '75 pounds', NULL, '2025-08-23 07:27:49', '2025-08-23 07:27:49'),
+(28, 57, '20 pounds', NULL, '2025-08-23 07:27:49', '2025-08-23 07:27:49'),
+(29, 59, NULL, 41, '2025-08-23 07:27:49', '2025-08-23 07:27:49'),
+(30, 59, NULL, 42, '2025-08-23 07:27:49', '2025-08-23 07:27:49'),
+(31, 59, NULL, 43, '2025-08-23 07:27:49', '2025-08-23 07:27:49'),
+(32, 61, NULL, 44, NULL, NULL),
+(33, 62, NULL, 49, '2025-08-23 07:27:49', '2025-08-23 07:27:49'),
+(34, 63, NULL, 52, '2025-08-23 07:27:49', '2025-08-23 07:27:49'),
+(35, 64, NULL, 58, '2025-08-23 07:27:49', '2025-08-23 07:27:49'),
+(36, 65, NULL, 63, '2025-08-23 07:27:49', '2025-08-23 07:27:49'),
+(37, 66, NULL, 66, '2025-08-23 07:27:49', '2025-08-23 07:27:49'),
+(38, 67, NULL, 71, '2025-08-23 07:27:49', '2025-08-23 07:27:49'),
+(39, 68, NULL, 72, '2025-08-23 07:27:49', '2025-08-23 07:27:49'),
+(40, 69, NULL, 76, '2025-08-23 07:27:49', '2025-08-23 07:27:49'),
+(41, 70, NULL, 80, '2025-08-23 07:27:49', '2025-08-23 07:27:49');
+
 -- --------------------------------------------------------
 
 --
@@ -1489,7 +1536,7 @@ INSERT INTO `question_options` (`id`, `question_id`, `text`, `created_at`, `upda
 (42, 59, 'Shoes', '2025-08-23 06:00:23', '2025-08-23 06:00:23'),
 (43, 59, 'Sportswear', '2025-08-23 06:00:23', '2025-08-23 06:00:23'),
 (44, 61, 'Personal consultation sessions', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
-(45, 61, 'Extra materials, such as a booklist.', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
+(45, 61, 'set goals and try to achieve these goals.', NULL, NULL),
 (46, 61, 'Mid-term examination', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
 (47, 61, 'Free glasses', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
 (48, 62, 'reduce your stress.', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
@@ -1948,7 +1995,11 @@ CREATE TABLE `test_users` (
 INSERT INTO `test_users` (`id`, `mock_test_id`, `name`, `phone`, `email`, `created_at`, `updated_at`) VALUES
 (1, 1, 'Malik Vaughan', '+1 (704) 522-1956', 'zytydapedo@mailinator.com', '2025-08-21 03:17:45', '2025-08-21 03:17:45'),
 (2, 1, 'Malik Vaughan', '+1 (704) 522-1956', 'zytydapedo@mailinator.com', '2025-08-21 03:37:10', '2025-08-21 03:37:10'),
-(3, 1, 'Meredith Burks', '+1 (565) 932-5405', 'tujizu@mailinator.com', '2025-08-22 22:38:47', '2025-08-22 22:38:47');
+(3, 1, 'Meredith Burks', '+1 (565) 932-5405', 'tujizu@mailinator.com', '2025-08-22 22:38:47', '2025-08-22 22:38:47'),
+(4, 1, 'Ashely Lindsey', '+1 (535) 832-8316', 'wigiruz@mailinator.com', '2025-08-23 01:53:12', '2025-08-23 01:53:12'),
+(5, 1, 'Preston Yang', '+1 (504) 354-3578', 'dujovup@mailinator.com', '2025-08-23 01:53:58', '2025-08-23 01:53:58'),
+(6, 1, 'Maryam Malone', '+1 (837) 451-9524', 'vixu@mailinator.com', '2025-08-23 01:55:15', '2025-08-23 01:55:15'),
+(7, 1, 'Raymond Morgan', '+1 (322) 414-3867', 'rara@mailinator.com', '2025-08-23 02:59:54', '2025-08-23 02:59:54');
 
 -- --------------------------------------------------------
 
@@ -2062,6 +2113,18 @@ CREATE TABLE `user_answers` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `user_answers`
+--
+
+INSERT INTO `user_answers` (`id`, `test_user_id`, `mock_test_id`, `section_id`, `question_id`, `option_id`, `question_no`, `answer_text`, `created_at`, `updated_at`) VALUES
+(52, 7, 1, 1, 26, 34, 6, NULL, '2025-08-23 06:05:13', '2025-08-23 06:05:13'),
+(53, 7, 1, 1, 26, 35, 6, NULL, '2025-08-23 06:05:13', '2025-08-23 06:05:13'),
+(54, 7, 1, 1, 59, 38, 28, NULL, '2025-08-23 06:05:13', '2025-08-23 06:05:13'),
+(55, 7, 1, 1, 59, 39, 28, NULL, '2025-08-23 06:05:13', '2025-08-23 06:05:13'),
+(56, 7, 1, 1, 59, 40, 28, NULL, '2025-08-23 06:05:13', '2025-08-23 06:05:13'),
+(57, 7, 1, 1, 59, 41, 28, NULL, '2025-08-23 06:05:13', '2025-08-23 06:05:13');
 
 -- --------------------------------------------------------
 
@@ -2627,7 +2690,7 @@ ALTER TABLE `questions`
 -- AUTO_INCREMENT for table `question_answers`
 --
 ALTER TABLE `question_answers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `question_groups`
@@ -2693,7 +2756,7 @@ ALTER TABLE `test_readings`
 -- AUTO_INCREMENT for table `test_users`
 --
 ALTER TABLE `test_users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `test_writings`
@@ -2717,7 +2780,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `user_answers`
 --
 ALTER TABLE `user_answers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=256;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT for table `websites`

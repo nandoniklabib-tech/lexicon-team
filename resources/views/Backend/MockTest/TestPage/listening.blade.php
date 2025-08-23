@@ -166,14 +166,12 @@
                                                         @endforeach
                                                     @elseif ($question->type === 'fill_blank')
                                                                 <p class="question-inline">
-
                                                                     {!! str_replace(
-                                                            '___',
-                                                            '<input type="text" class="form-control d-inline mx-1 question-input" name="answers[' . $q->id . ']" placeholder="' . $question->question_no . '">',
-                                                            $question->text
-                                                        ) !!}
-
-                                                                </p>
+                                                                '___',
+                                                                '<input type="text" class="form-control d-inline mx-1 question-input" name="answers[' . $question->id . ']" placeholder="' . $question->question_no . '">',
+                                                                $question->text
+                                                                ) 
+                                                                !!}</p>
                                                     @elseif ($question->type === 'multi_select')
                                                         <select name="answers[{{ $question->id }}][]" class="form-select w-50" multiple>
                                                             @foreach ($question->options as $option)

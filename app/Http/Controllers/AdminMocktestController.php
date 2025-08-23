@@ -58,7 +58,9 @@ class AdminMocktestController extends Controller
         return view('Backend.MockTest.TestPage.listening', compact('mockTest'));
     }
 
-    public function storeListeningQuestion(Request $request, MockTest $mockTest)
+
+
+   public function storeListeningQuestion(Request $request, MockTest $mockTest)
     {
         $testUserId = session('test_user_id');
 
@@ -67,44 +69,165 @@ class AdminMocktestController extends Controller
                 ->withErrors('Session expired. Please start the test again.');
         }
 
-        $answers = $request->input('answers', []);
+        $submittedAnswers = $request->input('answers', []);
 
-        foreach ($answers as $questionId => $answer) {
-            $question = Question::find($questionId);
+        // Get all questions for this test ordered by question_no
+        $questions = Question::whereHas('group.section', function($q) use ($mockTest) {
+                $q->where('mock_test_id', $mockTest->id);
+            })
+            ->orderBy('question_no')
+            ->get();
 
-            if (!$question) {
-                continue;
-            }
+        foreach ($questions as $question) {
+        // Skip static questions or null question_no
+        if ($question->type == 'static' || is_null($question->question_no)) {
+            continue;
+        }
 
-            // If it's an array (checkbox / multi_select), save multiple rows
-            if (is_array($answer)) {
-                foreach ($answer as $optionId) {
-                    UserAnswer::create([
-                        'test_user_id' => $testUserId,
-                        'mock_test_id' => $mockTest->id,
-                        'section_id'   => $question->group->section_id,
-                        'question_id'  => $question->id,
-                        'option_id'    => is_numeric($optionId) ? $optionId : null,
-                        'question_no'  => $question->question_no,
-                        'answer_text'  => !is_numeric($optionId) ? $optionId : null,
-                    ]);
-                }
-            } else {
+        $answer = $submittedAnswers[$question->id] ?? null;
+
+        // Delete previous answers for this user & question
+        UserAnswer::where('test_user_id', $testUserId)
+            ->where('mock_test_id', $mockTest->id)
+            ->where('question_id', $question->id)
+            ->delete();
+
+        if (is_array($answer)) {
+            // Checkbox / multiselect
+            foreach ($answer as $item) {
                 UserAnswer::create([
                     'test_user_id' => $testUserId,
                     'mock_test_id' => $mockTest->id,
                     'section_id'   => $question->group->section_id,
                     'question_id'  => $question->id,
-                    'option_id'    => is_numeric($answer) ? $answer : null,
                     'question_no'  => $question->question_no,
-                    'answer_text'  => !is_numeric($answer) ? $answer : null,
+
+                    // Either option_id OR answer_text
+                    'option_id'   => $question->options->contains('id', $item) ? $item : null,
+                    'answer_text' => $question->options->contains('id', $item) ? null : $item,
                 ]);
             }
+        } elseif (!empty($answer)) {
+            // Single answer (MCQ, select, fill blank, etc.)
+            UserAnswer::create([
+                'test_user_id' => $testUserId,
+                'mock_test_id' => $mockTest->id,
+                'section_id'   => $question->group->section_id,
+                'question_id'  => $question->id,
+                'question_no'  => $question->question_no,
+
+                // Either option_id OR answer_text
+                'option_id'   => $question->options->contains('id', $answer) ? $answer : null,
+                'answer_text' => $question->options->contains('id', $answer) ? null : $answer,
+            ]);}
+    }
+
+        return redirect()->route('admin.listening.result.show', $mockTest->id)
+        ->with('success', 'Answers saved successfully.');
+    }
+
+
+
+
+
+    //Show Result
+public function showListeningResult($mockTestId)
+{
+    $testUserId = session('test_user_id');
+    if (!$testUserId) {
+        return redirect()->route('admin/mocktests')
+            ->withErrors('Session expired. Please start the test again.');
+    }
+
+    // Get ALL user answers (not just MAX(id)) for this test
+    $userAnswers = UserAnswer::with(['question', 'option'])
+        ->where('test_user_id', $testUserId)
+        ->where('mock_test_id', $mockTestId)
+        ->get();
+
+    $results = [];
+    $totalScore = 0;
+    $totalQuestions = 0;
+
+    foreach ($userAnswers->groupBy('question_id') as $questionId => $answersGroup) {
+        $question = $answersGroup->first()->question;
+
+        if (!$question || is_null($question->question_no)) {
+            continue; // skip static/null questions
         }
 
-        return redirect()->route('admin.reading.show', $mockTest->id)
-            ->with('success', 'Answers saved successfully.');
+        // Correct answers
+        $correctOptions = $question->answers()->whereNotNull('option_id')->pluck('option_id')->toArray();
+        $correctTexts   = $question->answers()->whereNotNull('answer_text')->pluck('answer_text')->toArray();
+
+        // User answers
+        $userOptionIds = $answersGroup->pluck('option_id')->filter()->toArray();
+        $userTexts     = $answersGroup->pluck('answer_text')->filter()->toArray();
+
+        $questionScore = 0;
+
+        // === Option-based (MCQ, checkbox, multiselect) ===
+        if (!empty($correctOptions)) {
+            foreach ($userOptionIds as $optionId) {
+                if (in_array($optionId, $correctOptions)) {
+                    $questionScore++; // +1 for each correct option
+                }
+            }
+            $totalQuestions += count($correctOptions);
+        }
+
+        // === Text-based (Fill in the blank, short answer) ===
+        if (!empty($correctTexts)) {
+            foreach ($userTexts as $userText) {
+                if (in_array(trim(strtolower($userText)), array_map('strtolower', $correctTexts))) {
+                    $questionScore++; // +1 for each correct text match
+                }
+            }
+            $totalQuestions += count($correctTexts);
+        }
+
+        $totalScore += $questionScore;
+
+        // Prepare display values
+        $userAnswerDisplay = !empty($userTexts) 
+            ? implode(', ', $userTexts)
+            : implode(', ', $answersGroup->pluck('option.text')->filter()->toArray());
+
+        $correctAnswerDisplay = !empty($correctTexts)
+            ? implode(', ', $correctTexts)
+            : implode(', ', $question->answers()->with('option')->get()->pluck('option.text')->filter()->toArray());
+
+        $results[] = [
+            'question_no'    => $question->question_no,
+            'question'       => $question->text ?? '',
+            'user_answer'    => $userAnswerDisplay ?: '-',
+            'correct_answer' => $correctAnswerDisplay ?: '-',
+            'score'          => $questionScore,
+        ];
     }
+
+    return view('Backend.MockTest.TestPage.showResult', compact('results', 'totalScore', 'totalQuestions'));
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     //Show Reading Question
     public function showReadingQuestion($mockTestId)
