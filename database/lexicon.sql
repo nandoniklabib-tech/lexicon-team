@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 20, 2025 at 01:37 PM
+-- Generation Time: Aug 23, 2025 at 09:02 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -1154,7 +1154,18 @@ CREATE TABLE `mock_tests` (
 --
 
 INSERT INTO `mock_tests` (`id`, `title`, `description`, `created_at`, `updated_at`) VALUES
-(1, 'MockTest 1', 'This is test 1', '0000-00-00 00:00:00', NULL);
+(1, 'January', '100 Tests Taken', '0000-00-00 00:00:00', NULL),
+(2, 'February', '100 Tests Taken', '2025-08-21 08:48:28', '2025-08-21 08:48:28'),
+(3, 'March', '100 Tests Taken', '2025-08-21 08:48:28', '2025-08-21 08:48:28'),
+(4, 'April', '100 Tests Taken', '2025-08-21 08:48:28', '2025-08-21 08:48:28'),
+(5, 'May', '100 Tests Taken', '2025-08-21 08:48:28', '2025-08-21 08:48:28'),
+(6, 'June', '100 Tests Taken', '2025-08-21 08:48:28', '2025-08-21 08:48:28'),
+(7, 'July', '100 Tests Taken', '2025-08-21 08:48:28', '2025-08-21 08:48:28'),
+(8, 'August', '100 Tests Taken', '2025-08-21 08:48:28', '2025-08-21 08:48:28'),
+(9, 'September', '100 Tests Taken', '2025-08-21 08:48:28', '2025-08-21 08:48:28'),
+(10, 'October', '100 Tests Taken', '2025-08-21 08:48:28', '2025-08-21 08:48:28'),
+(11, 'November', '100 Tests Taken', '2025-08-21 08:48:28', '2025-08-21 08:48:28'),
+(12, 'December', '100 Tests Taken', '2025-08-21 08:48:28', '2025-08-21 08:48:28');
 
 -- --------------------------------------------------------
 
@@ -1337,112 +1348,70 @@ CREATE TABLE `questions` (
 --
 
 INSERT INTO `questions` (`id`, `question_group_id`, `text`, `type`, `order_no`, `question_no`, `meta_data`, `created_at`, `updated_at`) VALUES
-(1, 1, '<b>Southern</b> <span style=\"color:red;\">Rental Car</span> - booking extra', 'static', 1, NULL, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
-(2, 1, 'Name: William ___', 'fill_blank', 2, 1, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
-(3, 1, 'Address: 10 ___', 'fill_blank', 3, 2, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
-(4, 1, 'Contact number: 07 ___', 'fill_blank', 4, 3, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
-(5, 1, 'Payment by ___ card type', 'fill_blank', 5, 4, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
-(6, 1, 'Card No. 4550 1392 8309 3221', 'static', 6, NULL, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
-(7, 1, 'Card expiry date: July 20XX', 'static', 7, NULL, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
-(8, 1, 'Rental period: ___', 'fill_blank', 8, 5, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
-(9, 1, 'How much is the car per day? ___', 'fill_blank', 9, 6, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
-(10, 1, 'What does the price include? ___', 'fill_blank', 10, 7, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
-(11, 1, 'Who will he be visiting? ___', 'fill_blank', 11, 8, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
-(12, 1, 'What kind of car does the agent recommend? ___', 'fill_blank', 12, 9, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
-(13, 1, 'What does he need to collect the car? ___', 'fill_blank', 13, 10, NULL, '2025-08-16 06:48:31', '2025-08-16 06:48:31'),
-(14, 2, 'Overlander', 'others', 1, NULL, '{\"row\":1,\"col\":1}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
-(15, 2, '', 'others', 2, NULL, '{\"row\":1,\"col\":2}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
-(16, 2, 'Distance/km', 'others', 3, NULL, '{\"row\":2,\"col\":1}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
-(17, 2, '', 'fill_blank', 4, 11, '{\"row\":2,\"col\":2}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
-(18, 2, 'Highlight', 'others', 5, NULL, '{\"row\":3,\"col\":1}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
-(19, 2, '3 volcanoes', 'others', 6, NULL, '{\"row\":3,\"col\":2}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
-(20, 2, 'Time/hours', 'others', 7, NULL, '{\"row\":4,\"col\":1}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
-(21, 2, '11', 'others', 8, NULL, '{\"row\":4,\"col\":2}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
-(22, 2, 'Transalpine', 'others', 9, NULL, '{\"row\":5,\"col\":1}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
-(23, 2, '', 'others', 10, NULL, '{\"row\":5,\"col\":2}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
-(24, 2, 'Distance/km', 'others', 11, NULL, '{\"row\":6,\"col\":1}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
-(25, 2, '223', 'others', 12, NULL, '{\"row\":6,\"col\":2}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
-(26, 2, 'Highlight', 'others', 13, NULL, '{\"row\":7,\"col\":1}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
-(27, 2, '', 'fill_blank', 14, 12, '{\"row\":7,\"col\":2}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
-(28, 2, 'Time/hours', 'others', 15, NULL, '{\"row\":8,\"col\":1}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
-(29, 2, '', 'fill_blank', 16, 13, '{\"row\":8,\"col\":2}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
-(30, 2, 'Transcoastal', 'others', 17, NULL, '{\"row\":9,\"col\":1}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
-(31, 2, '', 'others', 18, NULL, '{\"row\":9,\"col\":2}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
-(32, 2, 'Distance/km', 'others', 19, NULL, '{\"row\":10,\"col\":1}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
-(33, 2, '', 'fill_blank', 20, 14, '{\"row\":10,\"col\":2}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
-(34, 2, 'Highlight', 'others', 21, NULL, '{\"row\":11,\"col\":1}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
-(35, 2, '', 'fill_blank', 22, 15, '{\"row\":11,\"col\":2}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
-(36, 2, 'Time/hours', 'others', 23, NULL, '{\"row\":12,\"col\":1}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
-(37, 2, '5', 'others', 24, NULL, '{\"row\":12,\"col\":2}', '2025-08-16 08:56:54', '2025-08-16 08:56:54'),
-(38, 2, 'Taking three days to complete, the ___ is one of the world’s longest train journeys.', 'fill_blank', 25, 16, '{\"position\":\"summary\"}', '2025-08-16 09:02:08', '2025-08-16 09:02:08'),
-(39, 2, 'The Ghan is shorter, passing through towns built by the ___', 'fill_blank', 26, 17, '{\"position\":\"summary\"}', '2025-08-16 09:02:08', '2025-08-16 09:02:08'),
-(40, 2, 'There is also a sculpture designed to mark the laying of the ___ concrete sleeper.', 'fill_blank', 27, 18, '{\"position\":\"summary\"}', '2025-08-16 09:02:08', '2025-08-16 09:02:08'),
-(41, 2, 'The Overland was the first train to travel between the capital cities in two ___', 'fill_blank', 28, 19, '{\"position\":\"summary\"}', '2025-08-16 09:02:08', '2025-08-16 09:02:08'),
-(42, 2, ' and it is also the oldest journey of its kind on ___', 'fill_blank', 29, 20, '{\"position\":\"summary\"}', '2025-08-16 09:02:08', '2025-08-16 09:02:08'),
-(43, 3, 'Lyn is having difficulty completing her project because', 'mcq', 1, 21, NULL, '2025-08-16 10:00:32', '2025-08-16 10:00:32'),
-(44, 3, 'Her presentation is going to focus on', 'mcq', 2, 22, NULL, '2025-08-16 10:00:32', '2025-08-16 10:00:32'),
-(45, 3, 'Why does Lyn think we should be looking for alternative sources of energy?', 'mcq', 3, 23, NULL, '2025-08-16 10:00:32', '2025-08-16 10:00:32'),
-(46, 3, 'Solar power is a good form of alternative energy because', 'mcq', 4, 24, NULL, '2025-08-16 10:00:32', '2025-08-16 10:00:32'),
-(47, 3, 'Which graph best indicates what Lyn is describing?', 'mcq', 5, 25, '{\"image\":\"https://ieltsonlinetests.com/sites/default/files/listening-test-1-section-3-Q25.png\"}', '2025-08-16 10:00:32', '2025-08-16 10:00:32'),
-(48, 3, 'Label the following diagram USING NO MORE THAN TWO WORDS AND / OR A NUMBER', 'static', 6, NULL, '{\"image\":\"https://ieltsonlinetests.com/sites/default/files/2018-11/listening-test-13-section-3-Q27.png\"}', '2025-08-16 10:14:15', '2025-08-16 10:14:15'),
-(49, 3, '___', 'fill_blank', 7, 26, NULL, '2025-08-16 10:14:15', '2025-08-16 10:14:15'),
-(50, 3, '___', 'fill_blank', 8, 27, NULL, '2025-08-16 10:14:15', '2025-08-16 10:14:15'),
-(51, 3, '___', 'fill_blank', 9, 28, NULL, '2025-08-16 10:14:15', '2025-08-16 10:14:15'),
-(52, 3, '___', 'fill_blank', 10, 29, NULL, '2025-08-16 10:14:15', '2025-08-16 10:14:15'),
-(53, 3, '___', 'fill_blank', 11, 30, NULL, '2025-08-16 10:14:15', '2025-08-16 10:14:15'),
-(54, 4, 'Lecture on ___', 'fill_blank', 1, 31, NULL, '2025-08-16 10:41:18', '2025-08-16 10:41:18'),
-(55, 4, 'Examples: tourism and ___', 'fill_blank', 2, 32, NULL, '2025-08-16 10:41:18', '2025-08-16 10:41:18'),
-(56, 4, 'Common misconception is that marketing points to ___ in what is being provided.', 'fill_blank', 3, 33, NULL, '2025-08-16 10:41:18', '2025-08-16 10:41:18'),
-(57, 4, 'Marketing is actually essential in maintaining ___', 'fill_blank', 4, 34, NULL, '2025-08-16 10:41:18', '2025-08-16 10:41:18'),
-(58, 4, 'Selling a product is easier because it is ___ and customers do not have such different ___', 'fill_blank', 5, 35, NULL, '2025-08-16 10:41:18', '2025-08-16 10:41:18'),
-(59, 4, 'Aim: offer service beyond hopes of ___', 'fill_blank', 6, 37, NULL, '2025-08-16 10:41:18', '2025-08-16 10:41:18'),
-(60, 4, 'Important to: (a) keep informed & (b) ___', 'fill_blank', 7, 38, NULL, '2025-08-16 10:41:18', '2025-08-16 10:41:18'),
-(61, 4, 'One way to achieve this: ___', 'fill_blank', 8, 39, NULL, '2025-08-16 10:41:18', '2025-08-16 10:41:18'),
-(62, 4, '___ must always be available for any queries or problems.', 'fill_blank', 9, 40, NULL, '2025-08-16 10:41:18', '2025-08-16 10:41:18'),
-(63, 5, 'The text has 5 paragraphs (A - E).', 'static', 1, NULL, NULL, '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
-(64, 5, '<b>Which paragraph contains each of the following pieces of information?</b>', 'static', 2, NULL, NULL, '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
-(65, 5, 'The fact that a woman runs one of Thailand’s biggest banks', 'select', 3, 1, '{\"options\":[\"A\",\"B\",\"C\",\"D\",\"E\"]}', '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
-(66, 5, 'The number of countries included in the survey', 'select', 4, 2, '{\"options\":[\"A\",\"B\",\"C\",\"D\",\"E\"]}', '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
-(67, 5, 'The fact that Japan’s birth rate is falling quickly', 'select', 5, 3, '{\"options\":[\"A\",\"B\",\"C\",\"D\",\"E\"]}', '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
-(68, 5, 'The criteria used to get a score for each country', 'select', 6, 4, '{\"options\":[\"A\",\"B\",\"C\",\"D\",\"E\"]}', '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
-(69, 5, '<b>Complete the following sentences using NO MORE THAN THREE WORDS from the text for each gap.</b>', 'static', 7, NULL, NULL, '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
-(70, 5, 'Higher consumption in the ___ sector of the market is one reason that Asia’s economies are doing well.', 'fill_blank', 8, 5, NULL, '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
-(71, 5, 'The scores were decided through a combination of interviews and ___.', 'fill_blank', 9, 6, NULL, '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
-(72, 5, 'Higher ___ has created an economic problem for Korea.', 'fill_blank', 10, 7, NULL, '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
-(73, 5, 'Japanese politicians have not yet decided how to get money for the ___ .', 'fill_blank', 11, 8, NULL, '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
-(74, 5, '<b>Do the following statements agree with the information given in Reading Passage 1?</b>', 'static', 12, NULL, NULL, '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
-(75, 5, 'In boxes 9 - 13 on your answer sheet, write <b>TRUE</b> if the statement agrees with the information, <b> FALSE </b> if it contradicts the information, and <b> NOT GIVEN </b> if there is no information.', 'static', 13, NULL, NULL, '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
-(76, 5, 'Other countries are looking at the example of Thailand to see if its policies can help their economies.', 'true_false', 14, 9, '{\"options\":[\"TRUE\",\"FALSE\",\"NOT GIVEN\"]}', '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
-(77, 5, 'Higher female participation in an economy always leads to greater economic growth.', 'true_false', 15, 10, '{\"options\":[\"TRUE\",\"FALSE\",\"NOT GIVEN\"]}', '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
-(78, 5, 'Female participation in the economy is lower in Japan than in most other developed economies.', 'true_false', 16, 11, '{\"options\":[\"TRUE\",\"FALSE\",\"NOT GIVEN\"]}', '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
-(79, 5, 'Most of the Bank of Thailand’s assistant governors are female.', 'true_false', 17, 12, '{\"options\":[\"TRUE\",\"FALSE\",\"NOT GIVEN\"]}', '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
-(80, 5, 'The writer considers fairness to be a bad reason for giving women top jobs.', 'true_false', 18, 13, '{\"options\":[\"TRUE\",\"FALSE\",\"NOT GIVEN\"]}', '2025-08-16 11:32:17', '2025-08-16 11:32:17'),
-(81, 6, 'The text has 8 paragraphs (A - H).', 'static', 1, NULL, NULL, '2025-08-16 11:41:24', '2025-08-16 11:41:24'),
-(82, 6, 'Which paragraph does each of the following headings best fit?', 'static', 2, NULL, NULL, '2025-08-16 11:41:24', '2025-08-16 11:41:24'),
-(83, 6, 'Most popular employers for different students', 'select', 3, 14, '{\"options\":[\"A\",\"B\",\"C\",\"D\",\"E\",\"F\",\"G\",\"H\"]}', '2025-08-16 11:41:24', '2025-08-16 11:41:24'),
-(84, 6, 'Students’ expectations', 'select', 4, 15, '{\"options\":[\"A\",\"B\",\"C\",\"D\",\"E\",\"F\",\"G\",\"H\"]}', '2025-08-16 11:41:24', '2025-08-16 11:41:24'),
-(85, 6, 'Give and develop with the NHS', 'select', 5, 16, '{\"options\":[\"A\",\"B\",\"C\",\"D\",\"E\",\"F\",\"G\",\"H\"]}', '2025-08-16 11:41:24', '2025-08-16 11:41:24'),
-(86, 6, 'Reason for the NHS to be happy', 'select', 6, 17, '{\"options\":[\"A\",\"B\",\"C\",\"D\",\"E\",\"F\",\"G\",\"H\"]}', '2025-08-16 11:41:24', '2025-08-16 11:41:24'),
-(87, 6, 'According to the information given in the text, choose the correct answer or answers from the choices given.', 'static', 7, NULL, NULL, '2025-08-16 11:47:28', '2025-08-16 11:47:28'),
-(88, 6, 'The survey covered students', 'mcq', 8, 23, NULL, '2025-08-16 11:47:28', '2025-08-16 11:47:28'),
-(89, 6, 'The BBC', 'mcq', 9, 24, NULL, '2025-08-16 11:47:28', '2025-08-16 11:47:28'),
-(90, 7, 'For each question, only ONE of the choices is correct. Write the corresponding letter in the appropriate box on your answer sheet.', 'static', 1, NULL, NULL, '2025-08-16 11:54:20', '2025-08-16 11:54:20'),
-(91, 7, 'The Celestron SkyScout can', 'mcq', 2, 27, NULL, '2025-08-16 11:54:20', '2025-08-16 11:54:20'),
-(92, 7, 'The Seiko Spectrum e-paper watch', 'mcq', 3, 28, NULL, '2025-08-16 11:54:20', '2025-08-16 11:54:20'),
-(93, 7, 'The Electrolux Trilobite 2.0 robot vacuum cleaner', 'mcq', 4, 29, NULL, '2025-08-16 11:54:20', '2025-08-16 11:54:20'),
-(94, 7, 'The Honda Asimo robot', 'mcq', 5, 30, NULL, '2025-08-16 11:54:20', '2025-08-16 11:54:20'),
-(95, 7, '<b>Complete the following sentences using NO MORE THAN THREE WORDS from the text for each gap.</b>', 'static', 6, NULL, NULL, NULL, NULL),
-(96, 7, 'The SkyScout uses GPS and ___ to help you find a star.', 'fill_blank', 7, 31, NULL, '2025-08-18 10:40:41', '2025-08-18 10:40:41'),
-(97, 7, 'The Seiko Spectrum does not need batteries to power the ___', 'fill_blank', 8, 32, NULL, '2025-08-18 10:40:41', '2025-08-18 10:40:41'),
-(98, 7, 'HDTV uses more ___ than conventional TV.', 'fill_blank', 9, 33, NULL, '2025-08-18 10:40:41', '2025-08-18 10:40:41'),
-(99, 7, 'The Trilobite 2.0 could be used to ___ guests.', 'fill_blank', 10, 34, NULL, '2025-08-18 10:40:41', '2025-08-18 10:40:41'),
-(100, 7, 'Asimo first appeared ___', 'fill_blank', 11, 35, NULL, '2025-08-18 10:40:41', '2025-08-18 10:40:41'),
-(101, 7, 'Do the following statements agree with the information given in Reading Passage 3? In boxes 36 - 40 on your answer sheet, write TRUE if the statement agrees with the information, FALSE if the statement contradicts the information, NOT GIVEN if there is no information on this.', 'static', 12, NULL, NULL, '2025-08-18 10:43:02', '2025-08-18 10:43:02'),
-(102, 7, 'The Nokia N91 is strong.', 'true_false', 13, 36, '{\"options\":[\"TRUE\",\"FALSE\",\"NOT GIVEN\"]}', '2025-08-18 10:44:41', '2025-08-18 10:44:41'),
-(103, 7, 'E-paper can be torn easily.', 'true_false', 14, 37, '{\"options\":[\"TRUE\",\"FALSE\",\"NOT GIVEN\"]}', '2025-08-18 10:44:41', '2025-08-18 10:44:41'),
-(104, 7, 'HDTV is filmed differently to conventional TV.', 'true_false', 15, 38, '{\"options\":[\"TRUE\",\"FALSE\",\"NOT GIVEN\"]}', '2025-08-18 10:44:41', '2025-08-18 10:44:41'),
-(105, 7, 'The Trilobite 2.0 looks just like the original design.', 'true_false', 16, 39, '{\"options\":[\"TRUE\",\"FALSE\",\"NOT GIVEN\"]}', '2025-08-18 10:44:41', '2025-08-18 10:44:41'),
-(106, 7, 'Asimo is available for export.', 'true_false', 17, 40, '{\"options\":[\"TRUE\",\"FALSE\",\"NOT GIVEN\"]}', '2025-08-18 10:44:41', '2025-08-18 10:44:41');
+(1, 1, '<b>Questions 1-5</b><br>The housing officer takes some details from the girl.<br>Complete the following form with <b>NO MORE THAN THREE WORDS AND/OR A NUMBER </b> for each answer.<br>', 'static', 1, NULL, NULL, '2025-08-21 10:23:51', '2025-08-21 10:23:51'),
+(5, 1, '<b>PERSONAL DETAILS FOR HOMESTAY APPLICATION</b>', 'static', 2, NULL, NULL, '2025-08-21 10:32:53', '2025-08-21 10:32:53'),
+(6, 1, 'First name', 'static', 3, NULL, '{\"table_no\":1,\"row\":1,\"col\":1}', '2025-08-21 10:41:59', '2025-08-21 10:41:59'),
+(7, 1, '___', 'fill_blank', 4, 1, '{\"table_no\":1,\"row\":1,\"col\":2}', '2025-08-21 10:41:59', '2025-08-21 10:41:59'),
+(8, 1, 'Family name', 'static', 5, NULL, '{\"table_no\":1,\"row\":2,\"col\":1}', '2025-08-21 11:13:03', '2025-08-21 11:13:03'),
+(9, 1, 'Yuichini', 'static', 6, NULL, '{\"table_no\":1,\"row\":2,\"col\":2}', '2025-08-21 11:13:03', '2025-08-21 11:13:03'),
+(10, 1, 'Gender', 'static', 7, NULL, '{\"table_no\":1,\"row\":3,\"col\":1}', '2025-08-21 11:14:11', '2025-08-21 11:14:11'),
+(11, 1, 'Female', 'static', 8, NULL, '{\"table_no\":1,\"row\":3,\"col\":2}', '2025-08-21 11:14:11', '2025-08-21 11:14:11'),
+(12, 1, 'Age', 'static', 9, NULL, '{\"table_no\":1,\"row\":4,\"col\":1}', '2025-08-21 12:34:34', '2025-08-21 12:34:34'),
+(13, 1, '28', 'static', 10, NULL, '{\"table_no\":1,\"row\":4,\"col\":2}', '2025-08-21 12:34:34', '2025-08-21 12:34:34'),
+(14, 1, 'Passport number', 'static', 11, NULL, '{\"table_no\":1,\"row\":5,\"col\":1}', '2025-08-21 12:34:34', '2025-08-21 12:34:34'),
+(15, 1, '___', 'fill_blank', 12, 2, '{\"table_no\":1,\"row\":5,\"col\":2}', '2025-08-21 12:34:34', '2025-08-21 12:34:34'),
+(16, 1, 'Nationality', 'static', 13, NULL, '{\"table_no\":1,\"row\":6,\"col\":1}', '2025-08-21 12:34:34', '2025-08-21 12:34:34'),
+(17, 1, 'Japanese', 'static', 14, NULL, '{\"table_no\":1,\"row\":6,\"col\":2}', '2025-08-21 12:34:34', '2025-08-21 12:34:34'),
+(18, 1, 'Course enrolled', 'static', 15, NULL, '{\"table_no\":1,\"row\":7,\"col\":1}', '2025-08-21 12:34:34', '2025-08-21 12:34:34'),
+(19, 1, '___', 'fill_blank', 16, 3, '{\"table_no\":1,\"row\":7,\"col\":2}', '2025-08-21 12:34:34', '2025-08-21 12:34:34'),
+(20, 1, 'Length of the course', 'static', 17, NULL, '{\"table_no\":1,\"row\":8,\"col\":1}', '2025-08-21 12:34:34', '2025-08-21 12:34:34'),
+(21, 1, '___', 'fill_blank', 18, 4, '{\"table_no\":1,\"row\":8,\"col\":2}', '2025-08-21 12:34:34', '2025-08-21 12:34:34'),
+(22, 1, 'Homestay time', 'static', 19, NULL, '{\"table_no\":1,\"row\":9,\"col\":1}', '2025-08-21 12:34:34', '2025-08-21 12:34:34'),
+(23, 1, '___', 'fill_blank', 20, 5, '{\"table_no\":1,\"row\":9,\"col\":2}', '2025-08-21 12:34:34', '2025-08-21 12:34:34'),
+(24, 1, '<b> Question 6 </b><br>Mark <b>TWO</b> letter that represent the correct answer.', 'static', 21, NULL, NULL, '2025-08-21 12:50:19', '2025-08-21 12:50:19'),
+(26, 1, 'Which kind of family does the girls prefer?', 'checkbox', 22, 6, NULL, '2025-08-21 12:50:19', '2025-08-21 12:50:19'),
+(27, 1, '<b>Question 7-10</b><br>Fill in the blanks with <b> NO MORE THAN THREE WORDS </b> for each answer', 'static', 23, NULL, NULL, '2025-08-21 12:58:47', '2025-08-21 12:58:47'),
+(29, 1, 'Although the girl is not a vegetarian, she doesn\'t eat a lot of meat. Her favourite food is ___', 'fill_blank', 24, 7, NULL, '2025-08-21 13:04:57', '2025-08-21 13:04:57'),
+(30, 1, 'The girls has given up playing handball. Now, she just play ___ with her friends at weekends.', 'fill_blank', 25, 8, NULL, '2025-08-21 13:04:57', '2025-08-21 13:04:57'),
+(31, 1, 'The girl does not like the bus because they are always late. She would rather ___', 'fill_blank', 26, 9, NULL, '2025-08-21 13:04:57', '2025-08-21 13:04:57'),
+(32, 1, 'The girl can get the information about the homestay family that she wants ___', 'fill_blank', 27, 10, NULL, '2025-08-21 13:04:57', '2025-08-21 13:04:57'),
+(33, 2, '<b>Questions 11-20 </b><br>You will hear a talk by a tour guide about travel to Enzia.<br>Complete the notes by filling in the blanks with <b> NO MORE THAN TWO WORDS OR A NUMBER </b> for each answer.<br><b>NOTES</b><br><b>VISAS</b><br>', 'static', 1, NULL, NULL, '2025-08-23 04:48:00', '2025-08-23 04:48:00'),
+(34, 2, 'Now Eznina visas are needed by almost all nationalities.Normal visas last ___', 'fill_blank', 2, 11, NULL, '2025-08-23 05:05:22', '2025-08-23 05:05:22'),
+(35, 2, 'You need to pay $ ___ for the visa.Price may change from time to time', 'fill_blank', 3, 12, NULL, '2025-08-23 05:05:22', '2025-08-23 05:05:22'),
+(36, 2, 'Some Enzian consulates neighbouring countries require you to provide a letter to  ___', 'fill_blank', 4, 13, NULL, '2025-08-23 05:05:22', '2025-08-23 05:05:22'),
+(37, 2, 'You can get information of major embassies on ___ of the student handbook.If you want to re-enter Eznia, you must get a multi-entry visa.', 'fill_blank', 5, 14, NULL, '2025-08-23 05:05:22', '2025-08-23 05:05:22'),
+(38, 2, '<b>SOME MISCELLANEOUS GENERAL ADVICE</b><br>If you carry a lot of money, you need to complete a ___', 'fill_blank', 6, 15, NULL, '2025-08-23 05:05:22', '2025-08-23 05:05:22'),
+(39, 2, 'Remember to declare all your items, especially expensive items, on a  ___', 'fill_blank', 7, 16, NULL, '2025-08-23 05:05:22', '2025-08-23 05:05:22'),
+(40, 2, 'You are advised to carry a health certificate. The one you need is the  ___', 'fill_blank', 8, 17, NULL, '2025-08-23 05:05:22', '2025-08-23 05:05:22'),
+(41, 2, '<b>NOTES FOR STUDENTS</b><br>If you wish to get a youth fare card, you should show your ___', 'fill_blank', 9, 18, NULL, '2025-08-23 05:05:22', '2025-08-23 05:05:22'),
+(42, 2, 'Due to the bureaucracy in Eznia, you are advised to take at least ___ passport photos with you.', 'fill_blank', 10, 19, NULL, '2025-08-23 05:05:22', '2025-08-23 05:05:22'),
+(43, 2, '<b>CURRENCY</b><br>Pounds and US dollars are not very useful now in Eznia, so you should take Yen or ___ with you.Credit cards are not acceptable because of fraud scandals.', 'fill_blank', 11, 20, NULL, '2025-08-23 05:05:22', '2025-08-23 05:05:22'),
+(44, 3, '<b>Questions 21-24 </b><br>Complete the sentences below.Write <b> NO MORE THAN TWO WORDS OR A NUMBER </b> for each answer.', 'static', 1, NULL, NULL, '2025-08-23 05:17:46', '2025-08-23 05:17:46'),
+(45, 3, 'The woman being interviewed is now working in the bank. Her occupation is  ___', 'fill_blank', 2, 21, NULL, '2025-08-23 05:17:46', '2025-08-23 05:17:46'),
+(46, 3, 'The woman usually spends about ___ when she goes shopping.', 'fill_blank', 3, 22, NULL, '2025-08-23 05:17:46', '2025-08-23 05:17:46'),
+(47, 3, 'The woman often goes to ___ because she finds them convenient.', 'fill_blank', 4, 23, NULL, '2025-08-23 05:17:46', '2025-08-23 05:17:46'),
+(48, 3, 'According to the woman, ___ is/are her most difficult thing(s) to buy.', 'fill_blank', 5, 24, NULL, '2025-08-23 05:17:46', '2025-08-23 05:17:46'),
+(49, 3, '<b>Questions 25-27 </b><br>Fill in the blanks with <b> ONE WORD AND/OR A NUMBER </b> for each answer.', 'static', 6, NULL, NULL, '2025-08-23 05:20:02', '2025-08-23 05:20:02'),
+(51, 3, '', 'static', 7, NULL, '{\"image\":\"images/mockTestImage/Questions25.png\"}', '2025-08-23 05:28:40', '2025-08-23 05:28:40'),
+(52, 3, '<div style=\"height:30px; width:30px; background-color:#81b3ec;\"></div>', 'static', 8, NULL, '{\"table_no\":2,\"row\":1,\"col\":1}', '2025-08-23 05:44:39', '2025-08-23 05:44:39'),
+(53, 3, '50% of the people being interviewed spend ___ a month.', 'fill_blank', 9, 25, '{\"table_no\":2,\"row\":1,\"col\":2}', '2025-08-23 05:44:39', '2025-08-23 05:44:39'),
+(54, 3, '<div style=\"height:30px; width:30px; background-color:#ea7972;\"></div>', 'static', 10, NULL, '{\"table_no\":2,\"row\":2,\"col\":1}', '2025-08-23 05:44:39', '2025-08-23 05:44:39'),
+(55, 3, '15% of the people being interviewed spend ___ a month.', 'fill_blank', 11, 26, '{\"table_no\":2,\"row\":2,\"col\":2}', '2025-08-23 05:44:39', '2025-08-23 05:44:39'),
+(56, 3, '<div style=\"height:30px; width:30px; background-color:#c1e07a;\"></div>', 'static', 12, NULL, '{\"table_no\":2,\"row\":3,\"col\":1}', '2025-08-23 05:44:39', '2025-08-23 05:44:39'),
+(57, 3, '35% of the people being interviewed spend ___ a month.', 'fill_blank', 13, 27, '{\"table_no\":2,\"row\":3,\"col\":2}', '2025-08-23 05:44:39', '2025-08-23 05:44:39'),
+(58, 3, '<b>Questions 28-30</b><br>Mark <b>THREE</b> letter that represent the correct answer.', 'static', 14, NULL, NULL, '2025-08-23 05:56:53', '2025-08-23 05:56:53'),
+(59, 3, 'Most of the people being interviewed think that _________ is/are most difficult to buy.', 'checkbox', 15, 28, NULL, '2025-08-23 05:56:53', '2025-08-23 05:56:53'),
+(60, 4, '<b>Questions 31-40</b><br>Choose the correct answer<br>', 'static', 1, NULL, NULL, '2025-08-23 06:07:44', '2025-08-23 06:07:44'),
+(61, 4, 'What does the lecturer provide for those who are interested in doing extra reading?', 'mcq', 2, 31, NULL, '2025-08-23 06:07:44', '2025-08-23 06:07:44'),
+(62, 4, 'In the past, time management meant you needed to', 'mcq', 3, 32, NULL, '2025-08-23 06:07:44', '2025-08-23 06:07:44'),
+(63, 4, 'Today, wise time management means you need to', 'mcq', 4, 33, NULL, '2025-08-23 06:07:44', '2025-08-23 06:07:44'),
+(64, 4, 'In this college, students are assigned ____________ at the end of each semester.', 'mcq', 5, 34, NULL, '2025-08-23 06:07:44', '2025-08-23 06:07:44'),
+(65, 4, 'One sign he lecturer mentions that students feel under pressure is', 'mcq', 6, 35, NULL, '2025-08-23 06:07:44', '2025-08-23 06:07:44'),
+(66, 4, 'What kind of suggestion does the lecturer give to the students?', 'mcq', 7, 36, NULL, '2025-08-23 06:07:44', '2025-08-23 06:07:44'),
+(67, 4, 'According to the lecturer, there are three kinds of planners. They are:', 'mcq', 8, 37, NULL, '2025-08-23 06:07:44', '2025-08-23 06:07:44'),
+(68, 4, 'If you want to set an overview of your time, you should need at least', 'mcq', 9, 38, NULL, '2025-08-23 06:07:44', '2025-08-23 06:07:44'),
+(69, 4, 'The daily planner of time is mainly concerned with', 'mcq', 10, 39, NULL, '2025-08-23 06:07:44', '2025-08-23 06:07:44'),
+(70, 4, 'According to the lecturer, wise time management may have the following benefit:', 'mcq', 11, 40, NULL, '2025-08-23 06:07:44', '2025-08-23 06:07:44');
 
 -- --------------------------------------------------------
 
@@ -1480,12 +1449,12 @@ CREATE TABLE `question_groups` (
 --
 
 INSERT INTO `question_groups` (`id`, `section_id`, `title`, `description`, `media_file`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Part 1', 'Part 1', NULL, '2025-08-16 06:22:37', '2025-08-16 06:22:37'),
-(2, 1, 'Part 2', 'Part 2', NULL, '2025-08-16 06:22:37', '2025-08-16 06:22:37'),
-(3, 1, 'Part 3', 'Part 3', NULL, '2025-08-16 06:22:37', '2025-08-16 06:22:37'),
-(4, 1, 'Part 4', 'Part 3', NULL, '2025-08-16 06:22:37', '2025-08-16 06:22:37'),
-(5, 2, 'Part 1', '<p>You should spend about 20 minutes on Questions 1 -13, which are based on Reading Passage 1 below.</p><img style=\"width:100%;height:300px;\"src=\"{{ asset(\'adminMock/2/T2S1_0.jpg\') }}\"alt=\"image\"><h5>Secret of Thailand\'s Success?</h5><p>A. It is a question officials here in Asia are being posed more and more:Why are your economies so vibrant? Answers include young and swelling populations, decreased debt, growing cities, emerging middle-class consumer sectors, evolving markets and, of course, ( China’s rise. Add this to that list: Women and their increasing role in Asia’s economies. The idea is that the more opportunities women have, the more vibrant economies are and,consequently, the less need there is to amass a huge public debt to boost growth. It is an idea bolstered by a new survey by MasterCard International Inc., which compares the socio-economic level of women with men in Asia-Pacific nations. The gauge uses four key indicators: participation in the labour force, college education, managerial positions, and above-median income.<br>B. Which Asian nation is doing host when it comes to women’s advancement? Thailand. It scored 92.3 of a possible 100, and according to MasterCard’s index, 100 equals gender equality. The survey was based on interviews with 300 to 350 women in thirteen nations and national statistics. Malaysia came in second with a score of 86.2, while China came in third with 68.4. The average score in Asia was 67.7. At the bottom of the list is South Korea (45.5), followed by Indonesia (52.5), and Japan (54.5). Perhaps it is a bizarre coincidence, yet MasterCard’s findings fit quite neatly with two important issues in Asia: economic leadership and debt. Thailand, Malaysia, and China are three economies widely seen as the future of Asia. Thailand’s economic boom in recent years has prompted many leaders in the region to look at its growth strategy. Malaysia, which has a female central bank governor, is one of Asia’s rising economic powers. China, of course, is the world’s hottest economy, and one that is shaking up trade patterns and business decisions everywhere.<br>C. Something all three economies have in common is an above-average level of female participation. What the three worst ranked economies share are severe long-term economic challenges of high levels of debt and a female workforce that is being neglected. Research in economic history is very conclusive on the role of women in economic growth and development, says Yuwa Hedrick-Wong, an economic adviser to MasterCard. The more extensive women’s participation at all areas of economic activities, the higher the probability for stronger economic growth. That, Hedrick-Wong says, means societies and economies that consistently fail to fully incorporate women’s ability and talent in businesses, and the workplace will suffer the consequences. Take Korea, which has been walking in place economically in recent years. Immediately following the 1997— 1998 Asian financial crisis, Korea became a regional role model as growth boomed and unemployment fell. Yet a massive increase in household debt left consumers overexposed and growth slowed.<br>D. Maybe it is a just coincidence that Korea also ranks low on measures of gender equality published by the United Nations. As of 2003, for example, it ranked below Honduras, Paraguay, Mauritius, and Ukraine in terms of women’s economic and political empowerment. Utilising more of its female workforce would deepen Korea’s labour pool and increase potential growth rates in the economy. The same goes for Japan. The reluctance of Asia’s biggest economy to increase female participation and let more women into the executive suite exacerbates its biggest long-term challenge: a declining birth rate. In 2003, the number of children per Japanese woman fell to a record low of 1.29 versus about. 2 in the early 1970s. Preliminary government statistics suggest the rate declined further in 2004. The trend is nothing short of a crisis for a highly indebted nation of 126 million that has yet to figure out how to fund the national pension system down the road. Yet Japan has been slow to realise that for many women, the decision to delay childbirth is a form of rebellion against societal expectations to have children and become housewives,<br>E. It may be 2005, yet having children is a career-ending decision for millions of bright, ambit ions, and well-educated Japanese, Until corrected, Japan’s birth rate will drop and economic growth will lag, UN Secretary General Kofi Annan was absolutely right earlier this month when he said no other policy is as likely to raise economic productivity than the empowerment of women. Here, in Thailand, the government is getting some decent marks in this regard, and the economy’s 6 per cent-plus growth rate may be a direct result. Thailand still has a long way to go. Yet the Bank of Thailand’s deputy governor, Tarisa Watanagase, is a woman, as are seven of nine assistant governors. Then there’s Jada Wattanasiritham, who runs Siam Commercial Bank Plc, Thailand’s fourth-biggest lender. How many female chief executives can you name in Japan or Korea? Looked at broadly in Asia, MasterCard’s survey is on to something. It is that giving women more opportunities to contribute to an economy is not just about fairness, but dollars and sense, too.\n</p>\n', NULL, '2025-08-16 06:22:37', '2025-08-16 06:22:37'),
-(6, 2, 'Part 2', '<p> You should spend about 20 minutes on Questions 14 - 26, which are based on Reading Passage 2 below.</p><img style=\"width: 100%; height: 300px\" src=\"{{asset(\'adminMock/2/T2S2_0.jpg\')}}\" alt=\"image\"/><h5>Patients Are a Virtue</h <p> A. Despite conference jeers, job cuts, and a financial crisis, health secretary Patricia Hewitt may find a reason to smile this week, as the NHS (British National Health Service) was named one of the top places to work by students. Among engineering, science, and IT students, the health service was ranked second in this year’s Univer-sum UK graduate survey of ideal employers, a leap of 54 places from last year. The annual survey, conducted in the UK since 1997, canvassed the opinions of more than 7,700 final and penultimate-year students studying for degrees in business, engineering, science, IT, and the humanities, at 39 universities, between January and March this year.<br>B. Each student was presented with a list of 130 employers, nominated by students through a separate process, from which they selected the five they considered to be ideal employers. The Universum list is based on the frequency of an organisation being selected as an ideal employer, following a weighting process. This year, government departments and public sector organisations dominated the top spots, with the BBC ranked first among humanities, engineering, science, and IT students, retaining its place from last year, and coming third for those studying business. Among humanities students, the BBC was followed closely by the Foreign and Commonwealth Office and the Civil Service fast stream. The Cabinet Office and the Ministry of Defence were not far behind, ranked fifth and sixth respectively. As well as the NHS, engineering, science, and IT students favoured the Environment Agency, which leapt 83 places, from 86 in 2005 to number three this year. Meanwhile, business students voted accountancy giants PricewaterhouseCoopers (PwC) as their favoured employer, followed by HSBC.< >C. At a London awards ceremony sponsored by the Guardian, Foluke Ajayi, head of NHS careers at NHS employers, said its success this year reflected the reality of the health service, which is the third largest employer in the world and the largest in Europe. “We employ people in other clinical areas, such as health care. We employ IT managers, engineers, architects,” she said, adding that the health service is no longer seen as a “second choice” career. “People recognise that they can give something back to the community, but still develop a worthwhile career.”<br>D. Sarah Churchman, director of student recruitment and diversity at PwC, said her company’s success is down to a good campus presence, its commitment to invest in its employees and, with offices around the world, the chance to travel, something which just under half of the students polled said was an important factor when it came to looking for work. One of the big four accountancy firms, PwC is not into gimmicks, and it does not offer freebies but, said Churchman, it does offer “a solid foundation” for anyone wanting a career in business. “We sell our people skills, so we are interested in building skills. We’re not selling something, we invest in our people,” she added.<br> E. Further down the rankings, but still with reason to celebrate, was John Lewis, which matched bumper sales this year with a leap from 111th place in 2005 to 26th among this year’s humanities students. Sky found itself in 12th place, up from 104th last year, and the Environment Agency also proved popular among this student group, rising from 138th in 2005 to 7th this year. Among the business fraternity, shell saw a reversal of fortunes, rising to 30th place after last year’s 76thposition. There were a few dramatic drops in the rankings. The Bank of England fell from 14th in 2005 to 27th this year among humanities students, although it retained its mid-table position among those studying business. British Airways also saw a slight dip, as did McKinsey & Co, which dropped from 11th to 22ndamong business undergraduates.<br>F. Perhaps more surprisingly, this year was the first appearance in the rankings of Teach First, a small charity launched three years ago that aims to create the “leaders of the future” by encouraging top graduates who would not normally consider a career in teaching to commit to work in “challenging” secondary schools for at least two years. The organisation came straight in at number eight among humanities students and was voted 22nd by those studying engineering, science, and IT. James Darley, director of graduate recruitment at Teach First, said he was “bowled over” by the news. “We were not expecting this. We’re a registered charity, only able to physically go to 15 universities.”<br>G. The scheme, based on one run in the US, has the backing of more than 80 businesses, including Deloitte and HSBC. During their two years, candidates undertake leadership training and emerge from the programme with a range of skills and experiences. “We hope in the long term they will be our ambassadors, as we call them, in politics, industry, charities, who will have done it and continue to support the educationally disadvantaged,” adds Darley. This year, 260 graduates are expected to take up the Teach First challenge in schools in London and Manchester, More are expected over the coming years, as the scheme expands to Birmingham and three other cities by 2008. Of the first set of recruits to complete the programme, half have gone on to work for “some amazing companies”, while the other half have chosen to stay on in their schools for a further year - 20% in leadership roles.<br>H. While more than half of students were concerned about achieving a good work life balance, a third said they wanted a job that would challenge them. Although male Students tended to focus more on the practical aspects of work, such as “building a sound financial base”, women, particularly those studying for humanities degrees, had a more idealistic outlook, saying making a contribution to society was a key career goal. Almost half of all students said that paid overtime was a key part of any company compensation package, However, business students said that the most important compensation, apart from salary, was performance-related bonuses, while important considerations for humanities students were retirement plans. Working overseas also scored highly among those surveyed this year, with 45% of business students, and 44% of humanities students, listing it as a priority. Ethical considerations and corporate social responsibilities were also mentioned, with a large percentage of humanities and engineering, science and IT students saying it was a key consideration when it came to choosing an employer.</p>\n', NULL, '2025-08-16 06:22:37', '2025-08-16 06:22:37'),
+(1, 1, 'listening1 Part 1', 'Part 1', NULL, '2025-08-16 06:22:37', '2025-08-16 06:22:37'),
+(2, 1, 'listening1 Part 2', 'Part 2', NULL, '2025-08-16 06:22:37', '2025-08-16 06:22:37'),
+(3, 1, 'listening1 Part 3', 'Part 3', NULL, '2025-08-16 06:22:37', '2025-08-16 06:22:37'),
+(4, 1, 'listening1 Part 4', 'Part 3', NULL, '2025-08-16 06:22:37', '2025-08-16 06:22:37'),
+(5, 2, 'reading1 Part 1', '<p>You should spend about 20 minutes on Questions 1 -13, which are based on Reading Passage 1 below.</p><img style=\"width:100%;height:300px;\"src=\"{{ asset(\'adminMock/2/T2S1_0.jpg\') }}\"alt=\"image\"><h5>Secret of Thailand\'s Success?</h5><p>A. It is a question officials here in Asia are being posed more and more:Why are your economies so vibrant? Answers include young and swelling populations, decreased debt, growing cities, emerging middle-class consumer sectors, evolving markets and, of course, ( China’s rise. Add this to that list: Women and their increasing role in Asia’s economies. The idea is that the more opportunities women have, the more vibrant economies are and,consequently, the less need there is to amass a huge public debt to boost growth. It is an idea bolstered by a new survey by MasterCard International Inc., which compares the socio-economic level of women with men in Asia-Pacific nations. The gauge uses four key indicators: participation in the labour force, college education, managerial positions, and above-median income.<br>B. Which Asian nation is doing host when it comes to women’s advancement? Thailand. It scored 92.3 of a possible 100, and according to MasterCard’s index, 100 equals gender equality. The survey was based on interviews with 300 to 350 women in thirteen nations and national statistics. Malaysia came in second with a score of 86.2, while China came in third with 68.4. The average score in Asia was 67.7. At the bottom of the list is South Korea (45.5), followed by Indonesia (52.5), and Japan (54.5). Perhaps it is a bizarre coincidence, yet MasterCard’s findings fit quite neatly with two important issues in Asia: economic leadership and debt. Thailand, Malaysia, and China are three economies widely seen as the future of Asia. Thailand’s economic boom in recent years has prompted many leaders in the region to look at its growth strategy. Malaysia, which has a female central bank governor, is one of Asia’s rising economic powers. China, of course, is the world’s hottest economy, and one that is shaking up trade patterns and business decisions everywhere.<br>C. Something all three economies have in common is an above-average level of female participation. What the three worst ranked economies share are severe long-term economic challenges of high levels of debt and a female workforce that is being neglected. Research in economic history is very conclusive on the role of women in economic growth and development, says Yuwa Hedrick-Wong, an economic adviser to MasterCard. The more extensive women’s participation at all areas of economic activities, the higher the probability for stronger economic growth. That, Hedrick-Wong says, means societies and economies that consistently fail to fully incorporate women’s ability and talent in businesses, and the workplace will suffer the consequences. Take Korea, which has been walking in place economically in recent years. Immediately following the 1997— 1998 Asian financial crisis, Korea became a regional role model as growth boomed and unemployment fell. Yet a massive increase in household debt left consumers overexposed and growth slowed.<br>D. Maybe it is a just coincidence that Korea also ranks low on measures of gender equality published by the United Nations. As of 2003, for example, it ranked below Honduras, Paraguay, Mauritius, and Ukraine in terms of women’s economic and political empowerment. Utilising more of its female workforce would deepen Korea’s labour pool and increase potential growth rates in the economy. The same goes for Japan. The reluctance of Asia’s biggest economy to increase female participation and let more women into the executive suite exacerbates its biggest long-term challenge: a declining birth rate. In 2003, the number of children per Japanese woman fell to a record low of 1.29 versus about. 2 in the early 1970s. Preliminary government statistics suggest the rate declined further in 2004. The trend is nothing short of a crisis for a highly indebted nation of 126 million that has yet to figure out how to fund the national pension system down the road. Yet Japan has been slow to realise that for many women, the decision to delay childbirth is a form of rebellion against societal expectations to have children and become housewives,<br>E. It may be 2005, yet having children is a career-ending decision for millions of bright, ambit ions, and well-educated Japanese, Until corrected, Japan’s birth rate will drop and economic growth will lag, UN Secretary General Kofi Annan was absolutely right earlier this month when he said no other policy is as likely to raise economic productivity than the empowerment of women. Here, in Thailand, the government is getting some decent marks in this regard, and the economy’s 6 per cent-plus growth rate may be a direct result. Thailand still has a long way to go. Yet the Bank of Thailand’s deputy governor, Tarisa Watanagase, is a woman, as are seven of nine assistant governors. Then there’s Jada Wattanasiritham, who runs Siam Commercial Bank Plc, Thailand’s fourth-biggest lender. How many female chief executives can you name in Japan or Korea? Looked at broadly in Asia, MasterCard’s survey is on to something. It is that giving women more opportunities to contribute to an economy is not just about fairness, but dollars and sense, too.\n</p>\n', NULL, '2025-08-16 06:22:37', '2025-08-16 06:22:37'),
+(6, 2, 'reading1 part 2', '<p> You should spend about 20 minutes on Questions 14 - 26, which are based on Reading Passage 2 below.</p><img style=\"width: 100%; height: 300px\" src=\"{{asset(\'adminMock/2/T2S2_0.jpg\')}}\" alt=\"image\"/><h5>Patients Are a Virtue</h <p> A. Despite conference jeers, job cuts, and a financial crisis, health secretary Patricia Hewitt may find a reason to smile this week, as the NHS (British National Health Service) was named one of the top places to work by students. Among engineering, science, and IT students, the health service was ranked second in this year’s Univer-sum UK graduate survey of ideal employers, a leap of 54 places from last year. The annual survey, conducted in the UK since 1997, canvassed the opinions of more than 7,700 final and penultimate-year students studying for degrees in business, engineering, science, IT, and the humanities, at 39 universities, between January and March this year.<br>B. Each student was presented with a list of 130 employers, nominated by students through a separate process, from which they selected the five they considered to be ideal employers. The Universum list is based on the frequency of an organisation being selected as an ideal employer, following a weighting process. This year, government departments and public sector organisations dominated the top spots, with the BBC ranked first among humanities, engineering, science, and IT students, retaining its place from last year, and coming third for those studying business. Among humanities students, the BBC was followed closely by the Foreign and Commonwealth Office and the Civil Service fast stream. The Cabinet Office and the Ministry of Defence were not far behind, ranked fifth and sixth respectively. As well as the NHS, engineering, science, and IT students favoured the Environment Agency, which leapt 83 places, from 86 in 2005 to number three this year. Meanwhile, business students voted accountancy giants PricewaterhouseCoopers (PwC) as their favoured employer, followed by HSBC.< >C. At a London awards ceremony sponsored by the Guardian, Foluke Ajayi, head of NHS careers at NHS employers, said its success this year reflected the reality of the health service, which is the third largest employer in the world and the largest in Europe. “We employ people in other clinical areas, such as health care. We employ IT managers, engineers, architects,” she said, adding that the health service is no longer seen as a “second choice” career. “People recognise that they can give something back to the community, but still develop a worthwhile career.”<br>D. Sarah Churchman, director of student recruitment and diversity at PwC, said her company’s success is down to a good campus presence, its commitment to invest in its employees and, with offices around the world, the chance to travel, something which just under half of the students polled said was an important factor when it came to looking for work. One of the big four accountancy firms, PwC is not into gimmicks, and it does not offer freebies but, said Churchman, it does offer “a solid foundation” for anyone wanting a career in business. “We sell our people skills, so we are interested in building skills. We’re not selling something, we invest in our people,” she added.<br> E. Further down the rankings, but still with reason to celebrate, was John Lewis, which matched bumper sales this year with a leap from 111th place in 2005 to 26th among this year’s humanities students. Sky found itself in 12th place, up from 104th last year, and the Environment Agency also proved popular among this student group, rising from 138th in 2005 to 7th this year. Among the business fraternity, shell saw a reversal of fortunes, rising to 30th place after last year’s 76thposition. There were a few dramatic drops in the rankings. The Bank of England fell from 14th in 2005 to 27th this year among humanities students, although it retained its mid-table position among those studying business. British Airways also saw a slight dip, as did McKinsey & Co, which dropped from 11th to 22ndamong business undergraduates.<br>F. Perhaps more surprisingly, this year was the first appearance in the rankings of Teach First, a small charity launched three years ago that aims to create the “leaders of the future” by encouraging top graduates who would not normally consider a career in teaching to commit to work in “challenging” secondary schools for at least two years. The organisation came straight in at number eight among humanities students and was voted 22nd by those studying engineering, science, and IT. James Darley, director of graduate recruitment at Teach First, said he was “bowled over” by the news. “We were not expecting this. We’re a registered charity, only able to physically go to 15 universities.”<br>G. The scheme, based on one run in the US, has the backing of more than 80 businesses, including Deloitte and HSBC. During their two years, candidates undertake leadership training and emerge from the programme with a range of skills and experiences. “We hope in the long term they will be our ambassadors, as we call them, in politics, industry, charities, who will have done it and continue to support the educationally disadvantaged,” adds Darley. This year, 260 graduates are expected to take up the Teach First challenge in schools in London and Manchester, More are expected over the coming years, as the scheme expands to Birmingham and three other cities by 2008. Of the first set of recruits to complete the programme, half have gone on to work for “some amazing companies”, while the other half have chosen to stay on in their schools for a further year - 20% in leadership roles.<br>H. While more than half of students were concerned about achieving a good work life balance, a third said they wanted a job that would challenge them. Although male Students tended to focus more on the practical aspects of work, such as “building a sound financial base”, women, particularly those studying for humanities degrees, had a more idealistic outlook, saying making a contribution to society was a key career goal. Almost half of all students said that paid overtime was a key part of any company compensation package, However, business students said that the most important compensation, apart from salary, was performance-related bonuses, while important considerations for humanities students were retirement plans. Working overseas also scored highly among those surveyed this year, with 45% of business students, and 44% of humanities students, listing it as a priority. Ethical considerations and corporate social responsibilities were also mentioned, with a large percentage of humanities and engineering, science and IT students saying it was a key consideration when it came to choosing an employer.</p>\n', NULL, '2025-08-16 06:22:37', '2025-08-16 06:22:37'),
 (7, 2, 'Part 3', '<p>\n    You should spend about 20 minutes on Questions 27 - 40, which are based on\n    Reading Passage 3 below.\n</p>\n<img\n    style=\"width: 100%; height: 300px\"\n    src=\"{{asset(\'adminMock/2/T2S3_0.jpg\')}}\"\n    alt=\"image\"\n/>\n\n<h5>Rise of the Robots</h5>\n<p>\n    If you are into technology, you are living in wonderful times. Things are\n    developing in leaps and bounds, especially gadgets. Let us look at the\n    technology that is set to break through.\n</p>\n\n<h6>CELESTRON SKYSCOUT</h6>\n<p>\n    Backyard stargazing goes seriously hi-tech with the Celestron SkyScout,\n    which was judged to be the Best of Innovations at the New York Consumer\n    Electronics Show press preview event in November. It is not difficult to see\n    why. The SkyScout is a hand-held viewing device that is capable of finding\n    and identifying more than 6,000 celestial objects visible to the naked eye,\n    thus transforming the night sky into your own personal planetarium. Using\n    GPS technology and a substantial celestial database, the camcorder-sized\n    SkyScout enables stargazers to point the device at any visible object in the\n    sky, press a button, and then listen to a commentary. For the truly\n    celestially challenged, if you want to view a star or planet but do not have\n    a clue which bit of the heavens to look in, do not despair; the SkyScout’s\n    \"locate” feature will guide you to it using illuminated arrows in the\n    viewfinder.\n</p>\n\n<h6>NOKIA N91</h6>\n<p>\n    This amazing mobile jukebox is due out early in 2006. Nokia’s N91 looks set\n    to be in a class of its own as a multimedia mobile phone. It will play\n    music, take photos, surf the web and download videos, store contact details,\n    and generally organise your life. The robust little phone, resplendent in\n    its stainless steel case, is the first Nokia to be equipped with a hard\n    drive (4Gb), which means that it can store up to 3,000 songs. The N91, which\n    has a hi-fi quality headset and remote control, supports a wide range of\n    digital music formats, including MP3, Real, WAV, and WMA. It uses wireless\n    technology to allow users to find and buy music from the operator’s music\n    store. You can also drag and drop music from your PC to the N91 and manage\n    and share playlists. If you can find the time, you can get on the blower,\n    too.\n</p>\n\n<h6>SEIKO SPECTRUM E-PAPER WATCH</h6>\n<p>\n    The Seiko Spectrum is no ordinary wristwatch. At first glance, it is an\n    attractive and futuristic bracelet-style watch. Look closer, however, and\n    you will notice that its display is unlike any you have seen before. Rather\n    than the usual LCD screen, the display is made of “e-paper” - from the\n    electronic paper pioneers E Ink Corp - and shows a constantly changing\n    mosaic pattern along with the time. Because e-paper is so flexible and thin,\n    it allows the display to curve round the wrist along with the watch band -\n    something conventional liquid-crystal displays cannot do, as they have to be\n    flat. Seiko says the e-paper display not only produces far better contrast\n    than an LCD screen, but requires no power to retain an image, so the\n    batteries last longer. Seiko is releasing only 500 of the watches next\n    month, priced at about £1,250 - so you\'d better lose no time.\n</p>\n\n<h6>HIGH-DEFINITION TV</h6>\n<p>\n    HDTV, already available in the United States, Japan, and Australia, will hit\n    the UK in 2006. When you watch a programme filmed in the HD format, you will\n    see a much sharper, clearer and more vibrant image. This is due partly to\n    the way a programme is filmed, but also to the high-definition TV set\n    itself, which uses either 720 or 1,080 visible rows of pixels (depending on\n    which format the individual HDTV uses) to display images, compared to the\n    576 rows of pixels used in current sets.\n</p>\n\n<h6>ELECTROLUX TRILOBITE 2.0 ROBOT VACUUM CLEANER</h6>\n<p>\n    Next time you are expecting visitors, do not bother to vacuum first - wait\n    until they arrive, and then entertain them with this little gadget. The\n    Electrolux Trilobite 2.0 is a robotic vacuum cleaner that navigates its way\n    around your floors using ultrasound, just like a bat. It pings out\n    ultrasound vibrations at surfaces to create a map of the room, which it\n    remembers for future cleaning assignments. The Trilobite has no problem\n    avoiding collision with things placed on the floor. Special magnetic strips\n    are placed in doorways, near stairs and other openings. These act as a wall,\n    keeping the Trilobite in the room. You can also programme it to glide round\n    when you’re at work or after you\'ve gone to bed. When Electrolux introduced\n    the original Trilobite in 2001, it was voted among the 100 most innovative\n    designs (though whether the judges were dedicated couch potatoes, and thus\n    biased, we were not aide to discover). The name comes from the hard-shelled\n    sea creature from the Paleozoic era (between 250 million and 560 million\n    years ago) that roamed the ocean floor feeding on particles and small\n    animals.\n</p>\n\n<h6>HONDA ASIMO ROBOT</h6>\n<p>\n    Need an extra pair of hands around the office? Look no further; this mouth,\n    the Honda Motor Company showcased its second-generation humanoid robot,\n    Asimo. The machine has come a long way since its first incarnation five\n    years ago. The 1.3 metre-tall droid is now capable of performing a variety\n    of office tasks, including reception duties, serving drinks and acting as an\n    information guide, as well as making deliveries. Using multiple sensors,\n    Asimo has the ability to recognise the surrounding environment and interact\n    with people using integrated circuit tags. It can walk and run at a fair\n    pace, and push a cart. Honda plans to start using Asimo’s receptionist\n    functions at its Wako Building in Japan early in 2006, and it is hoped it\n    will become available for leasing afterwards. It could soon be pushing a\n    cart at an office near you.\n</p>\n', NULL, '2025-08-16 06:22:37', '2025-08-16 06:22:37'),
 (8, 3, 'Part 1', 'Part 1', NULL, '2025-08-16 06:22:37', '2025-08-16 06:22:37'),
 (9, 3, 'Part 2', 'Part 2', NULL, '2025-08-16 06:22:37', '2025-08-16 06:22:37');
@@ -1500,9 +1469,6 @@ CREATE TABLE `question_options` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `question_id` bigint(20) UNSIGNED NOT NULL,
   `text` varchar(255) DEFAULT NULL,
-  `row_index` int(11) DEFAULT NULL,
-  `col_index` int(11) DEFAULT NULL,
-  `is_correct` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1511,40 +1477,57 @@ CREATE TABLE `question_options` (
 -- Dumping data for table `question_options`
 --
 
-INSERT INTO `question_options` (`id`, `question_id`, `text`, `row_index`, `col_index`, `is_correct`, `created_at`, `updated_at`) VALUES
-(1, 43, 'she doesn’t have enough information', NULL, NULL, 0, '2025-08-16 10:06:02', '2025-08-16 10:06:02'),
-(2, 43, 'she can’t organise her presentation', NULL, NULL, 0, '2025-08-16 10:06:02', '2025-08-16 10:06:02'),
-(3, 43, 'she doesn’t have enough time', NULL, NULL, 1, '2025-08-16 10:06:02', '2025-08-16 10:06:02'),
-(4, 44, 'solar power in America', NULL, NULL, 0, '2025-08-16 10:06:02', '2025-08-16 10:06:02'),
-(5, 44, 'solar-powered water heaters', NULL, NULL, 1, '2025-08-16 10:06:02', '2025-08-16 10:06:02'),
-(6, 44, 'alternative energy technology', NULL, NULL, 0, '2025-08-16 10:06:02', '2025-08-16 10:06:02'),
-(7, 45, 'Fossil fuels are expensive', NULL, NULL, 0, '2025-08-16 10:06:02', '2025-08-16 10:06:02'),
-(8, 45, 'Fossil fuels have an impact on the environment', NULL, NULL, 0, '2025-08-16 10:06:02', '2025-08-16 10:06:02'),
-(9, 45, 'Fossil fuels are limited', NULL, NULL, 1, '2025-08-16 10:06:02', '2025-08-16 10:06:02'),
-(10, 46, 'it can be harnessed with simple technology', NULL, NULL, 1, '2025-08-16 10:06:02', '2025-08-16 10:06:02'),
-(11, 46, 'it is infinite', NULL, NULL, 0, '2025-08-16 10:06:02', '2025-08-16 10:06:02'),
-(12, 46, 'it can be applied equally well in any country', NULL, NULL, 0, '2025-08-16 10:06:02', '2025-08-16 10:06:02'),
-(13, 47, 'A', NULL, NULL, 0, '2025-08-16 10:06:02', '2025-08-16 10:06:02'),
-(14, 47, 'B', NULL, NULL, 1, '2025-08-16 10:06:02', '2025-08-16 10:06:02'),
-(15, 47, 'C', NULL, NULL, 0, '2025-08-16 10:06:02', '2025-08-16 10:06:02'),
-(16, 88, 'from all British universities', NULL, NULL, 0, '2025-08-16 11:49:56', '2025-08-16 11:49:56'),
-(17, 88, 'studying a variety of subjects', NULL, NULL, 0, '2025-08-16 11:49:56', '2025-08-16 11:49:56'),
-(18, 88, 'who were in their last year of studies only', NULL, NULL, 0, '2025-08-16 11:49:56', '2025-08-16 11:49:56'),
-(19, 89, 'was first choice in most categories', NULL, NULL, 0, '2025-08-16 11:49:56', '2025-08-16 11:49:56'),
-(20, 89, 'was unpopular with business students', NULL, NULL, 0, '2025-08-16 11:49:56', '2025-08-16 11:49:56'),
-(21, 89, 'employs more graduates than most other organisations and companies', NULL, NULL, 0, '2025-08-16 11:49:56', '2025-08-16 11:49:56'),
-(22, 91, 'tell you information about the stars', NULL, NULL, 0, '2025-08-16 11:59:01', '2025-08-16 11:59:01'),
-(23, 91, 'tell you where in the world you are', NULL, NULL, 0, '2025-08-16 11:59:01', '2025-08-16 11:59:01'),
-(24, 91, 'find objects in the sky that are not normally visible', NULL, NULL, 0, '2025-08-16 11:59:01', '2025-08-16 11:59:01'),
-(25, 92, 'cannot be bent', NULL, NULL, 0, '2025-08-16 11:59:01', '2025-08-16 11:59:01'),
-(26, 92, 'can be used for surfing the Internet', NULL, NULL, 0, '2025-08-16 11:59:01', '2025-08-16 11:59:01'),
-(27, 92, 'is being produced as a limited edition', NULL, NULL, 0, '2025-08-16 11:59:01', '2025-08-16 11:59:01'),
-(28, 93, 'asks permission before moving from room to room', NULL, NULL, 0, '2025-08-16 11:59:01', '2025-08-16 11:59:01'),
-(29, 93, 'uses lasers to help it avoid objects', NULL, NULL, 0, '2025-08-16 11:59:01', '2025-08-16 11:59:01'),
-(30, 93, 'is programmable', NULL, NULL, 0, '2025-08-16 11:59:01', '2025-08-16 11:59:01'),
-(31, 94, 'has two pairs of hands', NULL, NULL, 0, '2025-08-16 11:59:01', '2025-08-16 11:59:01'),
-(32, 94, 'uses lasers to help it recognise its surroundings', NULL, NULL, 0, '2025-08-16 11:59:01', '2025-08-16 11:59:01'),
-(33, 94, 'can run', NULL, NULL, 0, '2025-08-16 11:59:01', '2025-08-16 11:59:01');
+INSERT INTO `question_options` (`id`, `question_id`, `text`, `created_at`, `updated_at`) VALUES
+(34, 26, 'A big family with many young children', '2025-08-21 12:56:19', '2025-08-21 12:56:19'),
+(35, 26, 'A family without smoker or drinkers', '2025-08-21 12:56:19', '2025-08-21 12:56:19'),
+(36, 26, 'A family without any pets', '2025-08-21 12:56:19', '2025-08-21 12:56:19'),
+(37, 26, 'A family with many animals or pets', '2025-08-21 12:56:19', '2025-08-21 12:56:19'),
+(38, 59, 'Books', '2025-08-23 06:00:23', '2025-08-23 06:00:23'),
+(39, 59, 'Study materials', '2025-08-23 06:00:23', '2025-08-23 06:00:23'),
+(40, 59, 'Foods', '2025-08-23 06:00:23', '2025-08-23 06:00:23'),
+(41, 59, 'Trousers', '2025-08-23 06:00:23', '2025-08-23 06:00:23'),
+(42, 59, 'Shoes', '2025-08-23 06:00:23', '2025-08-23 06:00:23'),
+(43, 59, 'Sportswear', '2025-08-23 06:00:23', '2025-08-23 06:00:23'),
+(44, 61, 'Personal consultation sessions', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
+(45, 61, 'Extra materials, such as a booklist.', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
+(46, 61, 'Mid-term examination', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
+(47, 61, 'Free glasses', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
+(48, 62, 'reduce your stress.', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
+(49, 62, 'plan for every hour of the week.', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
+(50, 62, 'own a good watch', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
+(51, 62, 'set goals and try to achieve these goals.', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
+(52, 63, 'set goals and work in a systematic way.', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
+(53, 63, 'work faster', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
+(54, 63, 'set an overview of your assignment', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
+(55, 63, 'make a list, plan for everything and try to stick to this plan', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
+(56, 64, 'team projects', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
+(57, 64, 'final term examinations', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
+(58, 64, 'essays', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
+(59, 64, 'time management courses', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
+(60, 65, 'library books go missing.', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
+(61, 65, 'students get angry for no reason.', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
+(62, 65, 'lower class attendance rates.', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
+(63, 65, 'trouble at the library', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
+(64, 66, 'Making a very detailed plan of their daily activities.', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
+(65, 66, 'Not being so stressed just because there is an assignment.', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
+(66, 66, 'A regular one-hour session in their personal timetablesker', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
+(67, 66, 'Wearing comfortable shoes', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
+(68, 67, 'one weekly planner, one daily planner and one hour planner', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
+(69, 67, 'one yearly planner, one weekly planner and one daily planner', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
+(70, 67, 'one term planner, one monthly planner and one weekly planner', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
+(71, 67, 'one term planner, one weekly and one daily planner.', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
+(72, 68, 'one week.', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
+(73, 68, 'half a week', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
+(74, 68, 'one month', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
+(75, 68, 'one term.', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
+(76, 69, 'the detailed planning.', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
+(77, 69, 'how to plan all available time.', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
+(78, 69, 'TV schedules', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
+(79, 69, 'an overview of everything you need to do for several days', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
+(80, 70, 'having more time to spend on relaxation and other activities', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
+(81, 70, 'improving your performance in the final term assignment.', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
+(82, 70, 'helping you write better essays', '2025-08-23 06:18:32', '2025-08-23 06:18:32'),
+(83, 70, 'improving your memory.', '2025-08-23 06:18:32', '2025-08-23 06:18:32');
 
 -- --------------------------------------------------------
 
@@ -1963,15 +1946,9 @@ CREATE TABLE `test_users` (
 --
 
 INSERT INTO `test_users` (`id`, `mock_test_id`, `name`, `phone`, `email`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Sybil Aguilar', '+1 (681) 683-4694', 'misuvi@mailinator.com', '2025-08-16 00:07:41', '2025-08-16 00:07:41'),
-(2, 1, 'Danielle Fitzgerald', '+1 (813) 636-2194', 'vuzovodoha@mailinator.com', '2025-08-16 04:56:03', '2025-08-16 04:56:03'),
-(3, 1, 'Lysandra Gardner', '+1 (154) 213-7276', 'liwetyxuf@mailinator.com', '2025-08-16 04:59:29', '2025-08-16 04:59:29'),
-(4, 1, 'Camilla Bender', '+1 (545) 121-5556', 'pore@mailinator.com', '2025-08-17 22:06:51', '2025-08-17 22:06:51'),
-(5, 1, 'Amity Hardin', '+1 (302) 414-2304', 'hysomudoma@mailinator.com', '2025-08-19 03:52:12', '2025-08-19 03:52:12'),
-(6, 1, 'Bruce Chaney', '+1 (222) 389-4438', 'wara@mailinator.com', '2025-08-20 01:10:32', '2025-08-20 01:10:32'),
-(7, 1, 'Alexa Michael', '+1 (163) 913-7869', 'hupixa@mailinator.com', '2025-08-20 04:09:37', '2025-08-20 04:09:37'),
-(8, 1, 'Mark Bowman', '+1 (827) 455-6948', 'cynekol@mailinator.com', '2025-08-20 05:13:30', '2025-08-20 05:13:30'),
-(9, 1, 'Mark Bowman', '+1 (827) 455-6948', 'cynekol@mailinator.com', '2025-08-20 05:17:22', '2025-08-20 05:17:22');
+(1, 1, 'Malik Vaughan', '+1 (704) 522-1956', 'zytydapedo@mailinator.com', '2025-08-21 03:17:45', '2025-08-21 03:17:45'),
+(2, 1, 'Malik Vaughan', '+1 (704) 522-1956', 'zytydapedo@mailinator.com', '2025-08-21 03:37:10', '2025-08-21 03:37:10'),
+(3, 1, 'Meredith Burks', '+1 (565) 932-5405', 'tujizu@mailinator.com', '2025-08-22 22:38:47', '2025-08-22 22:38:47');
 
 -- --------------------------------------------------------
 
@@ -2064,7 +2041,8 @@ INSERT INTO `users` (`id`, `name`, `mobile`, `education`, `institution`, `email`
 (9, 'Arman', NULL, NULL, NULL, 'arman.bae.innovation@gmail.com', 'Admin', NULL, '$2y$12$P1G0NX1nKGCboGQlz65vCurtEu8ExsNyVyTjMFmi9YF1iKGEVAQvq', '0YAt6UCqeYMY5f7uzoihtHtarmJcBjVISa0CStRCqNKuMxgbZ1X8H3BktuHd', '2025-04-20 17:46:48', '2025-08-14 04:19:46'),
 (10, 'Rakib', NULL, NULL, NULL, 'islamrakib635@gmail.com', 'Admin', NULL, '$2y$12$7D62BsJfT9oCI5SdU96tc.jpDAOWTTHOITf8Trrx62edKBed2zKS6', NULL, '2025-04-26 08:44:39', '2025-04-26 08:45:32'),
 (11, 'Shakib hossain Shovon', NULL, NULL, NULL, 'skbshvn@gmail.com', 'Admin', NULL, '$2y$12$KIQ2patIfQETZXHHrkRRCuXMoM9V8.YmRGQCcRAcPGaCLFjzASP8G', NULL, '2025-07-19 05:31:00', '2025-07-19 05:31:11'),
-(12, 'Lexicon Admin', NULL, NULL, NULL, 'lexiconeltc@gmail.com', 'Admin', NULL, '$2y$12$YlL2ia2n.K.DIViM555YPuY8NkObkDEX34455N8UPKO2lxGsSfxWm', NULL, '2025-07-19 06:35:29', '2025-07-19 06:35:58');
+(12, 'Lexicon Admin', NULL, NULL, NULL, 'lexiconeltc@gmail.com', 'Admin', NULL, '$2y$12$YlL2ia2n.K.DIViM555YPuY8NkObkDEX34455N8UPKO2lxGsSfxWm', NULL, '2025-07-19 06:35:29', '2025-07-19 06:35:58'),
+(13, 'labib', NULL, NULL, NULL, 'nandoniklabib@gmail.com', 'User', NULL, '$2y$12$XYIbQKWLOJcl19F1nF2UK.zD12hl9MYOQOEOWZPl/JJXA0VXcDcRm', NULL, '2025-08-21 01:56:56', '2025-08-21 01:56:56');
 
 -- --------------------------------------------------------
 
@@ -2084,69 +2062,6 @@ CREATE TABLE `user_answers` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `user_answers`
---
-
-INSERT INTO `user_answers` (`id`, `test_user_id`, `mock_test_id`, `section_id`, `question_id`, `option_id`, `question_no`, `answer_text`, `created_at`, `updated_at`) VALUES
-(137, 9, 1, 1, 2, NULL, 1, 'Quia architecto labo', '2025-08-20 05:18:29', '2025-08-20 05:18:29'),
-(138, 9, 1, 1, 3, NULL, 2, 'Ullamco odio eos qu', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
-(139, 9, 1, 1, 4, NULL, 3, 'Ea pariatur Asperna', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
-(140, 9, 1, 1, 5, NULL, 4, 'Ut exercitation quam', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
-(141, 9, 1, 1, 8, NULL, 5, 'Quo fugit omnis non', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
-(142, 9, 1, 1, 9, NULL, 6, 'Ratione necessitatib', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
-(143, 9, 1, 1, 10, NULL, 7, 'Eiusmod nesciunt de', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
-(144, 9, 1, 1, 11, NULL, 8, 'Veniam pariatur Cu', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
-(145, 9, 1, 1, 12, NULL, 9, 'Eum fugiat eveniet', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
-(146, 9, 1, 1, 13, NULL, 10, 'Laborum dignissimos', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
-(147, 9, 1, 1, 38, NULL, 16, 'Voluptatem consequa', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
-(148, 9, 1, 1, 39, NULL, 17, 'Consequat Laboris q', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
-(149, 9, 1, 1, 40, NULL, 18, 'Et voluptatem porro', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
-(150, 9, 1, 1, 41, NULL, 19, 'Consequat Autem ten', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
-(151, 9, 1, 1, 42, NULL, 20, 'Debitis itaque facil', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
-(152, 9, 1, 1, 43, 2, 21, NULL, '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
-(153, 9, 1, 1, 44, 5, 22, NULL, '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
-(154, 9, 1, 1, 45, 9, 23, NULL, '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
-(155, 9, 1, 1, 46, 10, 24, NULL, '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
-(156, 9, 1, 1, 47, 14, 25, NULL, '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
-(157, 9, 1, 1, 49, NULL, 26, 'Vel laborum ut quo q', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
-(158, 9, 1, 1, 50, NULL, 27, 'Blanditiis deserunt', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
-(159, 9, 1, 1, 51, NULL, 28, 'Voluptates voluptate', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
-(160, 9, 1, 1, 52, NULL, 29, 'Laborum Perferendis', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
-(161, 9, 1, 1, 53, NULL, 30, 'Et aut earum labore', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
-(162, 9, 1, 1, 54, NULL, 31, 'Consequatur eaque su', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
-(163, 9, 1, 1, 55, NULL, 32, 'Rerum et eos exercit', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
-(164, 9, 1, 1, 56, NULL, 33, 'Iste minus libero qu', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
-(165, 9, 1, 1, 57, NULL, 34, 'Alias reprehenderit', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
-(166, 9, 1, 1, 58, NULL, 35, 'Quasi dignissimos Na', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
-(167, 9, 1, 1, 59, NULL, 37, 'Consequat Eius dolo', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
-(168, 9, 1, 1, 60, NULL, 38, 'Voluptate ea dolorem', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
-(169, 9, 1, 1, 61, NULL, 39, 'Praesentium maiores', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
-(170, 9, 1, 1, 62, NULL, 40, 'Dolorum magnam optio', '2025-08-20 05:18:30', '2025-08-20 05:18:30'),
-(171, 9, 1, 2, 65, NULL, 1, 'E', '2025-08-20 05:33:47', '2025-08-20 05:33:47'),
-(172, 9, 1, 2, 66, NULL, 2, 'D', '2025-08-20 05:33:48', '2025-08-20 05:33:48'),
-(173, 9, 1, 2, 67, NULL, 3, 'A', '2025-08-20 05:33:48', '2025-08-20 05:33:48'),
-(174, 9, 1, 2, 68, NULL, 4, 'E', '2025-08-20 05:33:48', '2025-08-20 05:33:48'),
-(175, 9, 1, 2, 70, NULL, 5, 'Quis excepteur ut bl', '2025-08-20 05:33:48', '2025-08-20 05:33:48'),
-(176, 9, 1, 2, 71, NULL, 6, 'Optio qui distincti', '2025-08-20 05:33:48', '2025-08-20 05:33:48'),
-(177, 9, 1, 2, 72, NULL, 7, 'Nihil non consequatu', '2025-08-20 05:33:48', '2025-08-20 05:33:48'),
-(178, 9, 1, 2, 73, NULL, 8, 'Consequat Quia faci', '2025-08-20 05:33:48', '2025-08-20 05:33:48'),
-(179, 9, 1, 2, 83, NULL, 14, 'A', '2025-08-20 05:33:48', '2025-08-20 05:33:48'),
-(180, 9, 1, 2, 84, NULL, 15, 'G', '2025-08-20 05:33:48', '2025-08-20 05:33:48'),
-(181, 9, 1, 2, 85, NULL, 16, 'G', '2025-08-20 05:33:48', '2025-08-20 05:33:48'),
-(182, 9, 1, 2, 86, NULL, 17, 'B', '2025-08-20 05:33:48', '2025-08-20 05:33:48'),
-(183, 9, 1, 2, 88, 17, 23, NULL, '2025-08-20 05:33:48', '2025-08-20 05:33:48'),
-(184, 9, 1, 2, 89, 19, 24, NULL, '2025-08-20 05:33:48', '2025-08-20 05:33:48'),
-(185, 9, 1, 2, 91, 22, 27, NULL, '2025-08-20 05:33:48', '2025-08-20 05:33:48'),
-(186, 9, 1, 2, 92, 27, 28, NULL, '2025-08-20 05:33:48', '2025-08-20 05:33:48'),
-(187, 9, 1, 2, 93, 28, 29, NULL, '2025-08-20 05:33:48', '2025-08-20 05:33:48'),
-(188, 9, 1, 2, 94, 31, 30, NULL, '2025-08-20 05:33:48', '2025-08-20 05:33:48'),
-(189, 9, 1, 2, 96, NULL, 31, 'Hic suscipit officii', '2025-08-20 05:33:48', '2025-08-20 05:33:48'),
-(190, 9, 1, 2, 97, NULL, 32, 'Id et temporibus vol', '2025-08-20 05:33:48', '2025-08-20 05:33:48'),
-(191, 9, 1, 2, 98, NULL, 33, 'In ut voluptas vero', '2025-08-20 05:33:48', '2025-08-20 05:33:48'),
-(192, 9, 1, 2, 99, NULL, 34, 'Magni laborum blandi', '2025-08-20 05:33:48', '2025-08-20 05:33:48'),
-(193, 9, 1, 2, 100, NULL, 35, 'Eum quia consequatur', '2025-08-20 05:33:48', '2025-08-20 05:33:48');
 
 -- --------------------------------------------------------
 
@@ -2676,7 +2591,7 @@ ALTER TABLE `mocktest_students`
 -- AUTO_INCREMENT for table `mock_tests`
 --
 ALTER TABLE `mock_tests`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `notices`
@@ -2706,7 +2621,7 @@ ALTER TABLE `placements`
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT for table `question_answers`
@@ -2724,7 +2639,7 @@ ALTER TABLE `question_groups`
 -- AUTO_INCREMENT for table `question_options`
 --
 ALTER TABLE `question_options`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT for table `scorers`
@@ -2778,7 +2693,7 @@ ALTER TABLE `test_readings`
 -- AUTO_INCREMENT for table `test_users`
 --
 ALTER TABLE `test_users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `test_writings`
@@ -2796,13 +2711,13 @@ ALTER TABLE `trainers`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `user_answers`
 --
 ALTER TABLE `user_answers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=194;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=256;
 
 --
 -- AUTO_INCREMENT for table `websites`
