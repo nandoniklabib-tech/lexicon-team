@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>123 LEXICON - IELTS - Listening</title>
+    <title>LEXICON - IELTS - Listening</title>
 
     <!-- favicon -->
     <link rel="shortcut icon" href="" type="image/x-icon">
@@ -279,11 +279,22 @@
                             @foreach ($mockTest->sections as $section)
                                 @if ($section->name === 'Listening')
                                     @foreach ($section->questionGroups as $index => $group)
-                                        <li class="nav-item">
+                                        <li class="nav-item d-flex align-items-center justify-content-center gap-1">
                                             <button type="button" class="nav-link {{ $firstTab ? 'active' : '' }}"
                                                 data-bs-toggle="pill" data-bs-target="#part{{ $index + 1 }}">
                                                 Part {{ $index + 1 }}
                                             </button>
+                                            <div class="d-flex align-items-center justify-content-center gap-1">
+                                                @foreach ($group->questions as $question)
+                                                @if(!empty($question->question_no) && $question->question_group_id===$index+1)
+                                                <a href="#q{{ $loop->iteration }}" 
+                                                class="btn btn-outline-sidebtn mb-0 question-nav"
+                                                data-question="answer{{ $loop->iteration }}">
+                                                {{ $question->question_no }}
+                                                </a>
+                                                @endif
+                                                @endforeach
+                                            </div>
                                         </li>
                                         @php $firstTab = false; @endphp
                                     @endforeach
