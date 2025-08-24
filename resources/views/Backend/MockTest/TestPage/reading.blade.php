@@ -188,14 +188,15 @@
                                                                     @endforeach
                                                                 </select>
                                                             @elseif ($question->type === 'select')
-                                                                Q{{ $question->question_no }}: {!! $question->text !!}
+                                                                Q{{ $question->question_no }} 
                                                                 <select name="answers[{{ $question->id }}]" class="form-select"
-                                                                    style="width: 60px; height:50px; display: inline">
+                                                                    style="width: 120px; height:50px; display: inline">
                                                                     <option value="">-- Choose --</option>
                                                                     @foreach ($question->meta_data['options'] ?? [] as $option)
                                                                         <option value="{{ $option }}">{{ $option }}</option>
                                                                     @endforeach
                                                                 </select>
+                                                                {!! $question->text !!}
                                                             @elseif ($question->type === 'checkbox')
                                                                 Q{{ $question->question_no }}: {!! $question->text !!}
                                                                 @foreach ($question->options as $option)
