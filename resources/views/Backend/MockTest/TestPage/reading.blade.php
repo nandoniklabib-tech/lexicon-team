@@ -58,7 +58,7 @@
     </div>
 
     <!-- Start Modal -->
-    <div class="modal fade" id="startModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    {{-- <div class="modal fade" id="startModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm modal-dialog-centered">
             <div class="modal-content rounded-pill py-2">
@@ -68,7 +68,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <div class="prev-next-div">
         <a class="up-btn" href="#" id="upBtn">
@@ -257,12 +257,17 @@
                                                                                             @endforeach
 
                                                                                             {{-- Fill in The Blanks --}}
-                                                                                            @elseif($question->type === 'fill_blank' && empty($question->meta_data['row']))
+                                                                                        @elseif($question->type === 'fill_blank' && empty($question->meta_data['row']))
                                                                                             <p class="">
                                                                                                 Q{{ $question->question_no }}
                                                                                                 :
-                                                                                                {!! str_replace('___','<input type="text" name="answers[' .
-                                                                                                        $question->id .']" class="form-control d-inline mx-1" style="width:150px;"placeholder="Q ' . $question->question_no . ' ">',
+                                                                                                {!! str_replace(
+                                                                                                    '___',
+                                                                                                    '<input type="text" name="answers[' .
+                                                                                                        $question->id .
+                                                                                                        ']" class="form-control d-inline mx-1" style="width:150px;"placeholder="Q ' .
+                                                                                                        $question->question_no .
+                                                                                                        ' ">',
                                                                                                     $question->text,
                                                                                                 ) !!}
                                                                                             </p>
@@ -380,6 +385,7 @@
                                             <button type="button" class="nav-link {{ $firstTab ? 'active' : '' }}"
                                                 data-bs-toggle="pill" data-bs-target="#part{{ $index + 1 }}">
                                                 Part {{ $index + 1 }}
+                                                
                                             </button>
                                         </li>
                                         @php $firstTab = false; @endphp
