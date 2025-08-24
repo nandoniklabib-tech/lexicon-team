@@ -189,7 +189,8 @@
                                                                 </select>
                                                             @elseif ($question->type === 'select')
                                                                 Q{{ $question->question_no }}: {!! $question->text !!}
-                                                                <select name="answers[{{ $question->id }}]" class="form-select w-50">
+                                                                <select name="answers[{{ $question->id }}]" class="form-select"
+                                                                    style="width: 60px; height:50px; display: inline">
                                                                     <option value="">-- Choose --</option>
                                                                     @foreach ($question->meta_data['options'] ?? [] as $option)
                                                                         <option value="{{ $option }}">{{ $option }}</option>
