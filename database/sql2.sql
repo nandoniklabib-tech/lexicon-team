@@ -40,33 +40,9 @@ VALUES
 (6, 'Join a club', 'select', 20, 16, '{"options":["A","B","C","D","E","F","G"]}', NOW(), NOW()),
 (6, 'Use public transport', 'select', 21, 17, '{"options":["A","B","C","D","E","F","G"]}', NOW(), NOW());
 
-
-Questions 18-22
-According to the text, FIVE of the following statements are true.
-
-Write the corresponding letters in answer boxes 18 to 22 in any order.
-
-A
-
-McCarthy claims people can become addicted to using cars.
-B
-
-The cost of using a car rose by over ten per cent last year.
-C
-
-Most British people borrow money to help buy cars.
-D
-
-Many people need cars to drive in London occasionally.
-E
-
-Streetcar operates in over 20 cities in Britain.
-F
-
-Streetcar’s cars must be left at specific locations.
-G
-
-Car sharing is becoming more popular with people who live and work near each other.
-H
-
-The government wants to encourage people to go to work on foot or by bicycle.
+INSERT INTO questions (question_group_id, text, type, order_no, question_no, meta_data, created_at, updated_at)
+VALUES
+(6, '<b>Questions 18-22 </b><br>According to the text, <b> FIVE <b> of the following statements are true.', 'static', 22, NULL, NULL, NOW(), NOW());
+INSERT INTO questions (question_group_id, text, type, order_no, question_no, meta_data, created_at, updated_at)
+VALUES
+(6, 'Write the corresponding letters in answer boxes 18 to 22 in any order.', 'checkbox', 23, 18, NULL, NOW(), NOW());

@@ -115,8 +115,8 @@
         <section style="width: 100%; height: 80vh;">
             <div class="container-fluid h-100">
                 <div class="row h-100">
-                    <div class="col-12 h-100">
-                        <div class="tab-content h-100" id="partTabsContent">
+                    <div class="col-12 h-100 d-flex flex-column">
+                         <div class="tab-content h-100 flex-grow-1"id="partTabsContent" > 
                             @foreach($mockTest->sections->firstWhere('name', 'Reading')->questionGroups as $index => $group)
                                 <div class="tab-pane fade {{ $index === 0 ? 'show active' : '' }}" 
                                     id="content-{{ $index+1 }}" 
@@ -293,7 +293,7 @@
         </section>
     </form>
 
-    <!-- bootstrap js -->
+    {{-- <!-- bootstrap js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
@@ -366,7 +366,7 @@
                 'Loading... <span class="spinner-border spinner-border-sm ms-2" role="status" aria-hidden="true"></span>';
         });
     </script>
-    <!-- after submit end -->
+    <!-- after submit end --> --}}
 
 </body>
 
