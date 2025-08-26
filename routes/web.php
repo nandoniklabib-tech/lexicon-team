@@ -94,7 +94,7 @@ Auth::routes();
 Route::middleware(['auth','user-access:Admin'])->group(function(){
 
   // mock test start -------------
-  Route::get('admin/mocktests', [AdminMocktestController::class, 'mocktests']);
+  Route::get('admin/mocktests', [AdminMocktestController::class, 'mocktests'])->name('admin.mocktests');
   Route::get('admin/mocktests/{mockTest}/user-info', [AdminMocktestController::class, 'userInfoShow'])->name('userInfoShow');
   Route::post('admin/mocktests/{mockTest}/user-info', [AdminMocktestController::class, 'userInfoSave'])->name('userInfoSave');
 
@@ -104,6 +104,10 @@ Route::middleware(['auth','user-access:Admin'])->group(function(){
 
   Route::get('admin/reading/{mockTest}',[AdminMocktestController::class, 'showReadingQuestion'])->name('admin.reading.show');
   Route::post('admin/reading/{mockTest}',[AdminMocktestController::class, 'storeReadingQuestion'])->name('admin.reading.store');
+  Route::get('admin/reading/result/{mockTest}',[AdminMocktestController::class, 'showReadingResult'])->name('admin.reading.result.show');
+
+  Route::get('admin/writing/{mockTest}',[AdminMocktestController::class, 'showWritingQuestion'])->name('admin.writing.show');
+  Route::post('admin/writing/{mockTest}',[AdminMocktestController::class, 'storeWritingQuestion'])->name('admin.writing.store');
 
    });
 
