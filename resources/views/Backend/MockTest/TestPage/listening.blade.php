@@ -60,7 +60,7 @@
     <audio id="testAudio" src="{{ asset('adminMock/2/audio.mp3') }}"></audio>
 
     <!-- Start Modal -->
-    <div class="modal fade" id="startModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <!-- <div class="modal fade" id="startModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm modal-dialog-centered">
             <div class="modal-content rounded-pill py-2">
@@ -70,7 +70,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="prev-next-div">
         <a class="up-btn" href="#" id="upBtn">
             <i class="fa-solid fa-square-caret-left"></i>
@@ -155,7 +155,7 @@
                                                         @if (!empty($question->meta_data['image']))
                                                             <div class="text-left mb-3">
                                                                 <img src="{{ $question->meta_data['image'] }}" alt="Question Image"
-                                                                    class="img-fluid" style="max-height: 300px;">
+                                                                    class="img-fluid" style="max-height: 360px;">
                                                             </div>
                                                         @endif
                                                         @foreach ($question->options as $option)
@@ -179,13 +179,15 @@
                                                             @endforeach
                                                         </select>
                                                     @elseif ($question->type === 'select')
-                                                        Q{{ $question->question_no }}: {!! $question->text !!}
-                                                        <select name="answers[{{ $question->id }}]" class="form-select w-50">
+                                                        Q{{ $question->question_no }} 
+                                                        <select name="answers[{{ $question->id }}]" class="form-select"
+                                                            style="width: 120px; height:50px; display: inline">
                                                             <option value="">-- Choose --</option>
                                                             @foreach ($question->meta_data['options'] ?? [] as $option)
                                                                 <option value="{{ $option }}">{{ $option }}</option>
                                                             @endforeach
                                                         </select>
+                                                        {!! $question->text !!}
                                                     @elseif ($question->type === 'checkbox')
                                                         Q{{ $question->question_no }}: {!! $question->text !!}
                                                         @foreach ($question->options as $option)

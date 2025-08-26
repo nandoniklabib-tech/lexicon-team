@@ -51,3 +51,86 @@ VALUES
 INSERT INTO questions (question_group_id, text, type, order_no, question_no, meta_data, created_at, updated_at)
 VALUES
 (2, '<b>Questions 11-15</b><br>Label the map below of a typical medieval castle.<br>Write the correct letter, A-G, next to questions 11-15.', 'static', 33, NULL, NULL, NOW(), NOW());
+
+INSERT INTO questions (question_group_id, text, type, order_no, question_no, meta_data, created_at, updated_at)
+VALUES
+(2, '', 'static', 34, NULL, '{"image":"images/mockTestImage/Questions3_2_1.png"}', NOW(), NOW());
+
+INSERT INTO questions (question_group_id, text, type, order_no, question_no, meta_data, created_at, updated_at)
+VALUES
+(2, 'Chapel', 'select', 35, 11, '{"options":["A","B","C","D","E","F","G"]}', NOW(), NOW()),
+(2, 'Great Hall', 'select', 36, 12, '{"options":["A","B","C","D","E","F","G"]}', NOW(), NOW()),
+(2, 'Great Chambers', 'select', 37, 13, '{"options":["A","B","C","D","E","F","G"]}', NOW(), NOW()),
+(2, 'Bakehouse', 'select', 38, 14, '{"options":["A","B","C","D","E","F","G"]}', NOW(), NOW()),
+(2, 'Stables', 'select', 39, 15, '{"options":["A","B","C","D","E","F","G"]}', NOW(), NOW());
+
+INSERT INTO questions (question_group_id, text, type, order_no, question_no, meta_data, created_at, updated_at) VALUES (2, '<b>Questions 16-20</b><br>Choose the correct letter, A, B or C.', 'static', 40, NULL, NULL, NOW(), NOW());
+
+INSERT INTO questions (question_group_id, text, type, order_no, question_no, meta_data, created_at, updated_at)
+VALUES
+(2, 'Medieval castles', 'mcq', 41, 16, NULL, NOW(), NOW()),
+(2, 'The early medieval Keep served as', 'mcq', 42, 17, NULL, NOW(), NOW()),
+(2, 'In later medieval castles, the Keep', 'mcq', 43, 18, NULL, NOW(), NOW()),
+(2, 'Underground dungeons were built in response to', 'mcq', 44, 19, NULL, NOW(), NOW()),
+(2, 'The least effective line of defence was', 'mcq', 45, 20, NULL, NOW(), NOW());
+
+INSERT INTO question_options(question_id, text, created_at, updated_at)
+VALUES
+(41, 'A. shared a common design.', NOW(), NOW()),
+(41, 'B. were each unique.', NOW(), NOW()),
+(41, 'C. had the same methods of fortification in common.', NOW(), NOW()),
+(42, 'A. a prison and fortified tower.', NOW(), NOW()),
+(42, 'B. a fortified tower and living area.', NOW(), NOW()),
+(42, 'C. a fortified entrance to the inner castle area.', NOW(), NOW()),
+(43, 'A. evolved into a set of different buildings.', NOW(), NOW()),
+(43, 'B. was used purely for accommodation.', NOW(), NOW()),
+(43, 'C. played a less significant role in the castle`s domestic life.', NOW(), NOW()),
+(44, 'A. a shift in the medieval belief system.', NOW(), NOW()),
+(44, 'B. the Keep being no longer used for prisoners.', NOW(), NOW()),
+(44, 'C. a call for harsher treatment of prisoners.', NOW(), NOW()),
+(45, 'A. the portcullis.', NOW(), NOW()),
+(45, 'B. the drawbridge.', NOW(), NOW()),
+(45, 'C. the barbican.', NOW(), NOW());
+
+INSERT INTO questions (question_group_id, text, type, order_no, question_no, meta_data, created_at, updated_at)
+VALUES
+(3, '<b>Questions 21-25</b><br>Choose the correct letter, A, B or C.', 'static', 1, NULL, NULL, NOW(), NOW());
+
+INSERT INTO questions (question_group_id, text, type, order_no, question_no, meta_data, created_at, updated_at)
+VALUES
+(3, 'Julie and Dave thought the lecture', 'mcq', 2, 21, NULL, NOW(), NOW()),
+(3, 'Hamlet was a play', 'mcq', 3, 22, NULL, NOW(), NOW()),
+(3, 'In the time of James I', 'mcq', 4, 23, NULL, NOW(), NOW()),
+(3, 'Shakespeare introduced ghosts into plays', 'mcq', 5, 24, NULL, NOW(), NOW()),
+(3, 'Shakespeare`s audience would probably have', 'mcq', 6, 25, NULL, NOW(), NOW());
+
+INSERT INTO question_options(question_id, text, created_at, updated_at)
+VALUES
+(47, 'A. gave a new insight into Shakespeare`s style.', NOW(), NOW()),
+(47, 'B. offered a thought-provoking view on Shakespeare and his work.', NOW(), NOW()),
+(47, 'C. explained Shakespeare`s belief in ghosts.', NOW(), NOW()),
+(48, 'A. which reflected popular belief in the supernatural.', NOW(), NOW()),
+(48, 'B. that recorded historical events.', NOW(), NOW()),
+(48, 'C. seemingly in conflict with accepted beliefs.', NOW(), NOW()),
+(49, 'A. a belief in ghosts was not tolerated.', NOW(), NOW()),
+(49, 'B. more people believed in ghosts.', NOW(), NOW()),
+(49, 'C. certain religious beliefs were not acceptable.', NOW(), NOW()),
+(50, 'A. because he believed in a spirit world.', NOW(), NOW()),
+(50, 'B. as a theatrical device.', NOW(), NOW()),
+(50, 'C. to provoke religious debate.', NOW(), NOW()),
+(51, 'A. secretly approved of a supernatural content in plays.', NOW(), NOW()),
+(51, 'B. shown approval for plays with a supernatural content.', NOW(), NOW()),
+(51, 'C. disapproved of the inclusion of ghosts in plays.', NOW(), NOW());
+
+INSERT INTO questions (question_group_id, text, type, order_no, question_no, meta_data, created_at, updated_at)
+VALUES
+(3, '<b>Questions 26-30</b><br>What does Julie say about the following subjects?<br>Write the correct letter, A, B or C, next to questions 26-30.<br><b>A.</b> cornful, dismissive<br><b>B.</b> open-minded<br><b>C.</b> believing', 'static', 7, NULL, NULL, NOW(), NOW());
+
+INSERT INTO questions (question_group_id, text, type, order_no, question_no, meta_data, created_at, updated_at)
+VALUES
+(3, 'witches / astrology', 'select', 8, 26, '{"options":["A","B","C"]}', NOW(), NOW()),
+(3, 'ghosts', 'select', 9, 27, '{"options":["A","B","C"]}', NOW(), NOW()),
+(3, 'UFOs/aliens', 'select', 10, 28, '{"options":["A","B","C"]}', NOW(), NOW()),
+(3, 'premonitions', 'select', 11, 29, '{"options":["A","B","C"]}', NOW(), NOW()),
+(3, 'telepathy', 'select', 12, 30, '{"options":["A","B","C"]}', NOW(), NOW());
+
