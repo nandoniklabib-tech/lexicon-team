@@ -134,3 +134,26 @@ VALUES
 (3, 'premonitions', 'select', 11, 29, '{"options":["A","B","C"]}', NOW(), NOW()),
 (3, 'telepathy', 'select', 12, 30, '{"options":["A","B","C"]}', NOW(), NOW());
 
+INSERT INTO questions (question_group_id, text, type, order_no, question_no, meta_data, created_at, updated_at)
+VALUES
+(4, '<b>Questions 31-35</b><br>Complete the notes below.<br>Write NO MORE THAN THREE WORDS for each answer.', 'static', 1, NULL, NULL, NOW(), NOW());
+
+INSERT INTO questions (question_group_id, text, type, order_no, question_no, meta_data, created_at, updated_at)
+VALUES
+(4, 'Darwin is credited with having ___ popular beliefs about Man`s creation.', 'fill_blank', 2, 31, NULL, NOW(), NOW()),
+(4, 'However, Alfred Russell Wallace simultaneously came up with an ___ to Darwin.', 'fill_blank', 3, 32, NULL, NOW(), NOW()),
+(4, 'Unfortunately for Wallace, Darwin seems to have been given the ___ for the theory of evolution.', 'fill_blank', 4, 33, NULL, NOW(), NOW()),
+(4, 'Darwin`s theory ___ , upsetting the religious authorities of his time.', 'fill_blank', 5, 34, NULL, NOW(), NOW()),
+(4, 'Today, it is often accepted that Man is a product ___ and not spontaneous creation.', 'fill_blank', 6, 35, NULL, NOW(), NOW());
+
+INSERT INTO questions (question_group_id, text, type, order_no, question_no, meta_data, created_at, updated_at)
+VALUES
+(4, '<b>Questions 36-40</b><br>Complete the sentences below.<br>Write NO MORE THAN TWO WORDS for each answer.', 'static', 7, NULL, NULL, NOW(), NOW());
+
+INSERT INTO questions (question_group_id, text, type, order_no, question_no, meta_data, created_at, updated_at)
+VALUES
+(4, 'The absence of a ___ might be seen by some to discredit Darwin`s theory.', 'fill_blank', 8, 36, NULL, NOW(), NOW()),
+(4, 'Finding an evolutionary bridge between Man and ape would provide undeniable ___ the theory of evolution.', 'fill_blank', 9, 37, NULL, NOW(), NOW()),
+(4, 'When ___ of the Piltdown Man was first unearthed in 1908, it seemed Darwin`s theory was no longer in doubt.', 'fill_blank', 10, 38, NULL, NOW(), NOW()),
+(4, 'In fact, the hoax proved ___ that scientists and the Press alike believed in its validity.', 'fill_blank', 11, 39, NULL, NOW(), NOW()),
+(4, 'After 40 years, Piltdown Man ___ as being no more than a fake.', 'fill_blank', 12, 40, NULL, NOW(), NOW());
