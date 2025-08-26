@@ -283,8 +283,7 @@
                                             <button type="button" class="nav-link {{ $firstTab ? 'active' : '' }}"
                                                 data-bs-toggle="pill" data-bs-target="#part{{ $index + 1 }}">
                                                 Part {{ $index + 1 }}
-                                                for()
-                                                <div>{{ $question->question_no }}</div>
+                                                
                                             </button>
                                         </li>
                                         @php $firstTab = false; @endphp
