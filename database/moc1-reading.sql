@@ -1,4 +1,3 @@
-'mcq','fill_blank','multi_select','checkbox','table','true_false','select','static','others'
 
 INSERT INTO questions (question_group_id, text, type, order_no, question_no, meta_data, created_at, updated_at)
 VALUES
