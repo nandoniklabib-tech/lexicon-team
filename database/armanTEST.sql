@@ -3,6 +3,11 @@ INSERT INTO questions (question_group_id, text, type, order_no, question_no, met
 VALUES
 (1, 'TEXT', 'static', order_no, NULL, NULL, NOW(), NOW());
 
+-- INPUT
+INSERT INTO questions (question_group_id, text, type, order_no, question_no, meta_data, created_at, updated_at)
+VALUES
+(1, '___', 'fill_blank', order_no, NULL, NULL, NOW(), NOW());
+
 -- TABLE 
 INSERT INTO questions (question_group_id, text, type, order_no, question_no, meta_data, created_at, updated_at)
 VALUES

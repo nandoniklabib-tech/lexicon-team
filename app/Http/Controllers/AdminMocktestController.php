@@ -288,6 +288,16 @@ public function showListeningResult($mockTestId)
     }
 
 
+    //Show Writing Question
+    public function showWritingQuestion($mockTestId)
+    {
+        // Load test with sections → groups → questions
+        $mockTest = MockTest::with([
+            'sections.questionGroups.questions.options'
+        ])->findOrFail($mockTestId);
+
+        return view('Backend.MockTest.TestPage.writing', compact('mockTest'));
+    }
 
 
 
