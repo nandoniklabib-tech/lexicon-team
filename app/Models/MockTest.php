@@ -15,4 +15,8 @@ class MockTest extends Model
     {
         return $this->hasMany(Section::class, 'mock_test_id', 'id');
     }
+    public function testUser()
+    {
+        return $this->hasMany(TestUser::class, 'mock_test_id', 'id');
+    }
 }

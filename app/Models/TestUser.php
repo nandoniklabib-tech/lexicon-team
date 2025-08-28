@@ -15,4 +15,8 @@ class TestUser extends Model
     {
         return $this->belongsTo(MockTest::class, 'mock_test_id', 'id');
     }
+    public function testUser()
+    {
+        return $this->belongsTo(TestUser::class, 'mock_test_id', 'id');
+    }
 }

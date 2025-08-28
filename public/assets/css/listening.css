@@ -1,0 +1,92 @@
+.highlight-question {
+    border: 2px solid #0d6efd;
+    padding: 2px;
+    transition: all 0.5s ease;
+}
+
+.form-check.selected-option .form-check-input {
+    border-color: #0d6efd;
+    background-color: #0d6efd;
+}
+
+.question .form-check-input[type="radio"] {
+    width: 1rem;
+    height: 1rem;
+}
+
+.question .form-check-label {
+    margin-left: 0.3rem;
+    font-size: 0.95rem;
+}
+
+/* Clean table with only outer border */
+.table-bordered {
+    border: 2px solid #d6d0d0; /* outer border */
+    border-radius: 6px;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Remove inner cell borders */
+.table td, .table th {
+    border: 1px solid #d6d0d0; 
+    vertical-align: middle;
+    padding: 12px 10px;
+}
+
+/* Static cell styling */
+.table td {
+    font-size: 14px;
+    color: #333;
+}
+
+/* Fill-in-the-blank input styling */
+.question-input[type="text"] {
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    padding: 4px 6px;
+    width: 90%;
+    max-width: 150px;
+    background-color: transparent;
+}
+
+.question-input[type="text"]:focus {
+    outline: none;
+    box-shadow: 0 0 2px rgba(0,0,0,0.1);
+    border-color: #dee2e6;
+}
+
+/* MCQ styling */
+.table td .question div {
+    margin: 4px 0;
+}
+
+.table td .question input[type="radio"] {
+    margin-right: 6px;
+}
+
+/* Hover effect for table rows */
+.table tbody tr:hover td {
+    background-color: #9c0aa1;
+}
+
+/* Alternating row colors (subtle) */
+.table tbody tr:nth-child(odd) td {
+    background-color: #ffffff;
+}
+
+.table tbody tr:nth-child(even) td {
+    background-color: #f9f9f9;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .table td {
+        font-size: 13px;
+        padding: 8px 6px;
+    }
+
+    .question-input[type="text"] {
+        width: 80%;
+    }
+}
