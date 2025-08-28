@@ -60,7 +60,7 @@
     <audio id="testAudio" src="{{ asset('adminMock/2/audio.mp3') }}"></audio>
 
     <!-- Start Modal -->
-    <div class="modal fade" id="startModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    {{-- <div class="modal fade" id="startModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm modal-dialog-centered">
             <div class="modal-content rounded-pill py-2">
@@ -70,7 +70,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <div class="prev-next-div">
         <a class="up-btn" href="#" id="upBtn">
             <i class="fa-solid fa-square-caret-left"></i>
