@@ -16,7 +16,6 @@ values
 (9,'writing part 2','writing part 2',null,now(),now());
 
 
-
 INSERT INTO writing_passages (question_group_id, title, content,created_at, updated_at)
 VALUES
 (9,NULL,'You should spend about 40 minutes on this task.<br>Some people think that physical strength is important for success in sport, while other people think that mental strength is more important.<br> Discuss both views and give your own opinion.<br>You should write at least 250 words.',NOW(),NOW());
