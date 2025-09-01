@@ -194,22 +194,24 @@
                                     </select>
                                     
                                 @elseif ($question->type === 'select')
-                                    <p class="question-text fw-bold">Q{{ $question->question_no }}: {!! $question->text !!}</p>
-                                    <select name="answers[{{ $question->id }}]" class="form-select w-50 question-input custom-select">
+                                    <p class="question-text fw-bold">Q{{ $question->question_no }} </p>
+                                    <select name="answers[{{ $question->id }}]" class="form-select question-input custom-select">
                                         <option value="">-- Choose --</option>
                                         @foreach ($question->meta_data['options'] ?? [] as $option)
                                             <option value="{{ $option }}">{{ $option }}</option>
                                         @endforeach
-                                    </select>                            
+                                    </select> 
+                                    {!! $question->text !!}  
+                                                                                                                    
                                 @elseif ($question->type === 'checkbox')
                                     <p class="question-text">Q{{ $question->question_no }}: {!! $question->text !!}</p>
                                     @foreach ($question->options as $option)
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input custom-checkbox question-input" name="answers[{{ $question->id }}][]" value="{{ $option->id }}" id="q{{ $question->id }}_chk{{ $loop->index }}">
-                                        <label class="form-check-label" for="q{{ $question->id }}_chk{{ $loop->index }}">
-                                            {{ $option->text }}
-                                        </label>
-                                    </div>
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input custom-checkbox question-input" name="answers[{{ $question->id }}][]" value="{{ $option->id }}" id="q{{ $question->id }}_chk{{ $loop->index }}">
+                                            <label class="d-inline" for="q{{ $question->id }}_chk{{ $loop->index }}">
+                                                {{ $option->text }}
+                                            </label>
+                                        </div>
                                     @endforeach
 
                                 @elseif ($question->type === 'true_false')
@@ -252,7 +254,7 @@
 
                                         {{-- Static content --}}
                                         @if ($q->type === 'static')
-                                        {{ $q->text }}
+                                        {!! $q->text !!}
                                         @endif
 
                                         {{-- Fill blank --}}

@@ -32,7 +32,7 @@
     background: #fff;
 
 }
-/* Make radio buttons bigger and more visually appealing */
+
 .custom-radio {
     width: 20px;       
     height: 20px;      
@@ -40,83 +40,17 @@
     margin-right: 10px;
 }
 
-/* Optional: style the labels */
-/* General question text */
-.question-text {
-    font-weight: 600;
-    font-size: 1.1rem;
-    margin-bottom: 10px;
-}
-
-/* Form-check container */
-.form-check {
-    position: relative;
-    margin-bottom: 12px;
-}
-
-/* Radio & checkbox inputs */
-.custom-radio,
-.custom-checkbox {
-    display: none; /* hide default input */
-}
-
-/* Card-style labels */
-.form-check-label {
-    display: block;
-    padding: 12px 16px;
-    border: 2px solid #ccc;
-    border-radius: 10px;
-    background-color: #f9f9f9;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    font-size: 1rem;
-}
-
-/* Hover effect */
-.form-check-label:hover {
-    border-color: #4CAF50;
-    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.2);
-}
-
-/* Checked state */
-.custom-radio:checked + .form-check-label,
-.custom-checkbox:checked + .form-check-label {
-    border-color: #4CAF50;
-    background-color: #e8f5e9;
-    font-weight: 600;
-}
-
-/* Optional: add a checkmark */
-.custom-checkbox:checked + .form-check-label::after,
-.custom-radio:checked + .form-check-label::after {
-    content: "✔";
-    position: absolute;
-    right: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #4CAF50;
-    font-size: 1.1rem;
-}
-
-/* Select dropdown */
 .custom-select {
-    padding: 12px 16px;
-    font-size: 1rem;
-    border-radius: 10px;
-    border: 2px solid #ccc;
-    background-color: #f9f9f9;
-    width: 100%;
-    max-width: 400px;
-    transition: all 0.3s ease;
+    width: 120px;
+    height: 50px;
+    display: inline;
 }
 
-.custom-select:focus {
-    border-color: #4CAF50;
-    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.2);
-    outline: none;
+.custom-checkbox {
+    width: 20px;       
+    height: 20px;
+    margin-right: 10px;
 }
-
 
 
 
