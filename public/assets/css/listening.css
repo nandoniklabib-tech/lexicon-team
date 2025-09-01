@@ -3,90 +3,121 @@
     padding: 2px;
     transition: all 0.5s ease;
 }
-
-.form-check.selected-option .form-check-input {
-    border-color: #0d6efd;
-    background-color: #0d6efd;
+.part-nav {
+    border-radius: 8px;
+    background: #fff;
+    min-width: 450px;
+    text-align: center;
+    transition: all 0.3s ease;
 }
 
-.question .form-check-input[type="radio"] {
-    width: 1rem;
-    height: 1rem;
+.part-nav.active {
+    background: #cbe2f5;
 }
 
-.question .form-check-label {
-    margin-left: 0.3rem;
+.part-nav .part-label {
+    display: block;
     font-size: 0.95rem;
+    color: #000;
 }
 
-/* Clean table with only outer border */
-.table-bordered {
-    border: 2px solid #d6d0d0; /* outer border */
-    border-radius: 6px;
-    width: 100%;
-    border-collapse: collapse;
+.part-nav .questions {
+    display: flex;
+    justify-content: center;
+
 }
 
-/* Remove inner cell borders */
-.table td, .table th {
-    border: 1px solid #d6d0d0; 
-    vertical-align: middle;
-    padding: 12px 10px;
+.question-btn.answered-btn {
+    border-top: 4px solid #d78e07 !important;
+    background: #fff;
+
+}
+/* Make radio buttons bigger and more visually appealing */
+.custom-radio {
+    width: 20px;       
+    height: 20px;      
+    accent-color: #4CAF50; 
+    margin-right: 10px;
 }
 
-/* Static cell styling */
-.table td {
-    font-size: 14px;
-    color: #333;
+/* Optional: style the labels */
+/* General question text */
+.question-text {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
 }
 
-/* Fill-in-the-blank input styling */
-.question-input[type="text"] {
-    border: 1px solid #dee2e6;
-    border-radius: 4px;
-    padding: 4px 6px;
-    width: 90%;
-    max-width: 150px;
-    background-color: transparent;
+/* Form-check container */
+.form-check {
+    position: relative;
+    margin-bottom: 12px;
 }
 
-.question-input[type="text"]:focus {
-    outline: none;
-    box-shadow: 0 0 2px rgba(0,0,0,0.1);
-    border-color: #dee2e6;
+/* Radio & checkbox inputs */
+.custom-radio,
+.custom-checkbox {
+    display: none; /* hide default input */
 }
 
-/* MCQ styling */
-.table td .question div {
-    margin: 4px 0;
-}
-
-.table td .question input[type="radio"] {
-    margin-right: 6px;
-}
-
-/* Hover effect for table rows */
-.table tbody tr:hover td {
-    background-color: #9c0aa1;
-}
-
-/* Alternating row colors (subtle) */
-.table tbody tr:nth-child(odd) td {
-    background-color: #ffffff;
-}
-
-.table tbody tr:nth-child(even) td {
+/* Card-style labels */
+.form-check-label {
+    display: block;
+    padding: 12px 16px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
     background-color: #f9f9f9;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    font-size: 1rem;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .table td {
-        font-size: 13px;
-        padding: 8px 6px;
-    }
-
-    .question-input[type="text"] {
-        width: 80%;
-    }
+/* Hover effect */
+.form-check-label:hover {
+    border-color: #4CAF50;
+    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.2);
 }
+
+/* Checked state */
+.custom-radio:checked + .form-check-label,
+.custom-checkbox:checked + .form-check-label {
+    border-color: #4CAF50;
+    background-color: #e8f5e9;
+    font-weight: 600;
+}
+
+/* Optional: add a checkmark */
+.custom-checkbox:checked + .form-check-label::after,
+.custom-radio:checked + .form-check-label::after {
+    content: "✔";
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #4CAF50;
+    font-size: 1.1rem;
+}
+
+/* Select dropdown */
+.custom-select {
+    padding: 12px 16px;
+    font-size: 1rem;
+    border-radius: 10px;
+    border: 2px solid #ccc;
+    background-color: #f9f9f9;
+    width: 100%;
+    max-width: 400px;
+    transition: all 0.3s ease;
+}
+
+.custom-select:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.2);
+    outline: none;
+}
+
+
+
+
+

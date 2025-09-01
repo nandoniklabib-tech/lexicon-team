@@ -157,58 +157,60 @@
                             @if ($question->type !== 'table' && empty($question->meta_data['table_no']))
                             <div class="mb-3 question" id="q{{ $question->question_no }}">
                                 @if ($question->type === 'mcq')
-                                <p class="fw-bold question-text">{{ $question->question_no }}: {{ $question->text }}</p>
-
-                                @if (!empty($question->meta_data['image']))
-                                <div class="text-left mb-3">
-                                    <img src="{{ $question->meta_data['image'] }}" alt="Question Image" class="img-fluid" style="max-height: 300px;">
-                                </div>
-                                @endif
-
-                                @foreach ($question->options as $option)
-                                <div class="form-check">
-                                    <input type="radio" class="form-check-input question-input" name="answers[{{ $question->id }}]" value="{{ $option->id }}" id="q{{ $question->id }}_option{{ $loop->index }}">
-                                    <label class="form-check-label" for="q{{ $question->id }}_option{{ $loop->index }}">
-                                        {{ $option->text }}
-                                    </label>
-                                </div>
-                                @endforeach
+                                    <p class="fw-bold question-text">{{ $question->question_no }}: {{ $question->text }}</p>                           
+                                    @if (!empty($question->meta_data['image']))
+                                        <div class="text-left mb-3">
+                                            <img src="{{ $question->meta_data['image'] }}" alt="Question Image" class="img-fluid" style="max-height: 300px;">
+                                        </div>
+                                    @endif
+                                    @foreach ($question->options as $option)
+                                        <div class="form-check mb-2">
+                                            <input 
+                                                type="radio" 
+                                                class="form-check-input question-input custom-radio" 
+                                                name="answers[{{ $question->id }}]" 
+                                                value="{{ $option->id }}" 
+                                                id="q{{ $question->id }}_option{{ $loop->index }}"
+                                            >
+                                            <label class="form-check-label" for="q{{ $question->id }}_option{{ $loop->index }}">
+                                                {{ $option->text }}
+                                            </label>
+                                        </div>
+                                    @endforeach
 
                                 @elseif ($question->type === 'fill_blank')
-                                <p class="question-inline">
-                                    {!! str_replace(
-                                    '___',
-                                    '<input type="text" class="form-control d-inline mx-1 question-input" name="answers[' . $question->id . ']" placeholder="' . $question->question_no . '">',
-                                    $question->text
-                                    ) !!}
-                                </p>
+                                    <p class="question-inline">
+                                        {!! str_replace(
+                                        '___',
+                                        '<input type="text" class="form-control d-inline mx-1 question-input" name="answers[' . $question->id . ']" placeholder="' . $question->question_no . '">', $question->text
+                                        ) !!}
+                                    </p>
 
                                 @elseif ($question->type === 'multi_select')
-                                <select name="answers[{{ $question->id }}][]" class="form-select w-50 question-input" multiple>
-                                    @foreach ($question->options as $option)
-                                    <option value="{{ $option->id }}">{{ $option->text }}</option>
-                                    @endforeach
-                                </select>
-
+                                    <select name="answers[{{ $question->id }}][]" class="form-select w-50 question-input" multiple>
+                                        @foreach ($question->options as $option)
+                                        <option value="{{ $option->id }}">{{ $option->text }}</option>
+                                        @endforeach
+                                    </select>
+                                    
                                 @elseif ($question->type === 'select')
-                                <p class="question-text">Q{{ $question->question_no }}: {!! $question->text !!}</p>
-                                <select name="answers[{{ $question->id }}]" class="form-select w-50 question-input">
-                                    <option value="">-- Choose --</option>
-                                    @foreach ($question->meta_data['options'] ?? [] as $option)
-                                    <option value="{{ $option }}">{{ $option }}</option>
-                                    @endforeach
-                                </select>
-
+                                    <p class="question-text fw-bold">Q{{ $question->question_no }}: {!! $question->text !!}</p>
+                                    <select name="answers[{{ $question->id }}]" class="form-select w-50 question-input custom-select">
+                                        <option value="">-- Choose --</option>
+                                        @foreach ($question->meta_data['options'] ?? [] as $option)
+                                            <option value="{{ $option }}">{{ $option }}</option>
+                                        @endforeach
+                                    </select>                            
                                 @elseif ($question->type === 'checkbox')
-                                <p class="question-text">Q{{ $question->question_no }}: {!! $question->text !!}</p>
-                                @foreach ($question->options as $option)
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input question-input" name="answers[{{ $question->id }}][]" value="{{ $option->id }}" id="q{{ $question->id }}_chk{{ $loop->index }}">
-                                    <label class="form-check-label" for="q{{ $question->id }}_chk{{ $loop->index }}">
-                                        {{ $option->text }}
-                                    </label>
-                                </div>
-                                @endforeach
+                                    <p class="question-text">Q{{ $question->question_no }}: {!! $question->text !!}</p>
+                                    @foreach ($question->options as $option)
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input custom-checkbox question-input" name="answers[{{ $question->id }}][]" value="{{ $option->id }}" id="q{{ $question->id }}_chk{{ $loop->index }}">
+                                        <label class="form-check-label" for="q{{ $question->id }}_chk{{ $loop->index }}">
+                                            {{ $option->text }}
+                                        </label>
+                                    </div>
+                                    @endforeach
 
                                 @elseif ($question->type === 'true_false')
                                 <div class="d-flex gap-3">
@@ -295,52 +297,52 @@
         </section>
 
 
-        <!-- bottom bar -->
-        <section class="bottom-bar fixed-bottom bg-light py-2 border-top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
+<!-- bottom bar -->
+<section class="bottom-bar fixed-bottom bg-light py-2 border-top">
+    <div class="container-fluid">
+        <div class="d-flex flex-wrap align-items-center p-3" style="justify-content: space-between;">
+            @foreach ($mockTest->sections as $section)
+                @if ($section->name === 'Listening')
+                    @foreach ($section->questionGroups as $index => $group)
+                        <div class="part-nav p-2"
+                             data-part="{{ $index + 1 }}">
+                             
+                            <span class="fw-bold part-label" style="cursor:pointer;">
+                                Part {{ $index + 1 }}
+                            </span>
 
-                        <!-- PART TABS -->
-                        <ul class="nav nav-pills mb-1 d-flex w-100" id="pills-tab" role="tablist">
-                            @php $firstTab = true; @endphp
-                            @foreach ($mockTest->sections as $section)
-                            @if ($section->name === 'Listening')
-                            @foreach ($section->questionGroups as $index => $group)
-                            <li class="nav-item flex-fill text-center me-1 mb-1">
-                                <button type="button" class="nav-link {{ $firstTab ? 'active' : '' }}" data-bs-toggle="pill" data-bs-target="#part{{ $index + 1 }}">
-                                    Part {{ $index + 1 }}
-                                </button>
-                            </li>
-                            @php $firstTab = false; @endphp
-                            @endforeach
-                            @endif
-                            @endforeach
-                        </ul>
+                            <div class="part-content mt-1">
+                                {{-- Default: summary --}}
+                                <span class="summary">
+                                    0 of {{ $group->questions->where('type','!=','static')->count() }} questions
+                                </span>
 
-                        <!-- QUESTION BUTTONS FOR ACTIVE PART -->
-                        <div id="question-buttons-container" class="d-flex flex-wrap justify-content-center">
-                            @foreach ($mockTest->sections as $section)
-                            @if ($section->name === 'Listening')
-                            @foreach ($section->questionGroups as $index => $group)
-                            <div class="question-nav mb-1" data-part="{{ $index + 1 }}" style="{{ $index !== 0 ? 'display:none;' : 'flex;' }}">
-                                @foreach ($group->questions as $question)
-                                @if($question->type !== 'static')
-                                <button type="button" class="btn btn-outline-secondary btn-sm me-1 mb-1 question-btn" data-target="q{{ $question->question_no }}">
-                                    {{ $question->question_no }}
-                                </button>
-                                @endif
-                                @endforeach
+                                {{-- Question numbers (hidden initially except part 1) --}}
+                                <div class="questions d-none flex-wrap gap-1">
+                                    @foreach ($group->questions as $question)
+                                        @if($question->type !== 'static')
+                                            <button type="button" 
+                                                    class="btn btn-outline-secondary btn-sm question-btn"
+                                                    style="width:28px; height:28px; padding:0;"
+                                                    data-target="q{{ $question->question_no }}"
+                                                    data-part="{{ $index + 1 }}">
+                                                {{ $question->question_no }}
+                                            </button>
+                                        @endif
+                                    @endforeach
+                                </div>
                             </div>
-                            @endforeach
-                            @endif
-                            @endforeach
                         </div>
+                    @endforeach
+                @endif
+            @endforeach
 
-                    </div>
-                </div>
-            </div>
-        </section>
+        </div>
+    </div>
+</section>
+
+
+
 
 
 
@@ -382,82 +384,78 @@
 
     </script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function() {
+        const partNavs = document.querySelectorAll('.part-nav');
+        const tabPanes = document.querySelectorAll('.tab-pane');
+        const inputs = document.querySelectorAll('.question-input');
 
-            const partTabs = document.querySelectorAll('#pills-tab .nav-link');
-            const questionNavs = document.querySelectorAll('.question-nav');
-            const questionButtons = document.querySelectorAll('.question-btn');
-            const inputs = document.querySelectorAll('.question-input');
-
-            // Show only the active part's question buttons
-            partTabs.forEach(tab => {
-                tab.addEventListener('shown.bs.tab', function(e) {
-                    const targetPart = e.target.getAttribute('data-bs-target').replace('#part', '');
-                    questionNavs.forEach(nav => {
-                        nav.style.display = (nav.dataset.part === targetPart) ? 'flex' : 'none';
-                    });
-                });
-            });
-
-            // Scroll to question
-            questionButtons.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const targetId = this.dataset.target;
-                    const targetElem = document.getElementById(targetId);
-                    if (targetElem) {
-                        targetElem.scrollIntoView({
-                            behavior: 'smooth'
-                            , block: 'center'
-                        });
-                        targetElem.classList.add('highlight-question');
-                        setTimeout(() => targetElem.classList.remove('highlight-question'), 1500);
-                    }
-                });
-            });
-
-            // Highlight question button when answered
-            inputs.forEach(input => {
-                input.addEventListener('change', function() {
-                    const questionDiv = this.closest('.question');
-                    if (!questionDiv) return;
-                    const qId = questionDiv.id;
-                    const btn = document.querySelector(`.question-btn[data-target="${qId}"]`);
-                    if (btn) {
-                        btn.classList.remove('btn-outline-secondary');
-                        btn.classList.add('btn-success');
-                    }
-
-                    // MCQ circle highlight
-                    if (input.type === 'radio') {
-                        const name = input.name;
-                        const radios = document.querySelectorAll(`input[name="${name}"]`);
-                        radios.forEach(r => {
-                            if (r.checked) {
-                                r.parentElement.classList.add('selected-option');
-                            } else {
-                                r.parentElement.classList.remove('selected-option');
-                            }
-                        });
-                    }
-                });
-            });
-
-        });
-
-    </script>
-
-
-
-
-    <style>
-        /* Optional highlight animation */
-        .highlight-question {
-            border: 2px solid #0d6efd;
-            padding: 2px;
-            transition: all 0.5s ease;
+        // Show first part by default
+        if (partNavs.length) {
+            partNavs[0].classList.add('active');
+            partNavs[0].querySelector('.questions').classList.remove('d-none');
+            partNavs[0].querySelector('.summary').classList.add('d-none');
         }
 
-    </style>
+        // Part switching
+        partNavs.forEach(nav => {
+            nav.querySelector('.part-label').addEventListener('click', function() {
+                const part = nav.dataset.part;
+
+                // hide all tab panes
+                tabPanes.forEach(pane => pane.classList.remove('show', 'active'));
+                document.getElementById(`part${part}`).classList.add('show', 'active');
+
+                // reset all navs
+                partNavs.forEach(n => {
+                    n.classList.remove('active');
+                    n.querySelector('.questions').classList.add('d-none');
+                    n.querySelector('.summary').classList.remove('d-none');
+                });
+
+                // activate current
+                nav.classList.add('active');
+                nav.querySelector('.questions').classList.remove('d-none');
+                nav.querySelector('.summary').classList.add('d-none');
+            });
+        });
+
+        // Scroll to question
+        document.querySelectorAll('.question-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const targetId = this.dataset.target;
+                const targetElem = document.getElementById(targetId);
+                if (targetElem) {
+                    targetElem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    targetElem.classList.add('highlight-question');
+                    setTimeout(() => targetElem.classList.remove('highlight-question'), 1500);
+                }
+            });
+        });
+
+        // Track answered questions & update summary
+        inputs.forEach(input => {
+            input.addEventListener('change', function() {
+                const questionDiv = this.closest('.question');
+                if (!questionDiv) return;
+
+                const qId = questionDiv.id;
+                const btn = document.querySelector(`.question-btn[data-target="${qId}"]`);
+                if (btn) {
+                    btn.classList.add('answered-btn');
+                }
+
+                // update summary count
+                const part = btn.dataset.part;
+                const partNav = document.querySelector(`.part-nav[data-part="${part}"]`);
+                if (partNav) {
+                    const total = partNav.querySelectorAll('.question-btn').length;
+                    const answered = partNav.querySelectorAll('.question-btn.answered-btn').length;
+                    partNav.querySelector('.summary').textContent = `${answered} of ${total} questions`;
+                }
+            });
+        });
+    });
+</script>
 
 
     <!-- bootstrap js -->
