@@ -53,7 +53,9 @@
         <button onclick="takeNote()" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">Take Note</button>
     </div>
 
-    <audio id="testAudio" src="{{ asset('adminMock/2/audio.mp3') }}"></audio>
+    
+
+    {{-- <audio id="testAudio" src="{{ asset('assets/audios/listening1.mp3') }}"></audio> --}}
 
     <!-- Start Modal -->
     <div class="modal fade" id="startModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -103,18 +105,40 @@
 
                     <!-- Right: Controls -->
                     <div class="col-4">
+                        <div class="d-flex justify-content-between align-items-center">                           
+                            <!-- Left side: audio -->
+                            <div>
+                                @foreach ($mockTest->sections as $section)
+                                    @if ($section->name === 'Listening')
+                                        @foreach ($section->questionGroups as $group)
+                                            @if (!empty($group->media_file))
+                                                <div class="audio-wrapper">
+                                                    <audio id="audio_group_{{ $group->id }}" src="{{ $group->media_file }}" preload="none"></audio>
+                                                    <button type="button" class="btn audio-btn" data-audio="audio_group_{{ $group->id }}">
+                                                        🔊 Audio is Playing
+                                                    </button>
+                                                </div>
+                                                @break {{-- just one audio button, remove this if you need all --}}
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                @endforeach
+                            </div>
 
-                        <div class="d-flex justify-content-end align-items-center">
-                            <button type="submit" class="afterSubmitBtn btn btn-outline-dark fw-bold">Finish test</button>
+                            <!-- Right side: actions -->
+                            <div class="d-flex align-items-center">
+                                <button type="submit" class="afterSubmitBtn btn btn-outline-dark fw-bold">Finish test</button>
+                                <button class="btn btn-outline-dark ms-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                                    <i class="bi bi-vector-pen"></i>
+                                </button>
+                                <a class="text-dark" href="#" id="fullscreenBtn" title="Toggle Fullscreen">
+                                    <i id="fullscreenIcon" class="fa-solid fa-maximize fs-3 ps-3"></i>
+                                </a>
+                            </div>
 
-                            <button class="btn btn-outline-dark ms-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-                                <i class="bi bi-vector-pen"></i>
-                            </button>
-                            <a class="text-dark" href="#" id="fullscreenBtn" title="Toggle Fullscreen">
-                                <i id="fullscreenIcon" class="fa-solid fa-maximize fs-3 ps-3"></i>
-                            </a>
                         </div>
                     </div>
+
 
                 </div>
             </div>
