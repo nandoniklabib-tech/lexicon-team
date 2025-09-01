@@ -56,7 +56,7 @@
     <audio id="testAudio" src="{{ asset('adminMock/2/audio.mp3') }}"></audio>
 
     <!-- Start Modal -->
-    {{-- <div class="modal fade" id="startModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <div class="modal fade" id="startModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm modal-dialog-centered">
             <div class="modal-content rounded-pill py-2">
@@ -66,7 +66,7 @@
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
     <div class="prev-next-div">
         <a class="up-btn" href="#" id="upBtn">
             <i class="fa-solid fa-square-caret-left"></i>
@@ -239,51 +239,56 @@
                             @else
                             {{-- Render table in-place --}}
                             @php
-                            $tableNo = $question->meta_data['table_no'];
-                            if (isset($tables[$tableNo])) {
-                            $rows = $tables[$tableNo];
-                            unset($tables[$tableNo]);
+                                $tableNo = $question->meta_data['table_no'];
+                                if (isset($tables[$tableNo])) {
+                                    $rows = $tables[$tableNo];
+                                    unset($tables[$tableNo]);
                             @endphp
 
                             <table class="table table-bordered text-left align-middle mb-4">
                                 @foreach ($rows as $row)
-                                <tr>
-                                    @for ($col = 1; $col <= max(array_keys($row)); $col++) <td>
-                                        @if (isset($row[$col]))
-                                        @php $q = $row[$col]; @endphp
+                                    <tr>
+                                        @for ($col = 1; $col <= max(array_keys($row)); $col++)
+                                            <td>
+                                                @if (isset($row[$col]))
+                                                    @php $q = $row[$col]; @endphp
 
-                                        {{-- Static content --}}
-                                        @if ($q->type === 'static')
-                                        {!! $q->text !!}
-                                        @endif
+                                                    <div class="question" id="q{{ $q->question_no }}"> {{-- wrap each table question --}}
+                                                            
+                                                        {{-- Static content --}}
+                                                        @if ($q->type === 'static')
+                                                            {!! $q->text !!}
+                                                        @endif
 
-                                        {{-- Fill blank --}}
-                                        @if ($q->type === 'fill_blank')
-                                        {!! str_replace(
-                                        '___',
-                                        '<input type="text" class="form-control d-inline mx-1 question-input" name="answers['.$q->id.']" placeholder="'.$q->question_no.'">',
-                                        $q->text
-                                        ) !!}
-                                        @endif
+                                                        {{-- Fill blank --}}
+                                                        @if ($q->type === 'fill_blank')
+                                                            {!! str_replace(
+                                                                '___',
+                                                                '<input type="text" class="form-control d-inline mx-1 question-input" name="answers['.$q->id.']" placeholder="'.$q->question_no.'">',
+                                                                $q->text
+                                                            ) !!}
+                                                        @endif
 
-                                        {{-- MCQ --}}
-                                        @if ($q->type === 'mcq')
-                                        @foreach ($q->options as $option)
-                                        <div>
-                                            <input type="radio" class="question-input" name="answers[{{ $q->id }}]" value="{{ $option->id }}">
-                                            {{ $option->text }}
-                                        </div>
-                                        @endforeach
-                                        @endif
+                                                        {{-- MCQ --}}
+                                                        @if ($q->type === 'mcq')
+                                                            @foreach ($q->options as $option)
+                                                                <div>
+                                                                    <input type="radio" class="question-input" name="answers[{{ $q->id }}]" value="{{ $option->id }}" id="q{{ $q->id }}_option{{ $loop->index }}">
+                                                                    <label for="q{{ $q->id }}_option{{ $loop->index }}">{{ $option->text }}</label>
+                                                                </div>
+                                                            @endforeach
+                                                        @endif
 
-                                        @endif
-                                        </td>
+                                                    </div> {{-- /.question --}}
+                                                @endif
+                                            </td>
                                         @endfor
-                                </tr>
+                                    </tr>
                                 @endforeach
                             </table>
 
                             @php } @endphp
+
 
                             @endif
                             @endforeach
@@ -386,78 +391,78 @@
 
     </script>
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const partNavs = document.querySelectorAll('.part-nav');
-        const tabPanes = document.querySelectorAll('.tab-pane');
-        const inputs = document.querySelectorAll('.question-input');
+        document.addEventListener('DOMContentLoaded', function() {
+            const partNavs = document.querySelectorAll('.part-nav');
+            const tabPanes = document.querySelectorAll('.tab-pane');
+            const inputs = document.querySelectorAll('.question-input');
 
-        // Show first part by default
-        if (partNavs.length) {
-            partNavs[0].classList.add('active');
-            partNavs[0].querySelector('.questions').classList.remove('d-none');
-            partNavs[0].querySelector('.summary').classList.add('d-none');
-        }
+            // Show first part by default
+            if (partNavs.length) {
+                partNavs[0].classList.add('active');
+                partNavs[0].querySelector('.questions').classList.remove('d-none');
+                partNavs[0].querySelector('.summary').classList.add('d-none');
+            }
 
-        // Part switching
-        partNavs.forEach(nav => {
-            nav.querySelector('.part-label').addEventListener('click', function() {
-                const part = nav.dataset.part;
+            // Part switching
+            partNavs.forEach(nav => {
+                nav.querySelector('.part-label').addEventListener('click', function() {
+                    const part = nav.dataset.part;
 
-                // hide all tab panes
-                tabPanes.forEach(pane => pane.classList.remove('show', 'active'));
-                document.getElementById(`part${part}`).classList.add('show', 'active');
+                    // hide all tab panes
+                    tabPanes.forEach(pane => pane.classList.remove('show', 'active'));
+                    document.getElementById(`part${part}`).classList.add('show', 'active');
 
-                // reset all navs
-                partNavs.forEach(n => {
-                    n.classList.remove('active');
-                    n.querySelector('.questions').classList.add('d-none');
-                    n.querySelector('.summary').classList.remove('d-none');
+                    // reset all navs
+                    partNavs.forEach(n => {
+                        n.classList.remove('active');
+                        n.querySelector('.questions').classList.add('d-none');
+                        n.querySelector('.summary').classList.remove('d-none');
+                    });
+
+                    // activate current
+                    nav.classList.add('active');
+                    nav.querySelector('.questions').classList.remove('d-none');
+                    nav.querySelector('.summary').classList.add('d-none');
                 });
+            });
 
-                // activate current
-                nav.classList.add('active');
-                nav.querySelector('.questions').classList.remove('d-none');
-                nav.querySelector('.summary').classList.add('d-none');
+            // Scroll to question
+            document.querySelectorAll('.question-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const targetId = this.dataset.target;
+                    const targetElem = document.getElementById(targetId);
+                    if (targetElem) {
+                        targetElem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        targetElem.classList.add('highlight-question');
+                        setTimeout(() => targetElem.classList.remove('highlight-question'), 1500);
+                    }
+                });
+            });
+
+            // Track answered questions & update summary
+            inputs.forEach(input => {
+                input.addEventListener('change', function() {
+                    const questionDiv = this.closest('.question');
+                    if (!questionDiv) return;
+
+                    const qId = questionDiv.id;
+                    const btn = document.querySelector(`.question-btn[data-target="${qId}"]`);
+                    if (btn) {
+                        btn.classList.add('answered-btn');
+                    }
+
+                    // update summary count
+                    const part = btn.dataset.part;
+                    const partNav = document.querySelector(`.part-nav[data-part="${part}"]`);
+                    if (partNav) {
+                        const total = partNav.querySelectorAll('.question-btn').length;
+                        const answered = partNav.querySelectorAll('.question-btn.answered-btn').length;
+                        partNav.querySelector('.summary').textContent = `${answered} of ${total} questions`;
+                    }
+                });
             });
         });
-
-        // Scroll to question
-        document.querySelectorAll('.question-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const targetId = this.dataset.target;
-                const targetElem = document.getElementById(targetId);
-                if (targetElem) {
-                    targetElem.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    targetElem.classList.add('highlight-question');
-                    setTimeout(() => targetElem.classList.remove('highlight-question'), 1500);
-                }
-            });
-        });
-
-        // Track answered questions & update summary
-        inputs.forEach(input => {
-            input.addEventListener('change', function() {
-                const questionDiv = this.closest('.question');
-                if (!questionDiv) return;
-
-                const qId = questionDiv.id;
-                const btn = document.querySelector(`.question-btn[data-target="${qId}"]`);
-                if (btn) {
-                    btn.classList.add('answered-btn');
-                }
-
-                // update summary count
-                const part = btn.dataset.part;
-                const partNav = document.querySelector(`.part-nav[data-part="${part}"]`);
-                if (partNav) {
-                    const total = partNav.querySelectorAll('.question-btn').length;
-                    const answered = partNav.querySelectorAll('.question-btn.answered-btn').length;
-                    partNav.querySelector('.summary').textContent = `${answered} of ${total} questions`;
-                }
-            });
-        });
-    });
-</script>
+    </script>
 
 
     <!-- bootstrap js -->
