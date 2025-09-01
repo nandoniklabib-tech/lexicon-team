@@ -113,12 +113,10 @@
                                         @foreach ($section->questionGroups as $group)
                                             @if (!empty($group->media_file))
                                                 <div class="audio-wrapper">
-                                                    <audio id="audio_group_{{ $group->id }}" src="{{ $group->media_file }}" preload="none"></audio>
-                                                    <button type="button" class="btn audio-btn" data-audio="audio_group_{{ $group->id }}">
-                                                        🔊 Audio is Playing
-                                                    </button>
+                                                    <audio id="audio_{{ $group->id }}" src="{{ asset($group->media_file) }}"></audio>                                                    
                                                 </div>
-                                                @break {{-- just one audio button, remove this if you need all --}}
+                                                🔊 Audio is Playing
+                                                @break
                                             @endif
                                         @endforeach
                                     @endif
@@ -488,7 +486,31 @@
         });
     </script>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const startBtn = document.getElementById('fullscreenBtn2');
 
+    // Get the first audio
+    const audio = document.querySelector('audio');
+
+    startBtn.addEventListener('click', function(e) {
+        e.preventDefault(); // prevent default link action just in case
+
+        if(audio) {
+            audio.play(); // start audio
+
+            // Disable the test actions until audio ends
+            const testButtons = document.querySelectorAll('.afterSubmitBtn, .audio-btn');
+            testButtons.forEach(btn => btn.disabled = true);
+
+            audio.onended = () => {
+                // Enable test buttons after audio finishes
+                testButtons.forEach(btn => btn.disabled = false);
+            }
+        }
+    });
+});
+</script>
     <!-- bootstrap js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
