@@ -1,0 +1,64 @@
+.part-nav {
+    flex: 1;                 /* Equal width for all */
+    text-align: center;      /* Center text */
+}
+
+.part-nav.active .part-label {
+    color: #000000;             /* Active text color */
+    background: #cbe2f5;        /* Active background */
+    padding: 6px 12px;       /* Make it look like a tab */
+    border-radius: 6px;
+}
+.split-container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.split {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+.left-pane {
+    min-width: 20%;   /* Prevent shrinking too small */
+    max-width: 80%;   /* Prevent taking full screen */
+    border-right: 1px solid #ddd;
+}
+
+.right-pane {
+    min-width: 20%;
+    max-width: 80%;
+}
+
+.divider {
+    width: 5px;
+    background: #ccc;
+    cursor: col-resize;
+    position: relative;
+    z-index: 10;
+}
+
+.word-count {
+    text-align: right;
+    font-size: 14px;
+    color: #333;
+    margin-top: 5px;
+}
+
+
+.answer-textarea {
+    width: 100%;          /* make it take full container width */
+    min-width: 300px;     /* minimum width */
+    height: 400px;        /* default height */
+    min-height: 300px;    /* minimum height */
+    padding: 10px;
+    font-size: 16px;
+    line-height: 1.5;
+    resize: vertical;     /* allow vertical resize only */
+    box-sizing: border-box; /* ensures padding doesn’t break min-width/height */
+}
+

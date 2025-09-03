@@ -47,21 +47,28 @@
         }
 
         /* Gradient sets */
-        .gradient-1 { background: linear-gradient(135deg, #ff9966, #ff5e62); }
-        .gradient-2 { background: linear-gradient(135deg, #36d1dc, #5b86e5); }
-        .gradient-3 { background: linear-gradient(135deg, #ff6a00, #ee0979); }
-        .gradient-4 { background: linear-gradient(135deg, #11998e, #38ef7d); }
-        .gradient-5 { background: linear-gradient(135deg, #8e2de2, #4a00e0); }
-        .gradient-6 { background: linear-gradient(135deg, #fc6076, #ff9a44); }
+        .gradient-1 { background: linear-gradient(135deg, #ff9966, #f30a0e); }
+        .gradient-2 { background: linear-gradient(135deg, #ff6a00, #2409ee); }
+        .gradient-3 { background: linear-gradient(135deg, #19c8d5, #168702); }
+        .gradient-4 { background: linear-gradient(135deg, #112599, #bbe4cb); }
+        .gradient-5 { background: linear-gradient(135deg, #8e2de2, #cde000); }
+        .gradient-6 { background: linear-gradient(135deg, #fc6076, #13fd0b); }
+
+        .gradient-7 { background: linear-gradient(135deg, #3a28c0, #ff5e62); }
+        .gradient-8 { background: linear-gradient(135deg, #8dcf11, #054fef); }
+        .gradient-9 { background: linear-gradient(135deg, #bb2537, #1f9a4e); }
+        .gradient-10 { background: linear-gradient(135deg, #28ffed, #381161); }
+        .gradient-11 { background: linear-gradient(135deg, #8e2de2, #dcef12); }
+        .gradient-12 { background: linear-gradient(135deg, #db3249, #16f1db); }
     </style>
 
     <section>
         <div class="container py-5">
-            <h2 class="text-center fw-bold mb-5">Available Mock Tests</h2>
+            <h2 class="text-center fw-bold mb-5 text-white">Available Mock Tests</h2>
             <div class="row g-4 justify-content-center">
                 @foreach ($mockTests as $index => $test)
                     @php
-                        $gradients = ['gradient-1','gradient-2','gradient-3','gradient-4','gradient-5','gradient-6'];
+                        $gradients = ['gradient-1','gradient-2','gradient-3','gradient-4','gradient-5','gradient-6','gradient-7','gradient-8','gradient-9','gradient-10','gradient-11','gradient-12'];
                         $class = $gradients[$index % count($gradients)];
                     @endphp
                     <div class="col-md-4 col-lg-3">

@@ -95,7 +95,6 @@
                         <p class="fw-bold mt-2 mb-0">{{ $testUser->name ?? 'Guest' }}</p>
                     </div>
 
-
                     <!-- Middle: Test name + Countdown -->
 
                     <div class="col-6 text-center ">
@@ -125,7 +124,7 @@
 
                             <!-- Right side: actions -->
                             <div class="d-flex align-items-center">
-                                <button type="submit" class="afterSubmitBtn btn btn-outline-dark fw-bold">Finish test</button>
+                                <button type="submit" class=" btn btn-outline-dark fw-bold">Finish test</button>
                                 <button class="btn btn-outline-dark ms-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
                                     <i class="bi bi-vector-pen"></i>
                                 </button>
@@ -136,8 +135,6 @@
 
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </section>
@@ -209,15 +206,19 @@
                                     </p>
 
                                 @elseif ($question->type === 'multi_select')
-                                    <select name="answers[{{ $question->id }}][]" class="form-select w-50 question-input" multiple>
+                                    <select 
+                                    name="answers[{{ $question->id }}][]" 
+                                    class="form-select w-50 question-input" multiple>
                                         @foreach ($question->options as $option)
-                                        <option value="{{ $option->id }}">{{ $option->text }}</option>
+                                            <option value="{{ $option->id }}">{{ $option->text }}</option>
                                         @endforeach
                                     </select>
                                     
                                 @elseif ($question->type === 'select')
                                     <p class="question-text fw-bold">Q{{ $question->question_no }} </p>
-                                    <select name="answers[{{ $question->id }}]" class="form-select question-input custom-select">
+                                    <select 
+                                    name="answers[{{ $question->id }}]" 
+                                    class="form-select question-input custom-select">
                                         <option value="">-- Choose --</option>
                                         @foreach ($question->meta_data['options'] ?? [] as $option)
                                             <option value="{{ $option }}">{{ $option }}</option>
@@ -229,7 +230,10 @@
                                     <p class="question-text">Q{{ $question->question_no }}: {!! $question->text !!}</p>
                                     @foreach ($question->options as $option)
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input custom-checkbox question-input" name="answers[{{ $question->id }}][]" value="{{ $option->id }}" id="q{{ $question->id }}_chk{{ $loop->index }}">
+                                            <input 
+                                            type="checkbox" 
+                                            class="form-check-input custom-checkbox question-input" 
+                                            name="answers[{{ $question->id }}][]" value="{{ $option->id }}" id="q{{ $question->id }}_chk{{ $loop->index }}">
                                             <label class="d-inline" for="q{{ $question->id }}_chk{{ $loop->index }}">
                                                 {{ $option->text }}
                                             </label>
@@ -326,57 +330,48 @@
         </section>
 
 
-<!-- bottom bar -->
-<section class="bottom-bar fixed-bottom bg-light py-2 border-top">
-    <div class="container-fluid">
-        <div class="d-flex flex-wrap align-items-center p-3" style="justify-content: space-between;">
-            @foreach ($mockTest->sections as $section)
-                @if ($section->name === 'Listening')
-                    @foreach ($section->questionGroups as $index => $group)
-                        <div class="part-nav p-2"
-                             data-part="{{ $index + 1 }}">
-                             
-                            <span class="fw-bold part-label" style="cursor:pointer;">
-                                Part {{ $index + 1 }}
-                            </span>
+        <section class="bottom-bar fixed-bottom bg-light py-2 border-top">
+            <div class="container-fluid">
+                <div class="d-flex flex-wrap align-items-center p-3" style="justify-content: space-between;">
+                    @foreach ($mockTest->sections as $section)
+                        @if ($section->name === 'Listening')
+                            @foreach ($section->questionGroups as $index => $group)
+                                <div class="part-nav p-2"
+                                    data-part="{{ $index + 1 }}">
+                                    
+                                    <span class="fw-bold part-label" style="cursor:pointer;">
+                                        Part {{ $index + 1 }}
+                                    </span>
 
-                            <div class="part-content mt-1">
-                                {{-- Default: summary --}}
-                                <span class="summary">
-                                    0 of {{ $group->questions->where('type','!=','static')->count() }} questions
-                                </span>
+                                    <div class="part-content mt-1">
+                                        {{-- Default: summary --}}
+                                        <span class="summary">
+                                            0 of {{ $group->questions->where('type','!=','static')->count() }} questions
+                                        </span>
 
-                                {{-- Question numbers (hidden initially except part 1) --}}
-                                <div class="questions d-none flex-wrap gap-1">
-                                    @foreach ($group->questions as $question)
-                                        @if($question->type !== 'static')
-                                            <button type="button" 
-                                                    class="btn btn-outline-secondary btn-sm question-btn"
-                                                    style="width:28px; height:28px; padding:0;"
-                                                    data-target="q{{ $question->question_no }}"
-                                                    data-part="{{ $index + 1 }}">
-                                                {{ $question->question_no }}
-                                            </button>
-                                        @endif
-                                    @endforeach
+                                        {{-- Question numbers (hidden initially except part 1) --}}
+                                        <div class="questions d-none flex-wrap gap-1">
+                                            @foreach ($group->questions as $question)
+                                                @if($question->type !== 'static')
+                                                    <button type="button" 
+                                                            class="btn btn-outline-secondary btn-sm question-btn"
+                                                            style="width:28px; height:28px; padding:0;"
+                                                            data-target="q{{ $question->question_no }}"
+                                                            data-part="{{ $index + 1 }}">
+                                                        {{ $question->question_no }}
+                                                    </button>
+                                                @endif
+                                            @endforeach
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
+                            @endforeach
+                        @endif
                     @endforeach
-                @endif
-            @endforeach
 
-        </div>
-    </div>
-</section>
-
-
-
-
-
-
-
-
+                </div>
+            </div>
+        </section>
     </form>
 
     {{-- Script for update time --}}
