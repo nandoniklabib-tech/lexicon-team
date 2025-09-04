@@ -43,9 +43,28 @@ class AdminMocktestController extends Controller
             'email' => $validated['email'],
         ]);
         session(['test_user_id' => $testUser->id]);
+        session(['test_user_email' => $testUser->email]);
+        session(['test_listening' =>  null]);
+        session(['test_reading' => null ]);
+        session(['test_writing' => null ]);
 
-        return redirect()->route('admin.listening.show', $mockTest->id);
+        return redirect()->route('admin.test.deshboard', $mockTest->id);
     }
+    
+     public function identifyMocktest(MockTest $mockTest)
+    {
+        $testlistening_have = session('test_listening');
+        $testreading_have   = session('test_reading');
+        $testwriting_have   = session('test_writing');
+
+        return view('Backend.MockTest.TestPage.mocktestConfirmer', compact(
+            'mockTest',
+            'testlistening_have',
+            'testreading_have',
+            'testwriting_have'
+        ));
+    }
+
 
     //Show listening Question
     public function showListeningQuestion($mockTestId)
@@ -62,6 +81,10 @@ class AdminMocktestController extends Controller
    public function storeListeningQuestion(Request $request, MockTest $mockTest)
     {
         $testUserId = session('test_user_id');
+        $testUserEmail = session('test_user_email');
+        session(['test_listening' =>  $testUserEmail]);
+        session(['test_reading' => null ]);
+        session(['test_writing' => null ]);
 
         if (!$testUserId) {
             return redirect()->route('admin/mocktests')
@@ -119,7 +142,7 @@ class AdminMocktestController extends Controller
             ]);}
     }
 
-        return redirect()->route('admin.listening.result.show', $mockTest->id)
+        return redirect()->route('admin.test.deshboard', $mockTest->id)
         ->with('success', 'Answers saved successfully.');
     }
 
@@ -215,6 +238,10 @@ class AdminMocktestController extends Controller
     public function storeReadingQuestion(Request $request, MockTest $mockTest)
     {
         $testUserId = session('test_user_id');
+        $testUserEmail = session('test_user_email');
+        session(['test_listening' =>  $testUserEmail]);
+        session(['test_reading' => $testUserEmail ]);
+        session(['test_writing' => null ]);
 
         if (!$testUserId) {
             return redirect()->route('admin.mocktests')
@@ -272,7 +299,7 @@ class AdminMocktestController extends Controller
             }
         }
 
-        return redirect()->route('admin.reading.result.show', $mockTest->id)
+        return redirect()->route('admin.test.deshboard', $mockTest->id)
             ->with('success', 'Answers saved successfully.');
     }
 
@@ -369,6 +396,10 @@ class AdminMocktestController extends Controller
     public function storeWritingQuestion(Request $request, $mockTestId)
     {
         $testUserId = session('test_user_id');
+        $testUserEmail = session('test_user_email');
+        session(['test_listening' =>  $testUserEmail]);
+        session(['test_reading' => $testUserEmail ]);
+        session(['test_writing' => $testUserEmail ]);
 
         if (!$testUserId) {
             return redirect()->route('admin/mocktests')

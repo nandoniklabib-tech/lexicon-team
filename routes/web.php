@@ -95,17 +95,25 @@ Route::middleware(['auth','user-access:Admin'])->group(function(){
 
   // mock test start -------------
   Route::get('admin/mocktests', [AdminMocktestController::class, 'mocktests'])->name('admin.mocktests');
+
+  //user info
   Route::get('admin/mocktests/{mockTest}/user-info', [AdminMocktestController::class, 'userInfoShow'])->name('userInfoShow');
   Route::post('admin/mocktests/{mockTest}/user-info', [AdminMocktestController::class, 'userInfoSave'])->name('userInfoSave');
 
+  //identify which mocktest is going
+  Route::get('admin/test/dashboard/{mockTest}', [AdminMocktestController::class,'identifyMocktest'])->name('admin.test.deshboard');
+
+  //listening show and store
   Route::get('admin/listening/{mockTest}',[AdminMocktestController::class, 'showListeningQuestion'])->name('admin.listening.show');
   Route::post('admin/listening/{mockTest}',[AdminMocktestController::class, 'storeListeningQuestion'])->name('admin.listening.store');
   Route::get('admin/listening/result/{mockTest}',[AdminMocktestController::class, 'showListeningResult'])->name('admin.listening.result.show');
 
+  //reading show and store
   Route::get('admin/reading/{mockTest}',[AdminMocktestController::class, 'showReadingQuestion'])->name('admin.reading.show');
   Route::post('admin/reading/{mockTest}',[AdminMocktestController::class, 'storeReadingQuestion'])->name('admin.reading.store');
   Route::get('admin/reading/result/{mockTest}',[AdminMocktestController::class, 'showReadingResult'])->name('admin.reading.result.show');
 
+  //writing show and store
   Route::get('admin/writing/{mockTest}',[AdminMocktestController::class, 'showWritingQuestion'])->name('admin.writing.show');
   Route::post('admin/writing/{mockTest}',[AdminMocktestController::class, 'storeWritingQuestion'])->name('admin.writing.store');
 
@@ -237,7 +245,6 @@ Route::get('free-mock-test-info', [WelcomeController::class,'freeMockTestInfo'])
 Route::post('mockteststudent-store1', [WelcomeController::class,'mockteststudentStore1']);
 Route::post('mockteststudent-store', [WelcomeController::class,'mockteststudentStore']);
 Route::get('free-mock-test-board', [WelcomeController::class,'freeMockTestBoard']);
-Route::get('free-mock-test-dashboard', [WelcomeController::class,'freeMockTestDashboard']);
 
 Route::get('free-mock-test-view-1', [WelcomeController::class,'freeMockTestView1']);
 Route::get('free-mock-test-view-2', [WelcomeController::class,'freeMockTestView2']);

@@ -281,15 +281,18 @@ class WelcomeController extends Controller
         $data['partners'] = Partner::latest()->get();
         return view('Frontend.pages.freeMockTest.freeMockTestBoard', $data);
     }
-    public function freeMockTestDashboard(){
-        $data['setting'] = Setting::latest()->first();
-        $data['categories'] = Category::get();
-        $data['partners'] = Partner::latest()->get();
-        $data['testlistening_have'] = TestListening::where('email',session('mocktest.email'))->first();
-        $data['testreading_have'] = TestReading::where('email',session('mocktest.email'))->first();
-        $data['testwriting_have'] = TestWriting::where('email',session('mocktest.email'))->first();
-        return view('Frontend.pages.freeMockTest.freeMockTestDashboard', $data);
-    }
+    // public function freeMockTestDashboard(){
+    //     $data['setting'] = Setting::latest()->first();
+    //     $data['categories'] = Category::get();
+    //     $data['partners'] = Partner::latest()->get();
+    //     $data['testlistening_have'] = TestListening::where('email',session('mocktest.email'))->first();
+    //     $data['testreading_have'] = TestReading::where('email',session('mocktest.email'))->first();
+    //     $data['testwriting_have'] = TestWriting::where('email',session('mocktest.email'))->first();
+    //     $data['testlistening_have'] = 'null';
+    //     $data['testreading_have'] = null;
+    //     $data['testwriting_have'] = null;
+    //     return view('Frontend.pages.freeMockTest.freeMockTestDashboard', $data);
+    // }
     public function freeMockTestView1(){
         $data['setting'] = Setting::latest()->first();
         $data['categories'] = Category::get();

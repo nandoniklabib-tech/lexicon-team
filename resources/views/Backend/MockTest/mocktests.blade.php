@@ -12,7 +12,7 @@
             align-items: center;
             text-align: center;
             transition: all 0.4s ease-in-out;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 8px 20px rgba(255, 0, 0, 0.15);
             background-size: 200% 200%;
         }
 
@@ -47,10 +47,10 @@
         }
 
         /* Gradient sets */
-        .gradient-1 { background: linear-gradient(135deg, #ff9966, #f30a0e); }
+        .gradient-1 { background: linear-gradient(135deg, #66ff75, #f30a0e); }
         .gradient-2 { background: linear-gradient(135deg, #ff6a00, #2409ee); }
         .gradient-3 { background: linear-gradient(135deg, #19c8d5, #168702); }
-        .gradient-4 { background: linear-gradient(135deg, #112599, #bbe4cb); }
+        .gradient-4 { background: linear-gradient(135deg, #112599, #e4bbbb); }
         .gradient-5 { background: linear-gradient(135deg, #8e2de2, #cde000); }
         .gradient-6 { background: linear-gradient(135deg, #fc6076, #13fd0b); }
 
