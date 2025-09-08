@@ -13,4 +13,8 @@ class UserScore extends Model
         'section_id',
         'result'
     ];
+    public function section()
+    {
+        return $this->belongsTo(Section::class);
+    }
 }

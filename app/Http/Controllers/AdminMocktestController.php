@@ -230,7 +230,7 @@ class AdminMocktestController extends Controller
         UserScore::updateOrCreate(
             [
                 'test_user_id' => $testUserId,
-                'section_id'   => $sectionId,
+                'section_id' => $sectionId,
             ],
             [
                 'result' => $totalScore,
@@ -398,7 +398,7 @@ class AdminMocktestController extends Controller
         UserScore::updateOrCreate(
             [
                 'test_user_id' => $testUserId,
-                'section_id'   => $sectionId,
+                'section_id' => $sectionId,
             ],
             [
                 'result' => $totalScore,
@@ -420,7 +420,7 @@ class AdminMocktestController extends Controller
     }
 
     //Store Writing Answer
-   public function storeWritingAnswers(Request $request, $mockTestId)
+    public function storeWritingAnswers(Request $request, $mockTestId)
     {
         $testUserId = session('test_user_id');
 
@@ -444,11 +444,11 @@ class AdminMocktestController extends Controller
             // Save or update the answer
             UserWritingAnswer::updateOrCreate(
                 [
-                    'test_user_id'      => $testUserId,
+                    'test_user_id' => $testUserId,
                     'question_group_id' => $groupId,
                 ],
                 [
-                    'section_id'  => $questionGroup->section_id,
+                    'section_id' => $questionGroup->section_id,
                     'answer_text' => $answerText, // preserves line breaks
                 ]
             );
@@ -472,80 +472,21 @@ class AdminMocktestController extends Controller
         $user = TestUser::find($testUserId);
 
         // Fetch scores for all sections of this mock test
-        $scores = UserScore::where('test_user_id', $testUserId)
-            ->whereIn('section_id', function($query) use ($mockTestId) {
+        $scores = UserScore::with('section')
+            ->where('test_user_id', $testUserId)
+            ->whereIn('section_id', function ($query) use ($mockTestId) {
                 $query->select('id')
                     ->from('sections')
                     ->where('mock_test_id', $mockTestId);
             })
-            ->get()
-            ->keyBy('section_id'); // allows easy access by section_id
+            ->get();
+
+        //dd($user, $scores);
 
         return view('Backend.MockTest.TestPage.result', compact(
             'user',
-            'scores'
+            'scores',
+            'mockTestId'
         ));
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public function adminMocktestWritingReports()
-    {
-        $data['testwritings'] = TestWriting::latest()->get();
-        return view('Backend.MockTest.adminMocktestWritingReports', $data);
-    }
-
-    public function writingPdf($id)
-    {
-        $data['testwriting'] = TestWriting::find($id);
-        return view('Backend.MockTest.writing.pdf', $data);
-    }
-
 }
