@@ -117,6 +117,9 @@ Route::middleware(['auth','user-access:Admin'])->group(function(){
   Route::get('admin/writing/{mockTest}',[AdminMocktestController::class, 'showWritingQuestion'])->name('admin.writing.show');
   Route::post('admin/writing/{mockTest}',[AdminMocktestController::class, 'storeWritingQuestion'])->name('admin.writing.store');
 
+  Route::get('admin/result/{mockTest}',[AdminMocktestController::class, 'showResult'])->name('admin.result.show');
+
+
    });
 
 

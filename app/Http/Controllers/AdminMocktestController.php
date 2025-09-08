@@ -438,9 +438,110 @@ class AdminMocktestController extends Controller
             ]);
         }
 
-        return redirect()->route('admin.writing.result.show', $mockTest->id)
+        return redirect()->route('admin.result.show', $mockTest->id)
             ->with('success', 'Writing answers saved successfully.');
     }
+
+    public function showResult($mockTestId)
+    {
+        $testUserId = session('test_user_id');
+
+        if (!$testUserId) {
+            return redirect()->route('admin.mocktests')
+                ->withErrors('Session expired. Please start the test again.');
+        }
+
+        $user = TestUser::find($testUserId);
+        $userName = $user ? $user->name : 'Guest';
+
+        // === Listening Results ===
+        $listeningUserAnswers = UserAnswer::with(['question', 'option'])
+            ->where('test_user_id', $testUserId)
+            ->where('mock_test_id', $mockTestId)
+            ->whereHas('question', fn($q) => $q->where('type', 'listening'))
+            ->get();
+
+        $listeningAnswers = [];
+        $listeningCorrect = 0;
+
+        foreach ($listeningUserAnswers->groupBy('question_id') as $answersGroup) {
+            $question = $answersGroup->first()->question;
+            if (!$question) continue;
+
+            $correctOptions = $question->answers()->whereNotNull('option_id')->pluck('option_id')->toArray();
+            $userOptionIds = $answersGroup->pluck('option_id')->filter()->toArray();
+
+            foreach ($userOptionIds as $optionId) {
+                if (in_array($optionId, $correctOptions)) {
+                    $listeningCorrect++;
+                }
+            }
+
+            $listeningAnswers[] = [
+                'question_no' => $question->question_no,
+                'user' => $answersGroup->first()->option?->label ?? $answersGroup->first()->answer_text ?? 'N/A',
+                'correct' => $question->answers()->first()?->option?->label ?? $question->answers()->first()?->answer_text ?? 'N/A'
+            ];
+        }
+
+        // === Reading Results ===
+        $readingUserAnswers = UserAnswer::with(['question', 'option'])
+            ->where('test_user_id', $testUserId)
+            ->where('mock_test_id', $mockTestId)
+            ->whereHas('question', fn($q) => $q->where('type', 'reading'))
+            ->get();
+
+        $readingAnswers = [];
+        $readingCorrect = 0;
+
+        foreach ($readingUserAnswers->groupBy('question_id') as $answersGroup) {
+            $question = $answersGroup->first()->question;
+            if (!$question) continue;
+
+            $correctOptions = $question->answers()->whereNotNull('option_id')->pluck('option_id')->toArray();
+            $correctTexts   = $question->answers()->whereNotNull('answer_text')->pluck('answer_text')->toArray();
+
+            $userOptionIds = $answersGroup->pluck('option_id')->filter()->toArray();
+            $userTexts     = $answersGroup->pluck('answer_text')->filter()->toArray();
+
+            foreach ($userOptionIds as $optionId) {
+                if (in_array($optionId, $correctOptions)) {
+                    $readingCorrect++;
+                }
+            }
+            foreach ($userTexts as $userText) {
+                if (in_array(trim(strtolower($userText)), array_map('strtolower', $correctTexts))) {
+                    $readingCorrect++;
+                }
+            }
+
+            $readingAnswers[] = [
+                'question_no' => $question->question_no,
+                'user' => $answersGroup->first()->option?->label ?? $answersGroup->first()->answer_text ?? 'N/A',
+                'correct' => $question->answers()->first()?->option?->label ?? $question->answers()->first()?->answer_text ?? 'N/A'
+            ];
+        }
+
+
+// dd([
+//     'listeningAnswers' => $listeningAnswers,
+//     'listeningCorrect' => $listeningCorrect,
+//     'readingAnswers' => $readingAnswers,
+//     'readingCorrect' => $readingCorrect
+// ]);
+
+
+        return view('Backend.MockTest.TestPage.result', compact(
+            'user',
+            'listeningCorrect',
+            'readingCorrect',
+            'listeningAnswers',
+            'readingAnswers'
+        ));
+    }
+
+
+
 
 
 
