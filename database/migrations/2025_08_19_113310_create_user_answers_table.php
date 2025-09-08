@@ -36,7 +36,7 @@ return new class extends Migration
                 ->nullOnDelete();
 
             $table->integer('question_no')->nullable();
-            $table->text('answer_text')->nullable();
+            $table->longText('answer_text')->nullable();
 
             $table->timestamps();
         });

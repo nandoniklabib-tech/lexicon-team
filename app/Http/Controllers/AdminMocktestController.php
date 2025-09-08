@@ -7,13 +7,16 @@ use App\Models\TestWriting;
 use App\Models\MockTest;
 use App\Models\TestUser;
 use App\Models\Question;
+use App\Models\QuestionGroup;
 use App\Models\UserAnswer;
+use App\Models\UserScore;
+use App\Models\UserWritingAnswer;
 
 
 
 
 class AdminMocktestController extends Controller
-{   
+{
     //Show All Mock Test
     public function mocktests()
     {
@@ -44,18 +47,18 @@ class AdminMocktestController extends Controller
         ]);
         session(['test_user_id' => $testUser->id]);
         session(['test_user_email' => $testUser->email]);
-        session(['test_listening' =>  null]);
-        session(['test_reading' => null ]);
-        session(['test_writing' => null ]);
+        session(['test_listening' => null]);
+        session(['test_reading' => null]);
+        session(['test_writing' => null]);
 
         return redirect()->route('admin.test.deshboard', $mockTest->id);
     }
-    
-     public function identifyMocktest(MockTest $mockTest)
+
+    public function identifyMocktest(MockTest $mockTest)
     {
         $testlistening_have = session('test_listening');
-        $testreading_have   = session('test_reading');
-        $testwriting_have   = session('test_writing');
+        $testreading_have = session('test_reading');
+        $testwriting_have = session('test_writing');
 
         return view('Backend.MockTest.TestPage.mocktestConfirmer', compact(
             'mockTest',
@@ -78,13 +81,13 @@ class AdminMocktestController extends Controller
     }
 
     //Store Listening Answer
-   public function storeListeningQuestion(Request $request, MockTest $mockTest)
+    public function storeListeningQuestion(Request $request, MockTest $mockTest)
     {
         $testUserId = session('test_user_id');
         $testUserEmail = session('test_user_email');
-        session(['test_listening' =>  $testUserEmail]);
-        session(['test_reading' => null ]);
-        session(['test_writing' => null ]);
+        session(['test_listening' => $testUserEmail]);
+        session(['test_reading' => null]);
+        session(['test_writing' => null]);
 
         if (!$testUserId) {
             return redirect()->route('admin/mocktests')
@@ -93,57 +96,58 @@ class AdminMocktestController extends Controller
 
         $submittedAnswers = $request->input('answers', []);
 
-        $questions = Question::whereHas('group.section', function($q) use ($mockTest) {
-                $q->where('mock_test_id', $mockTest->id);
-            })
+        $questions = Question::whereHas('group.section', function ($q) use ($mockTest) {
+            $q->where('mock_test_id', $mockTest->id);
+        })
             ->orderBy('question_no')
             ->get();
 
         foreach ($questions as $question) {
-        if ($question->type == 'static' || is_null($question->question_no)) {
-            continue;
-        }
+            if ($question->type == 'static' || is_null($question->question_no)) {
+                continue;
+            }
 
-        $answer = $submittedAnswers[$question->id] ?? null;
+            $answer = $submittedAnswers[$question->id] ?? null;
 
-        // Delete previous answers for this user & question
-        UserAnswer::where('test_user_id', $testUserId)
-            ->where('mock_test_id', $mockTest->id)
-            ->where('question_id', $question->id)
-            ->delete();
+            // Delete previous answers for this user & question
+            UserAnswer::where('test_user_id', $testUserId)
+                ->where('mock_test_id', $mockTest->id)
+                ->where('question_id', $question->id)
+                ->delete();
 
-        if (is_array($answer)) {
-            // Checkbox / multiselect
-            foreach ($answer as $item) {
+            if (is_array($answer)) {
+                // Checkbox / multiselect
+                foreach ($answer as $item) {
+                    UserAnswer::create([
+                        'test_user_id' => $testUserId,
+                        'mock_test_id' => $mockTest->id,
+                        'section_id' => $question->group->section_id,
+                        'question_id' => $question->id,
+                        'question_no' => $question->question_no,
+
+                        // Either option_id OR answer_text
+                        'option_id' => $question->options->contains('id', $item) ? $item : null,
+                        'answer_text' => $question->options->contains('id', $item) ? null : $item,
+                    ]);
+                }
+            } elseif (!empty($answer)) {
+                // Single answer (MCQ, select, fill blank, etc.)
                 UserAnswer::create([
                     'test_user_id' => $testUserId,
                     'mock_test_id' => $mockTest->id,
-                    'section_id'   => $question->group->section_id,
-                    'question_id'  => $question->id,
-                    'question_no'  => $question->question_no,
+                    'section_id' => $question->group->section_id,
+                    'question_id' => $question->id,
+                    'question_no' => $question->question_no,
 
                     // Either option_id OR answer_text
-                    'option_id'   => $question->options->contains('id', $item) ? $item : null,
-                    'answer_text' => $question->options->contains('id', $item) ? null : $item,
+                    'option_id' => $question->options->contains('id', $answer) ? $answer : null,
+                    'answer_text' => $question->options->contains('id', $answer) ? null : $answer,
                 ]);
             }
-        } elseif (!empty($answer)) {
-            // Single answer (MCQ, select, fill blank, etc.)
-            UserAnswer::create([
-                'test_user_id' => $testUserId,
-                'mock_test_id' => $mockTest->id,
-                'section_id'   => $question->group->section_id,
-                'question_id'  => $question->id,
-                'question_no'  => $question->question_no,
-
-                // Either option_id OR answer_text
-                'option_id'   => $question->options->contains('id', $answer) ? $answer : null,
-                'answer_text' => $question->options->contains('id', $answer) ? null : $answer,
-            ]);}
-    }
+        }
 
         return redirect()->route('admin.test.deshboard', $mockTest->id)
-        ->with('success', 'Answers saved successfully.');
+            ->with('success', 'Answers saved successfully.');
     }
 
     //Show Listening Result
@@ -168,16 +172,16 @@ class AdminMocktestController extends Controller
             $question = $answersGroup->first()->question;
 
             if (!$question || is_null($question->question_no)) {
-                continue; 
+                continue;
             }
 
             // Correct answers
             $correctOptions = $question->answers()->whereNotNull('option_id')->pluck('option_id')->toArray();
-            $correctTexts   = $question->answers()->whereNotNull('answer_text')->pluck('answer_text')->toArray();
+            $correctTexts = $question->answers()->whereNotNull('answer_text')->pluck('answer_text')->toArray();
 
             // User answers
             $userOptionIds = $answersGroup->pluck('option_id')->filter()->toArray();
-            $userTexts     = $answersGroup->pluck('answer_text')->filter()->toArray();
+            $userTexts = $answersGroup->pluck('answer_text')->filter()->toArray();
 
             $questionScore = 0;
 
@@ -204,7 +208,7 @@ class AdminMocktestController extends Controller
             $totalScore += $questionScore;
 
             // Prepare display values
-            $userAnswerDisplay = !empty($userTexts) 
+            $userAnswerDisplay = !empty($userTexts)
                 ? implode(', ', $userTexts)
                 : implode(', ', $answersGroup->pluck('option.text')->filter()->toArray());
 
@@ -213,13 +217,25 @@ class AdminMocktestController extends Controller
                 : implode(', ', $question->answers()->with('option')->get()->pluck('option.text')->filter()->toArray());
 
             $results[] = [
-                'question_no'    => $question->question_no,
-                'question'       => $question->text ?? '',
-                'user_answer'    => $userAnswerDisplay ?: '-',
+                'question_no' => $question->question_no,
+                'question' => $question->text ?? '',
+                'user_answer' => $userAnswerDisplay ?: '-',
                 'correct_answer' => $correctAnswerDisplay ?: '-',
-                'score'          => $questionScore,
+                'score' => $questionScore,
             ];
+
         }
+        $sectionId = $userAnswers->first()->section_id;
+
+        UserScore::updateOrCreate(
+            [
+                'test_user_id' => $testUserId,
+                'section_id'   => $sectionId,
+            ],
+            [
+                'result' => $totalScore,
+            ]
+        );
 
         return view('Backend.MockTest.TestPage.showResult', compact('results', 'totalScore', 'totalQuestions'));
     }
@@ -239,9 +255,9 @@ class AdminMocktestController extends Controller
     {
         $testUserId = session('test_user_id');
         $testUserEmail = session('test_user_email');
-        session(['test_listening' =>  $testUserEmail]);
-        session(['test_reading' => $testUserEmail ]);
-        session(['test_writing' => null ]);
+        session(['test_listening' => $testUserEmail]);
+        session(['test_reading' => $testUserEmail]);
+        session(['test_writing' => null]);
 
         if (!$testUserId) {
             return redirect()->route('admin.mocktests')
@@ -251,9 +267,9 @@ class AdminMocktestController extends Controller
         $submittedAnswers = $request->input('answers', []);
 
         // Get all questions for this mock test's reading section
-        $questions = Question::whereHas('group.section', function($q) use ($mockTest) {
-                $q->where('mock_test_id', $mockTest->id);
-            })
+        $questions = Question::whereHas('group.section', function ($q) use ($mockTest) {
+            $q->where('mock_test_id', $mockTest->id);
+        })
             ->orderBy('question_no')
             ->get();
 
@@ -278,11 +294,11 @@ class AdminMocktestController extends Controller
                     UserAnswer::create([
                         'test_user_id' => $testUserId,
                         'mock_test_id' => $mockTest->id,
-                        'section_id'   => $question->group->section_id,
-                        'question_id'  => $question->id,
-                        'question_no'  => $question->question_no,
-                        'option_id'    => $question->options->contains('id', $item) ? $item : null,
-                        'answer_text'  => $question->options->contains('id', $item) ? null : $item,
+                        'section_id' => $question->group->section_id,
+                        'question_id' => $question->id,
+                        'question_no' => $question->question_no,
+                        'option_id' => $question->options->contains('id', $item) ? $item : null,
+                        'answer_text' => $question->options->contains('id', $item) ? null : $item,
                     ]);
                 }
             } elseif (!empty($answer)) {
@@ -290,11 +306,11 @@ class AdminMocktestController extends Controller
                 UserAnswer::create([
                     'test_user_id' => $testUserId,
                     'mock_test_id' => $mockTest->id,
-                    'section_id'   => $question->group->section_id,
-                    'question_id'  => $question->id,
-                    'question_no'  => $question->question_no,
-                    'option_id'    => $question->options->contains('id', $answer) ? $answer : null,
-                    'answer_text'  => $question->options->contains('id', $answer) ? null : $answer,
+                    'section_id' => $question->group->section_id,
+                    'question_id' => $question->id,
+                    'question_no' => $question->question_no,
+                    'option_id' => $question->options->contains('id', $answer) ? $answer : null,
+                    'answer_text' => $question->options->contains('id', $answer) ? null : $answer,
                 ]);
             }
         }
@@ -325,16 +341,16 @@ class AdminMocktestController extends Controller
             $question = $answersGroup->first()->question;
 
             if (!$question || is_null($question->question_no)) {
-                continue; 
+                continue;
             }
 
             // Correct answers
             $correctOptions = $question->answers()->whereNotNull('option_id')->pluck('option_id')->toArray();
-            $correctTexts   = $question->answers()->whereNotNull('answer_text')->pluck('answer_text')->toArray();
+            $correctTexts = $question->answers()->whereNotNull('answer_text')->pluck('answer_text')->toArray();
 
             // User answers
             $userOptionIds = $answersGroup->pluck('option_id')->filter()->toArray();
-            $userTexts     = $answersGroup->pluck('answer_text')->filter()->toArray();
+            $userTexts = $answersGroup->pluck('answer_text')->filter()->toArray();
 
             $questionScore = 0;
 
@@ -361,7 +377,7 @@ class AdminMocktestController extends Controller
             $totalScore += $questionScore;
 
             // Prepare display values
-            $userAnswerDisplay = !empty($userTexts) 
+            $userAnswerDisplay = !empty($userTexts)
                 ? implode(', ', $userTexts)
                 : implode(', ', $answersGroup->pluck('option.text')->filter()->toArray());
 
@@ -370,13 +386,24 @@ class AdminMocktestController extends Controller
                 : implode(', ', $question->answers()->with('option')->get()->pluck('option.text')->filter()->toArray());
 
             $results[] = [
-                'question_no'    => $question->question_no,
-                'question'       => $question->text ?? '',
-                'user_answer'    => $userAnswerDisplay ?: '-',
+                'question_no' => $question->question_no,
+                'question' => $question->text ?? '',
+                'user_answer' => $userAnswerDisplay ?: '-',
                 'correct_answer' => $correctAnswerDisplay ?: '-',
-                'score'          => $questionScore,
+                'score' => $questionScore,
             ];
         }
+        $sectionId = $userAnswers->first()->section_id;
+
+        UserScore::updateOrCreate(
+            [
+                'test_user_id' => $testUserId,
+                'section_id'   => $sectionId,
+            ],
+            [
+                'result' => $totalScore,
+            ]
+        );
 
         return view('Backend.MockTest.TestPage.showreadingResult', compact('results', 'totalScore', 'totalQuestions'));
     }
@@ -384,7 +411,7 @@ class AdminMocktestController extends Controller
 
 
     //Show Writing Question
-     public function showWritingQuestion($mockTestId)
+    public function showWritingQuestion($mockTestId)
     {
         $mockTest = MockTest::with('sections.questionGroups')->findOrFail($mockTestId);
         $writingSection = $mockTest->sections->firstWhere('name', 'writing');
@@ -393,54 +420,45 @@ class AdminMocktestController extends Controller
     }
 
     //Store Writing Answer
-    public function storeWritingQuestion(Request $request, $mockTestId)
+   public function storeWritingAnswers(Request $request, $mockTestId)
     {
         $testUserId = session('test_user_id');
-        $testUserEmail = session('test_user_email');
-        session(['test_listening' =>  $testUserEmail]);
-        session(['test_reading' => $testUserEmail ]);
-        session(['test_writing' => $testUserEmail ]);
 
         if (!$testUserId) {
-            return redirect()->route('admin/mocktests')
+            return redirect()->route('admin.mocktests')
                 ->withErrors('Session expired. Please start the test again.');
         }
 
-        $mockTest = MockTest::findOrFail($mockTestId);
         $answers = $request->input('answers', []);
 
         foreach ($answers as $groupId => $answerText) {
             if (empty(trim($answerText))) {
-                continue; // skip empty submissions
+                continue; // Skip empty submissions
             }
 
             $questionGroup = QuestionGroup::find($groupId);
             if (!$questionGroup) {
-                continue;
+                continue; // Skip invalid question groups
             }
 
-            // Delete old essay if re-submitted
-            UserAnswer::where('test_user_id', $testUserId)
-                ->where('mock_test_id', $mockTest->id)
-                ->where('section_id', $questionGroup->section_id)
-                ->where('question_id', null) // writing has no individual question_id
-                ->delete();
-
-            // Save essay
-            UserAnswer::create([
-                'test_user_id' => $testUserId,
-                'mock_test_id' => $mockTest->id,
-                'section_id'   => $questionGroup->section_id,
-                'question_id'  => null,
-                'question_no'  => null,
-                'option_id'    => null,
-                'answer_text'  => $answerText,
-            ]);
+            // Save or update the answer
+            UserWritingAnswer::updateOrCreate(
+                [
+                    'test_user_id'      => $testUserId,
+                    'question_group_id' => $groupId,
+                ],
+                [
+                    'section_id'  => $questionGroup->section_id,
+                    'answer_text' => $answerText, // preserves line breaks
+                ]
+            );
         }
 
-        return redirect()->route('admin.result.show', $mockTest->id)
+        return redirect()->route('admin.result.show', $mockTestId)
             ->with('success', 'Writing answers saved successfully.');
     }
+
+
 
     public function showResult($mockTestId)
     {
@@ -452,91 +470,20 @@ class AdminMocktestController extends Controller
         }
 
         $user = TestUser::find($testUserId);
-        $userName = $user ? $user->name : 'Guest';
 
-        // === Listening Results ===
-        $listeningUserAnswers = UserAnswer::with(['question', 'option'])
-            ->where('test_user_id', $testUserId)
-            ->where('mock_test_id', $mockTestId)
-            ->whereHas('question', fn($q) => $q->where('type', 'listening'))
-            ->get();
-
-        $listeningAnswers = [];
-        $listeningCorrect = 0;
-
-        foreach ($listeningUserAnswers->groupBy('question_id') as $answersGroup) {
-            $question = $answersGroup->first()->question;
-            if (!$question) continue;
-
-            $correctOptions = $question->answers()->whereNotNull('option_id')->pluck('option_id')->toArray();
-            $userOptionIds = $answersGroup->pluck('option_id')->filter()->toArray();
-
-            foreach ($userOptionIds as $optionId) {
-                if (in_array($optionId, $correctOptions)) {
-                    $listeningCorrect++;
-                }
-            }
-
-            $listeningAnswers[] = [
-                'question_no' => $question->question_no,
-                'user' => $answersGroup->first()->option?->label ?? $answersGroup->first()->answer_text ?? 'N/A',
-                'correct' => $question->answers()->first()?->option?->label ?? $question->answers()->first()?->answer_text ?? 'N/A'
-            ];
-        }
-
-        // === Reading Results ===
-        $readingUserAnswers = UserAnswer::with(['question', 'option'])
-            ->where('test_user_id', $testUserId)
-            ->where('mock_test_id', $mockTestId)
-            ->whereHas('question', fn($q) => $q->where('type', 'reading'))
-            ->get();
-
-        $readingAnswers = [];
-        $readingCorrect = 0;
-
-        foreach ($readingUserAnswers->groupBy('question_id') as $answersGroup) {
-            $question = $answersGroup->first()->question;
-            if (!$question) continue;
-
-            $correctOptions = $question->answers()->whereNotNull('option_id')->pluck('option_id')->toArray();
-            $correctTexts   = $question->answers()->whereNotNull('answer_text')->pluck('answer_text')->toArray();
-
-            $userOptionIds = $answersGroup->pluck('option_id')->filter()->toArray();
-            $userTexts     = $answersGroup->pluck('answer_text')->filter()->toArray();
-
-            foreach ($userOptionIds as $optionId) {
-                if (in_array($optionId, $correctOptions)) {
-                    $readingCorrect++;
-                }
-            }
-            foreach ($userTexts as $userText) {
-                if (in_array(trim(strtolower($userText)), array_map('strtolower', $correctTexts))) {
-                    $readingCorrect++;
-                }
-            }
-
-            $readingAnswers[] = [
-                'question_no' => $question->question_no,
-                'user' => $answersGroup->first()->option?->label ?? $answersGroup->first()->answer_text ?? 'N/A',
-                'correct' => $question->answers()->first()?->option?->label ?? $question->answers()->first()?->answer_text ?? 'N/A'
-            ];
-        }
-
-
-// dd([
-//     'listeningAnswers' => $listeningAnswers,
-//     'listeningCorrect' => $listeningCorrect,
-//     'readingAnswers' => $readingAnswers,
-//     'readingCorrect' => $readingCorrect
-// ]);
-
+        // Fetch scores for all sections of this mock test
+        $scores = UserScore::where('test_user_id', $testUserId)
+            ->whereIn('section_id', function($query) use ($mockTestId) {
+                $query->select('id')
+                    ->from('sections')
+                    ->where('mock_test_id', $mockTestId);
+            })
+            ->get()
+            ->keyBy('section_id'); // allows easy access by section_id
 
         return view('Backend.MockTest.TestPage.result', compact(
             'user',
-            'listeningCorrect',
-            'readingCorrect',
-            'listeningAnswers',
-            'readingAnswers'
+            'scores'
         ));
     }
 
@@ -563,8 +510,6 @@ class AdminMocktestController extends Controller
 
 
 
-    
-    
 
 
 
@@ -589,14 +534,18 @@ class AdminMocktestController extends Controller
 
 
 
-    public function adminMocktestWritingReports(){
+
+
+    public function adminMocktestWritingReports()
+    {
         $data['testwritings'] = TestWriting::latest()->get();
         return view('Backend.MockTest.adminMocktestWritingReports', $data);
     }
 
-    public function writingPdf($id){
+    public function writingPdf($id)
+    {
         $data['testwriting'] = TestWriting::find($id);
-        return view('Backend.MockTest.writing.pdf',$data);
-    }   
+        return view('Backend.MockTest.writing.pdf', $data);
+    }
 
 }
