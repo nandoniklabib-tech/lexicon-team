@@ -7,6 +7,7 @@ use App\Models\TestWriting;
 use App\Models\MockTest;
 use App\Models\TestUser;
 use App\Models\Question;
+use App\Models\Section;
 use App\Models\QuestionGroup;
 use App\Models\UserAnswer;
 use App\Models\UserScore;
@@ -320,93 +321,100 @@ class AdminMocktestController extends Controller
     }
 
     //Show reading result
-    public function showReadingResult($mockTestId)
-    {
-        $testUserId = session('test_user_id');
-        if (!$testUserId) {
-            return redirect()->route('admin.mocktests')
-                ->withErrors('Session expired. Please start the test again.');
-        }
-
-        $userAnswers = UserAnswer::with(['question', 'option'])
-            ->where('test_user_id', $testUserId)
-            ->where('mock_test_id', $mockTestId)
-            ->get();
-
-        $results = [];
-        $totalScore = 0;
-        $totalQuestions = 0;
-
-        foreach ($userAnswers->groupBy('question_id') as $questionId => $answersGroup) {
-            $question = $answersGroup->first()->question;
-
-            if (!$question || is_null($question->question_no)) {
-                continue;
-            }
-
-            // Correct answers
-            $correctOptions = $question->answers()->whereNotNull('option_id')->pluck('option_id')->toArray();
-            $correctTexts = $question->answers()->whereNotNull('answer_text')->pluck('answer_text')->toArray();
-
-            // User answers
-            $userOptionIds = $answersGroup->pluck('option_id')->filter()->toArray();
-            $userTexts = $answersGroup->pluck('answer_text')->filter()->toArray();
-
-            $questionScore = 0;
-
-            // === Option-based (MCQ, checkbox, multiselect) ===
-            if (!empty($correctOptions)) {
-                foreach ($userOptionIds as $optionId) {
-                    if (in_array($optionId, $correctOptions)) {
-                        $questionScore++; // +1 for each correct option
-                    }
-                }
-                $totalQuestions += count($correctOptions);
-            }
-
-            // === Text-based (Fill in the blank, short answer) ===
-            if (!empty($correctTexts)) {
-                foreach ($userTexts as $userText) {
-                    if (in_array(trim(strtolower($userText)), array_map('strtolower', $correctTexts))) {
-                        $questionScore++; // +1 for each correct text match
-                    }
-                }
-                $totalQuestions += count($correctTexts);
-            }
-
-            $totalScore += $questionScore;
-
-            // Prepare display values
-            $userAnswerDisplay = !empty($userTexts)
-                ? implode(', ', $userTexts)
-                : implode(', ', $answersGroup->pluck('option.text')->filter()->toArray());
-
-            $correctAnswerDisplay = !empty($correctTexts)
-                ? implode(', ', $correctTexts)
-                : implode(', ', $question->answers()->with('option')->get()->pluck('option.text')->filter()->toArray());
-
-            $results[] = [
-                'question_no' => $question->question_no,
-                'question' => $question->text ?? '',
-                'user_answer' => $userAnswerDisplay ?: '-',
-                'correct_answer' => $correctAnswerDisplay ?: '-',
-                'score' => $questionScore,
-            ];
-        }
-        $sectionId = $userAnswers->first()->section_id;
-
-        UserScore::updateOrCreate(
-            [
-                'test_user_id' => $testUserId,
-                'section_id' => $sectionId,
-            ],
-            [
-                'result' => $totalScore,
-            ]
-        );
-
-        return view('Backend.MockTest.TestPage.showreadingResult', compact('results', 'totalScore', 'totalQuestions'));
+   public function showReadingResult($mockTestId)
+{
+    $testUserId = session('test_user_id');
+    if (!$testUserId) {
+        return redirect()->route('admin.mocktests')
+            ->withErrors('Session expired. Please start the test again.');
     }
+
+    // Get the Reading section ID for this mock test
+    $readingSectionId = Section::where('mock_test_id', $mockTestId)
+        ->where('name', 'Reading')
+        ->pluck('id')
+        ->first();
+
+    if (!$readingSectionId) {
+        return redirect()->back()->withErrors('Reading section not found.');
+    }
+
+    // Only get answers for Reading section
+    $userAnswers = UserAnswer::with(['question', 'option'])
+        ->where('test_user_id', $testUserId)
+        ->where('mock_test_id', $mockTestId)
+        ->where('section_id', $readingSectionId)
+        ->get();
+
+    $results = [];
+    $totalScore = 0;
+    $totalQuestions = 0;
+
+    foreach ($userAnswers->groupBy('question_id') as $questionId => $answersGroup) {
+        $question = $answersGroup->first()->question;
+        if (!$question || is_null($question->question_no)) {
+            continue;
+        }
+
+        // Correct answers
+        $correctOptions = $question->answers()->whereNotNull('option_id')->pluck('option_id')->toArray();
+        $correctTexts = $question->answers()->whereNotNull('answer_text')->pluck('answer_text')->toArray();
+
+        // User answers
+        $userOptionIds = $answersGroup->pluck('option_id')->filter()->toArray();
+        $userTexts = $answersGroup->pluck('answer_text')->filter()->toArray();
+
+        $questionScore = 0;
+
+        // Option-based scoring
+        foreach ($userOptionIds as $optionId) {
+            if (in_array($optionId, $correctOptions)) {
+                $questionScore++;
+            }
+        }
+        $totalQuestions += count($correctOptions);
+
+        // Text-based scoring
+        foreach ($userTexts as $userText) {
+            if (in_array(trim(strtolower($userText)), array_map('strtolower', $correctTexts))) {
+                $questionScore++;
+            }
+        }
+        $totalQuestions += count($correctTexts);
+
+        $totalScore += $questionScore;
+
+        $userAnswerDisplay = !empty($userTexts)
+            ? implode(', ', $userTexts)
+            : implode(', ', $answersGroup->pluck('option.text')->filter()->toArray());
+
+        $correctAnswerDisplay = !empty($correctTexts)
+            ? implode(', ', $correctTexts)
+            : implode(', ', $question->answers()->with('option')->get()->pluck('option.text')->filter()->toArray());
+
+        $results[] = [
+            'question_no' => $question->question_no,
+            'question' => $question->text ?? '',
+            'user_answer' => $userAnswerDisplay ?: '-',
+            'correct_answer' => $correctAnswerDisplay ?: '-',
+            'score' => $questionScore,
+        ];
+    }
+
+    // Save or update score for Reading section
+    UserScore::updateOrCreate(
+        [
+            'test_user_id' => $testUserId,
+            'section_id' => $readingSectionId,
+        ],
+        [
+            'result' => $totalScore,
+        ]
+    );
+
+    return view('Backend.MockTest.TestPage.showreadingResult', compact('results', 'totalScore', 'totalQuestions'));
+}
+
 
 
 
